@@ -58,6 +58,9 @@ bot.on('message', message =>{
 
             case 'luther':
                 message.channel.send('Luther! Luther! Wer ist Luther?!? MARTIN LUTHER!!!\nhttps://www.youtube.com/watch?v=AOEQrKk6AZ4');
+
+            case 'test':
+                message.channel.send('push reicht');
         }
     }
 })
