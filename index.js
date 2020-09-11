@@ -11,6 +11,7 @@ class Pool{
         this.message = message;
         this.maxPlayers = maxPlayers;
         this.players = [];
+        this.poolNumber = pools.length+1;
     }
 
     addPlayer(id){
@@ -23,7 +24,7 @@ class Pool{
     }
 
     announcePlayerCount(){
-        this.message.channel.send(`Aktuell sind ${this.players.length} Spieler im Pool`);
+        this.message.channel.send(`Aktuell sind ${this.players.length} Spieler in Pool ${this.poolNumber}`);
     }
 
     handleFullMatch(){
@@ -108,10 +109,11 @@ bot.on('message', message =>{
                 break;
             
             case 'teams':
-                var playerSlots = 4;
+                var playerSlots;
                 if (args[1] != null){
                     playerSlots = parseInt(args[1]);
                 }
+                playerSlots = Math.max(2, playerSlots);
                 var prompText = `Es wurde ein Matchmaking-Pool mit ${playerSlots} Slots eröffnet. Reagiere auf diese Nachricht, um hinzugefügt zu werden.`;
                 message.reply(prompText).then(botMsg => {
                     pools[botMsg.id] = new Pool(botMsg, playerSlots);
