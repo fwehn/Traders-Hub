@@ -12,7 +12,6 @@ bot.on('ready', () => {
 bot.on('message', message =>{
     let args = message.content.substring(PREFIX.length).split(" ");
 
-    // if (!message.author.roles.some(role => role.name === 'Vegi-Gang'))
     {
         switch(args[0].toLowerCase()){
             case 'calle':
@@ -35,6 +34,10 @@ bot.on('message', message =>{
             case 'hello':
                 message.channel.send('Hi');
                 break;
+            
+            case 'luther':
+                message.channel.send('Luther! Luther! Wer ist Luther?!? MARTIN LUTHER!!!\nhttps://www.youtube.com/watch?v=AOEQrKk6AZ4');
+                break;
 
             case 'mimimi':
                 message.channel.send('Das ist das Geräusch das der Stein immer macht.');
@@ -56,11 +59,9 @@ bot.on('message', message =>{
                 message.channel.send('schande, schande, schande');
                 break;
 
-            case 'luther':
-                message.channel.send('Luther! Luther! Wer ist Luther?!? MARTIN LUTHER!!!\nhttps://www.youtube.com/watch?v=AOEQrKk6AZ4');
-
             case 'test':
-                message.channel.send('push reicht');
+                message.reply('args[1] = ' + args[1]);
+                break;
         }
     }
 })
