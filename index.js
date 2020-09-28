@@ -5,6 +5,7 @@ const token = 'NzM3MzQzMTUxODIzNTE5ODA3.Xx7-Ug.K-_ij9LVXboI6GPcAhQmFDPI2vo';
 
 const PREFIX = '!';
 
+var mute = true;
 var pools = [];
 class Pool{
     constructor(message, maxPlayers){
@@ -71,6 +72,18 @@ bot.on('message', message =>{
 
     {
         switch(args[0].toLowerCase()){
+            case 'as':
+                if (message.member.voice.channel) {
+                    let channel = message.guild.channels.cache.get(message.member.voice.channel.id);
+                    for (const [memberID, member] of channel.members) {
+                      member.voice.setMute(mute);
+                    }
+                    mute = !mute;
+                } else {
+                    message.reply('You need to join a voice channel first!');
+                }
+                break;
+
             case 'calle':
                 message.channel.send('Ah, Yes, the Calle, da sach ich nur callepupalle, ALLA!');
                 break;
