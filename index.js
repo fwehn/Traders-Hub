@@ -72,7 +72,7 @@ bot.on('message', message =>{
 
     {
         switch(args[0].toLowerCase()){
-            case 'as':
+            case 'au':
                 if (message.member.voice.channel) {
                     let channel = message.guild.channels.cache.get(message.member.voice.channel.id);
                     for (const [memberID, member] of channel.members) {
@@ -82,6 +82,7 @@ bot.on('message', message =>{
                 } else {
                     message.reply('You need to join a voice channel first!');
                 }
+                message.delete();
                 break;
 
             case 'calle':
