@@ -4,17 +4,21 @@ const bot = new Discord.Client();
 const Pool = require('./pool.js');
 const WWGame = require('./wwgame.js');
 const Randomizer = require('./randomizer.js');
+const ArrayFunctions = require('./array-functions.js');
 const ytdl = require('ytdl-core');
+const { ArraySearch } = require('./array-functions.js');
 
 const token = 'NzM3MzQzMTUxODIzNTE5ODA3.Xx7-Ug.K-_ij9LVXboI6GPcAhQmFDPI2vo';
 const lowestRole = "784484964770906224";
 
 const PREFIX = '!';
 
+
 var mute = true;
 var pools = [];
 var wwGames = [];
 var randomizer = [];
+var gesoffen = [];
 var servers = [];
 
 
@@ -57,6 +61,7 @@ bot.on('message', message =>{
             case 'clearvars':
                 pools = [];
                 wwGames = [];
+                randomizer = [];
                 message.reply("Es wurden alle Variablen gelöscht.");
                 break;
 
@@ -148,6 +153,56 @@ bot.on('message', message =>{
                 //console.log(role);
                 onlineMembers.each(member => console.log(member.user.username));
                 onlineMembers.each(member => member.roles.add(role));
+                break;
+            
+            case 'saufen':
+                const dsu = message.guild.channels.cache.filter(channel => channel.id == "786617536397443094");
+                //459642779891531776
+                gesoffen = [];
+
+                if (!args[1] && args[1] != "start" && args[1] != "stop"){
+                    message.reply("bitte schreibe \"start\" oder \"stop\" um den Sauftimer zu starten bzw. zu stopen.");
+                }else if (args[1] == "start"){
+                    var interval = 1;
+
+                    if (args[2] != null){
+                        interval = Math.max(interval, parseInt(args[2]));
+                    }
+                    
+                    var prompText = `ich hab für euch einen Sauftimer erstellt!!!\nAlle ${interval} Minuten muss jemand trinken!!!`;
+                    message.reply(prompText).then(
+                        sauftimer = setInterval(function() {
+                            var onlineArray = [];
+                            var onlinePlayers = message.guild.members.cache.filter(member => member.presence.status == "online");
+                            onlinePlayers.forEach(member => onlineArray.push(member));
+
+                            onlineArray = ArrayFunctions.shuffle([...onlineArray])
+                            
+                            var found = false;
+                            var lengthBefore = gesoffen.length;
+                            onlineArray.forEach(member => {
+                                if (!found && !ArrayFunctions.ArraySearch(gesoffen, member.id)){
+                                    gesoffen.push(member.id);
+                                    member.send(`\nHey!\nAlles Klar bei dir?\nMir egal!\n**Sauf jetzt!**`);
+                                    dsu.forEach(channel => channel.send(`@everyone <@${member.id}> muss trinken!!!`));
+                                    console.log(gesoffen);
+                                    found = true;
+                                }
+                            });
+
+                            if (!found){
+                                dsu.forEach(channel => channel.send(`@everyone Jeder der aktuell online ist hat bereits gesoffen!!!`));
+                                clearInterval(sauftimer);
+                            }
+
+                        }, interval*60000));
+                }else {
+                    if (sauftimer != undefined){
+                        clearInterval(sauftimer);
+                    }
+                    message.reply("ich habe den derzeitigen Sauftimer gestoppt.")
+                }
+
                 break;
 
             case 'standard':
