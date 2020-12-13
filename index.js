@@ -66,6 +66,7 @@ bot.on('message', message =>{
                 pools = [];
                 wwGames = [];
                 randomizer = [];
+                servers = [];
                 message.reply("Es wurden alle Variablen gelöscht.");
                 break;
 
@@ -82,7 +83,7 @@ bot.on('message', message =>{
                 break;
 
             case 'mimimi':
-                message.channel.send('Biste n ADC oder was?!?');
+                message.reply('biste n ADC oder was?!?');
                 break;
             
             /*case 'play':
@@ -177,7 +178,7 @@ bot.on('message', message =>{
                     message.reply(prompText).then(
                         sauftimer = setInterval(function() {
                             var onlineArray = [];
-                            var onlinePlayers = message.guild.members.cache.filter(member => member.presence.status == "online");
+                            var onlinePlayers = message.guild.members.cache.filter(member => member.presence.status == "online" && member.voice.channel != null);
                             onlinePlayers.forEach(member => onlineArray.push(member));
 
                             onlineArray = ArrayFunctions.shuffle([...onlineArray])
@@ -228,7 +229,7 @@ bot.on('message', message =>{
                 break;
 
             case 'test':
-                message.reply(message.channel.id+"test");
+                message.reply(message.channel.id + " test " + message.member.voice.channel );
                 break;
 
             case 'würg':
