@@ -1,37 +1,20 @@
-## Welcome to GitHub Pages
+## Commands
+### Funktion
+| Command 	| Variablen                      	| Funktion                                                                                                                                               	| Beispiel         	| Ergebnis                                         	|
+|---------	|--------------------------------	|--------------------------------------------------------------------------------------------------------------------------------------------------------	|------------------	|--------------------------------------------------	|
+| !au     	| -                              	| Mutet alle Leute in deinem Voice-Channel                                                                                                               	| -                	| -                                                	|
+| !random 	| Anz. Teilnehmer, (Anz. Sieger) 	| Erstellt einen Randomizer und zieht Sieger, nachdem alle per Reaktion teilgenommen haben.                                                              	| !random 20 3     	| Es werden zufällig 3 von 20 Teilnehmern gezogen. 	|
+| !saufen 	| start/stopp, (Interval)        	| Startet/Beendet den Sauftimer: Immer nach Ablauf des Intervals, wird jemand der sich in einem Voice-Channel befindet auserwählt zum Saufen.            	| !saufen start 15 	| Alle 15 Minuten wird jemand erwählt zum Saufen.  	|
+| !teams  	| Anzahl der Spieler insgesamt   	| Erstellt zufällig 2 Teams aus allen, die per Reaktion Teilnehmen.                                                                                      	| !teams 6         	| Erstellt 2 Teams mit je 3 Personen.              	|
+| !ww     	| Anzahl der Spieler             	| Erstellt eine Partie Werwolf und teilt jedem Spieler eine Rolle zu. Erzähler wird derjenige, der den Command geschrieben hat. (Teilnahme per Reaktion) 	| !ww 20           	| Erstellt eine Partie Werwolf mit 20 Personen     	|
+| !roles  	| -                              	| Weist jedem, der noch keine Rolle hat, die niedrigste Rolle zu.                                                                                        	| -                	| -                                                	|
+  
+  
+### "Fun"
+Einfach mal verwenden und sehen, was passiert:  
 
-You can use the [editor on GitHub](https://github.com/fwehn/GLaDOS/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/fwehn/GLaDOS/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+- `!ehre`
+- `!luther`
+- `!mimimi`
+- `!standard`
+- `!würg`
