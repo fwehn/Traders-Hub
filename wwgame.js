@@ -31,13 +31,13 @@ class WW{
         var shuffledPlayers = arrayFuncs.shuffle([...this.players])
 
         var wwCount = 2;
-        if (this.maxPlayers >= 12) wws = 3;
+        if (this.maxPlayers >= 12) wwCount = 3;
 
-        shuffledPlayers.forEach((player, i) => {
+        shuffledPlayers.forEach((player) => {
             if (wwCount > 0){
                 werewolfs.push(player);
                 wwCount--;
-            }else if (seer == ""){
+            }else if (seer === ""){
                 seer = player;
             }else {
                 villager.push(player);
@@ -45,7 +45,7 @@ class WW{
         });
         var playerRoles = [];
         this.message.guild.members.cache.forEach(member => {
-                if (member.id == seer && !member.user.bot){
+                if (member.id === seer && !member.user.bot){
                     playerRoles.push("Seher: " + member.user.username + "\n");
                     member.send("Du bist Seher.");
                 }else if (arrayFuncs.ArraySearch(werewolfs, member.id)){
