@@ -1,1 +1,3 @@
-./variables.json
+variables.json
+.idea
+node_modules

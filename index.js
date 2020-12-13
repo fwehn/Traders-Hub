@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
-const fs = require('fs');
+const fs = require('file-system');
 const Pool = require('./pool.js');
 const WWGame = require('./wwgame.js');
 const Randomizer = require('./randomizer.js');
