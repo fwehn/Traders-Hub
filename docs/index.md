@@ -1,3 +1,8 @@
+---
+layout: page
+title: About
+---
+
 ## Commands
 ### Funktion
 | Command 	| Variablen                      	| Funktion                                                                                                                                               	| Beispiel         	| Ergebnis                                         	|
