@@ -1,6 +1,7 @@
 variables.json
 .idea
 node_modules
+package-lock.json
 
 # Created by https://www.gitignore.io
 
