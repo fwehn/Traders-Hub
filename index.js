@@ -1,17 +1,21 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
+const fs = require('fs');
 const Pool = require('./pool.js');
 const WWGame = require('./wwgame.js');
 const Randomizer = require('./randomizer.js');
 const ArrayFunctions = require('./array-functions.js');
 const ytdl = require('ytdl-core');
-const { ArraySearch } = require('./array-functions.js');
 
-const token = 'NzM3MzQzMTUxODIzNTE5ODA3.Xx7-Ug.K-_ij9LVXboI6GPcAhQmFDPI2vo';
-const lowestRole = "784484964770906224";
+const rawdata = fs.readFileSync('./variables.json');
+const variables = JSON.parse(rawdata);
+const token = variables.token;
+const PREFIX = variables.prefix;
 
-const PREFIX = '!';
+const lowestRole = variables.lowestRole;
+const saufChannelId = variables.saufChannelId;
+
 
 
 var mute = true;
@@ -156,8 +160,8 @@ bot.on('message', message =>{
                 break;
             
             case 'saufen':
-                const dsu = message.guild.channels.cache.filter(channel => channel.id == "786617536397443094");
-                //459642779891531776
+                const saufChannel = message.guild.channels.cache.filter(channel => channel.id == saufChannelId);
+                
                 gesoffen = [];
 
                 if (!args[1] && args[1] != "start" && args[1] != "stop"){
@@ -184,14 +188,14 @@ bot.on('message', message =>{
                                 if (!found && !ArrayFunctions.ArraySearch(gesoffen, member.id)){
                                     gesoffen.push(member.id);
                                     member.send(`\nHey!\nAlles Klar bei dir?\nMir egal!\n**Sauf jetzt!**`);
-                                    dsu.forEach(channel => channel.send(`@everyone <@${member.id}> muss trinken!!!`));
+                                    saufChannel.forEach(channel => channel.send(`@everyone <@${member.id}> muss trinken!!!`));
                                     console.log(gesoffen);
                                     found = true;
                                 }
                             });
 
                             if (!found){
-                                dsu.forEach(channel => channel.send(`@everyone Jeder der aktuell online ist hat bereits gesoffen!!!`));
+                                saufChannel.forEach(channel => channel.send(`@everyone Jeder der aktuell online ist hat bereits gesoffen!!!`));
                                 clearInterval(sauftimer);
                             }
 
@@ -224,7 +228,7 @@ bot.on('message', message =>{
                 break;
 
             case 'test':
-                message.reply(message.channel.id);
+                message.reply(message.channel.id+"test");
                 break;
 
             case 'würg':
