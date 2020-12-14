@@ -36,9 +36,9 @@ class Randomizer{
             this.message.channel.send("Glückwunsch an: \n" + selectedPlayers + "\nIhr seid die Auserwählten!!!");
         }else{
             this.message.channel.send("Glückwunsch an : \n" + selectedPlayers + "\nDu wurdest auserwählt!!!");
-        };
+        }
     }
-};
+}
 
 module.exports =
 {
