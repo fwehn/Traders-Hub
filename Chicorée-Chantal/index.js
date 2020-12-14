@@ -1,3 +1,5 @@
+console.log("satrting...");
+
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
@@ -12,11 +14,10 @@ const rawdata = fs.readFileSync('./variables.json');
 const variables = JSON.parse(rawdata);
 const token = variables.token;
 const PREFIX = variables.prefix;
+//console.log(token +"\n"+PREFIX + "\n" );
 
 const lowestRole = variables.lowestRole;
 const saufChannelId = variables.saufChannelId;
-
-
 
 var mute = true;
 var pools = [];
@@ -25,6 +26,7 @@ var randomizer = [];
 var gesoffen = [];
 var servers = [];
 
+console.log("waiting for discord...");
 
 bot.on('ready', () => {
     console.log('This Bot is Online');
