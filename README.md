@@ -1,4 +1,4 @@
-# GLaDOS
+# Chicorée-Chantal
 ## Commands
 ### Funktion
 | Command 	| Variablen                      	| Funktion                                                                                                                                               	| Beispiel         	| Ergebnis                                         	|

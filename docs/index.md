@@ -1,6 +1,6 @@
 ---
 layout: default
-title: GLaDOS
+title: Chicorée-Chantal
 ---
 
 ## Commands
