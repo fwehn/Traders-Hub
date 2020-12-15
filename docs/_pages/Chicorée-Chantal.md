@@ -1,7 +1,6 @@
 ---
 permalink: /chicoree-chantal/
 title: "Chicorée-Chantal"
-description: "Ein Discord-Bot mit einigen witzigen und nützlichen Funktionen"
 ---
 
 ## Commands
