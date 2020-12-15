@@ -1,11 +1,16 @@
 Finn Wehn:
   name        : "Finn Wehn"
   bio         : "Moin"
-  avatar      : "/assets/images/Traders-Hub.png"
+  avatar      : "/assets/images/Avatar-Finn.png"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
       url: "finn.wehn@web.de"
+
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram-square"
       url: "https://www.instagram.com/finn_wehn/"
+
+    - label: "Steam"
+      icon: "fab fa-fw fa-steam-square"
+      url: "https://steamcommunity.com/id/InFlNNity/"
