@@ -5,7 +5,7 @@ title: Traders-Hub
 ---
 # Willkommen
 
-Moin, willkommen im Traders-Hub.</p>
+Moin, willkommen im Traders-Hub.
 
 <iframe src="https://discord.com/widget?id=459426513675223044&theme=dark" width="100%" height="500" allowtransparency="true" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
 </iframe>
