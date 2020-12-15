@@ -1,5 +1,10 @@
 remote_theme: "mmistakes/minimal-mistakes@4.21.0"
+minimal_mistakes_skin: "dark"
 markdown: kramdown
+
+repository: "fwehn/Traders-Hub"
+logo: "/assets/images/Traders-Hub.png"
+masthead_title: "Traders-Hub"
 
 plugins:
   - jekyll-include-cache
