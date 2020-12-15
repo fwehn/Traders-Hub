@@ -16,4 +16,4 @@ defaults:
       path: ""
       type: pages
     values:
-      layout: splash
+      layout: single

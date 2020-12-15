@@ -1,5 +1,5 @@
 ---
-permalink: /docs/pages/
+permalink: /pages/chicoree-chantal/
 type: pages
 title: Chicorée-Chantal
 ---
