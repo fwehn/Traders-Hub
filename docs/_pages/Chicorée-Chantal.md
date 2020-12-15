@@ -2,6 +2,7 @@
 permalink: /chicoree-chantal/
 type: pages
 title: Chicorée-Chantal
+author: Finn Wehn
 ---
 
 ## Commands

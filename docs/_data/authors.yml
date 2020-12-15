@@ -1,0 +1,9 @@
+Finn Wehn:
+  name        : "Finn Wehn"
+  bio         : "Moin"
+  avatar      : "/assets/images/TradersHub.png"
+  links:
+    - label: "Email"
+      url: "finn.wehn@web.de"
+    - label: "Instagram"
+      url: "https://www.instagram.com/finn_wehn/"
