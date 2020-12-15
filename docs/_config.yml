@@ -11,8 +11,9 @@ plugins:
 ##theme: jekyll-theme-cayman
 
 defaults:
-  # _pages
+  # pages
   - scope:
-      path: "/pages/"
+      path: ""
+      type: pages
     values:
       layout: splash
