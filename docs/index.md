@@ -1,6 +1,5 @@
 ---
 layout: default
-permalink: /home/
 title: Traders-Hub
 ---
 # Willkommen

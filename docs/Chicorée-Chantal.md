@@ -1,6 +1,5 @@
 ---
 layout: default
-permalink: /chicoree-chantal/
 title: Chicorée-Chantal
 ---
 
