@@ -1,6 +1,6 @@
 theme: jekyll-theme-cayman
-
+markdown: kramdown
 # Apply this change to _config.yml file
 kramdown:
   # parse markdown inside block-level HTML tag
-  parse_block_html: true
+  parse_block_html: false
