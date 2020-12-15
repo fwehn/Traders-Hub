@@ -10,6 +10,8 @@ plugins:
   - jekyll-include-cache
 ##theme: jekyll-theme-cayman
 
+include: ["_pages"]
+
 defaults:
   # pages
   - scope:
