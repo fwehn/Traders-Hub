@@ -4,6 +4,8 @@ Finn Wehn:
   avatar      : "/assets/images/Traders-Hub.png"
   links:
     - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
       url: "finn.wehn@web.de"
     - label: "Instagram"
+      icon: "fab fa-fw fa-instagram-square"
       url: "https://www.instagram.com/finn_wehn/"
