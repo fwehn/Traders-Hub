@@ -1,5 +1,6 @@
 ---
 permalink: /docs/pages/
+type: pages
 title: Chicorée-Chantal
 ---
 
