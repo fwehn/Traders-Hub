@@ -1,8 +1,7 @@
 ---
 permalink: /chicoree-chantal/
-type: pages
 title: Chicorée-Chantal
-author: Finn Wehn
+description: Ein Discord-Bot mit einigen witzigen und nützlichen Funktionen
 ---
 
 ## Commands

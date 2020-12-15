@@ -1,6 +1,11 @@
 main:
-  - title: "Chicorée-Chantal"
-    url: /chicoree-chantal/
+  - title: "Discord"
+      url: /discord/
 
   - title: "Posts"
-    url: /posts/
+      url: /posts/
+
+  - title: "Chicorée-Chantal"
+      url: /chicoree-chantal/
+
+
