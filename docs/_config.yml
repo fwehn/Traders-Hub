@@ -15,4 +15,4 @@ defaults:
   - scope:
       path: "/pages/"
     values:
-      layout: single
+      layout: splash
