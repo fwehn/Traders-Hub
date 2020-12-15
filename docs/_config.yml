@@ -3,4 +3,4 @@ markdown: kramdown
 # Apply this change to _config.yml file
 kramdown:
   # parse markdown inside block-level HTML tag
-  parse_block_html: false
+  parse_block_html: true
