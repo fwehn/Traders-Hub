@@ -1,5 +1,4 @@
 ---
-layout: default
 permalink: /docs/discord-bot/
 title: Chicorée-Chantal
 ---
