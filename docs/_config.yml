@@ -1,6 +1,2 @@
-##remote_theme: "mmistakes/minimal-mistakes@4.21.0"
-markdown: kramdown
-
-##plugins:
-  ##- jekyll-include-cache
 theme: jekyll-theme-cayman
+markdown: kramdown
