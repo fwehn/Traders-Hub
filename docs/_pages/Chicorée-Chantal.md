@@ -1,5 +1,5 @@
 ---
-permalink: /docs/discord-bot/
+permalink: /docs/_pages/
 title: Chicorée-Chantal
 ---
 
