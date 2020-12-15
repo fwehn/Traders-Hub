@@ -3,3 +3,4 @@ markdown: kramdown
 
 plugins:
   - jekyll-include-cache
+theme: jekyll-theme-cayman
