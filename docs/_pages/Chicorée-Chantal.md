@@ -5,6 +5,7 @@ title: "Chicorée-Chantal"
 
 ## Commands
 ### Funktion
+
 | Command 	| Variablen                      	| Funktion                                                                                                                                               	| Beispiel         	| Ergebnis                                         	|
 |---------	|--------------------------------	|--------------------------------------------------------------------------------------------------------------------------------------------------------	|------------------	|--------------------------------------------------	|
 | !au     	| -                              	| Mutet alle Leute in deinem Voice-Channel                                                                                                               	| -                	| -                                                	|
@@ -16,6 +17,7 @@ title: "Chicorée-Chantal"
 
 
 ### "Fun"
+
 Einfach mal verwenden und sehen, was passiert:
 
 - `!ehre`
