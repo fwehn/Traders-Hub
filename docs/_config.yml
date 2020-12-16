@@ -80,8 +80,10 @@ author:
 # Site Footer
 footer:
   links:
+    - label: "Impressum"
+      url: /impressum/
     - label: "Discord"
-      icon: "fab fa-fw fa-discord-square"
+      icon: "fab fa-fw fa-discord"
       url: "https://discord.gg/jCYv5puCeY"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"

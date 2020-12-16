@@ -1,4 +1,8 @@
-# Impressum
+---
+permalink: /impressum/
+title: "Impressum"
+---
+
 ## Inhaber  
 Finn Wehn  
 Hasenweg 12  
