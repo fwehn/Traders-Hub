@@ -14,3 +14,12 @@ Finn Wehn:
     - label: "Steam"
       icon: "fab fa-fw fa-steam-square"
       url: "https://steamcommunity.com/id/InFlNNity/"
+
+Lukas Diekmann:
+  name: "Lukas Diekmann"
+  bio: ""
+  avatar: ""
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: ""
