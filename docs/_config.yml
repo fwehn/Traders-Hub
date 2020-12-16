@@ -29,7 +29,7 @@ masthead_title: "Traders-Hub"
 
 plugins:
   - jekyll-include-cache
-  - jekyll-feed
+  ##- jekyll-feed
 ##theme: jekyll-theme-cayman
 
 include: ["_pages"]
