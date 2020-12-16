@@ -8,13 +8,13 @@ toc_icon: "fas fa-robot"
 
 Hier sind alle brauchbaren und unnützen Commands unserer derzeitigen Bots aufgelistet, damit auch du in den "Genuss" kommst, dich ein wenig auszutoben.
 
-# Chicorée-Chantal
+## Chicorée-Chantal
 Bei Chicorée-Chantal handelt es sich um einen von Finn geschriebenen Bot.  
 Dieser basiert auf [Discord.js](https://discord.js.org/#/), einer JavaScript-API.  
 Den Code dazu findet ihr im [Repo](https://github.com/fwehn/Traders-Hub/tree/master/Chicor%C3%A9e-Chantal).  
 Wenn du noch Anregungen für neue Features oder Verbesserungsvorschläge für Bestehende hast, immer her damit!!!  
 
-## Useful Commands
+### Useful Commands
 
 | Command 	| Variablen                      	| Funktion                                                                                                                                               	| Beispiel         	| Ergebnis                                         	|
 |---------	|--------------------------------	|--------------------------------------------------------------------------------------------------------------------------------------------------------	|------------------	|--------------------------------------------------	|
@@ -26,7 +26,7 @@ Wenn du noch Anregungen für neue Features oder Verbesserungsvorschläge für Be
 | !roles  	| -                              	| Weist jedem, der noch keine Rolle hat, die niedrigste Rolle zu.                                                                                        	| -                	| -                                                	|
 
 
-## "Fun" Commands
+### "Fun" Commands
 
 Einfach mal verwenden und sehen, was passiert:
 
@@ -37,12 +37,12 @@ Einfach mal verwenden und sehen, was passiert:
 - `!würg`
 
 
-# Tofu-Thorben
+## Tofu-Thorben
 
 Tofu-Thorben ist unser Musikbot.  
 Es handelt sich um den sog. [Lewdbot](https://docs.notfab.net/).  
 
-## Useful Commands
+### Useful Commands
 
 | Command  	| Variablen    	| Funktion                                            	| Beispiel                                            	| Ergebnis                                        	|
 |----------	|--------------	|-----------------------------------------------------	|-----------------------------------------------------	|-------------------------------------------------	|
