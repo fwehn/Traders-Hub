@@ -1,13 +1,20 @@
 ---
-permalink: /vegi-gang/
-title: "Vegi-Gang"
+permalink: /veggie-gang/
+title: "Veggie-Gang"
 toc: true
 toc_label: "Bots"
 toc_icon: "fas fa-robot"
 ---
+
+Hier sind alle brauchbaren und unnützen Commands unserer derzeitigen Bots aufgelistet, damit auch du in den "Genuss" kommst, dich ein wenig auszutoben.
+
 # Chicorée-Chantal
-## Commands
-### Funktion
+Bei Chicorée-Chantal handelt es sich um einen von Finn geschriebenen Bot.  
+Dieser basiert auf [Discord.js](https://discord.js.org/#/), einer JavaScript-API.  
+Den Code dazu findet ihr im [Repo](https://github.com/fwehn/Traders-Hub/tree/master/Chicor%C3%A9e-Chantal).  
+Wenn du noch Anregungen für neue Features oder Verbesserungsvorschläge für Bestehende hast, immer her damit!!!  
+
+## Useful Commands
 
 | Command 	| Variablen                      	| Funktion                                                                                                                                               	| Beispiel         	| Ergebnis                                         	|
 |---------	|--------------------------------	|--------------------------------------------------------------------------------------------------------------------------------------------------------	|------------------	|--------------------------------------------------	|
@@ -19,7 +26,7 @@ toc_icon: "fas fa-robot"
 | !roles  	| -                              	| Weist jedem, der noch keine Rolle hat, die niedrigste Rolle zu.                                                                                        	| -                	| -                                                	|
 
 
-### "Fun"
+## "Fun" Commands
 
 Einfach mal verwenden und sehen, was passiert:
 
@@ -28,3 +35,22 @@ Einfach mal verwenden und sehen, was passiert:
 - `!mimimi`
 - `!standard`
 - `!würg`
+
+
+# Tofu-Thorben
+
+Tofu-Thorben ist unser Musikbot.  
+Es handelt sich um den sog. [Lewdbot](https://docs.notfab.net/).  
+
+## Useful Commands
+
+| Command  	| Variablen    	| Funktion                                            	| Beispiel                                            	| Ergebnis                                        	|
+|----------	|--------------	|-----------------------------------------------------	|-----------------------------------------------------	|-------------------------------------------------	|
+| l! play  	| Youtube-Link 	| Spielt direkt Sound der Quelle ab                   	| l! play https://www.youtube.com/watch?v=BCrOcqdYzZo 	| Spielt super Mukke                              	|
+| l! list  	| -            	| Schickt dir einen Link zu aktuellen Playlist        	| -                                                   	| -                                               	|
+| l! add   	| Youtube-Link 	| Fügt ein Lied (Sound des Videos) zur Playlist hinzu 	| l! add https://www.youtube.com/watch?v=BCrOcqdYzZo  	| Fügt das Geile Lied von oben zur Playlist hinzu 	|
+| l! skip  	| -            	| Geht zum nächsten Lied in der Playlist              	| -                                                   	| -                                               	|
+| l! clear 	| -            	| Löscht die Playlist                                 	| -                                                   	| -                                               	|
+
+*Das ist lediglich ein sehr kleiner Auszug an Commands, die wir bisher genutzt haben.  
+Um zu sehen, was Tofu-Thorben sonst noch so kann (was eine ganze Menge ist), schaue auf der offiziellen [Website](https://docs.notfab.net/).*
