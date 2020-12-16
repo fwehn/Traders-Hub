@@ -23,13 +23,13 @@ kramdown:
   enable_coderay: false
 
 
-repository: "fwehn/Traders-Hub"
+repository: "https://github.com/fwehn/Traders-Hub"
 logo: "/assets/images/Traders-Hub.png"
 masthead_title: "Traders-Hub"
 
 plugins:
   - jekyll-include-cache
-  ##- jekyll-feed
+  - jekyll-feed
 ##theme: jekyll-theme-cayman
 
 include: ["_pages"]
@@ -53,3 +53,36 @@ defaults:
       comments: true
       share: true
       related: true
+
+
+
+# Site Author
+author:
+  name             : "Finn Wehn"
+  avatar           : "/assets/images/Avatar-Finn.png"
+  bio              : "Moin"
+  location         : "Hasenweg 12, 51789 Lindlar"
+  email            : "finn.wehn@web.de"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "finn.wehn@web.de"
+    - label: "Website"
+      icon: "fas fa-fw fa-link"
+      url: "http://traders-hub.de/"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/fwehn"
+    - label: "Instagram"
+      icon: "fab fa-fw fa-instagram-square"
+      url: "https://www.instagram.com/finn_wehn/"
+
+# Site Footer
+footer:
+  links:
+    - label: "Discord"
+      icon: "fab fa-fw fa-discord-square"
+      url: "https://discord.gg/jCYv5puCeY"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/fwehn/Traders-Hub"
