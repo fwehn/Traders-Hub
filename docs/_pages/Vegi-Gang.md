@@ -1,8 +1,11 @@
 ---
-permalink: /chicoree-chantal/
-title: "Chicorée-Chantal"
+permalink: /vegi-gang/
+title: "Vegi-Gang"
+toc: true
+toc_label: "Bots"
+toc_icon: "fas fa-robot"
 ---
-
+# Chicorée-Chantal
 ## Commands
 ### Funktion
 
