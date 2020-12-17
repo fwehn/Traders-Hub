@@ -87,5 +87,5 @@ footer:
       icon: "fab fa-fw fa-discord"
       url: "https://discord.gg/jCYv5puCeY"
     - label: "GitHub"
-      icon: "fab fa-fw fa-github"
+      icon: "fab fa-github-square"
       url: "https://github.com/fwehn/Traders-Hub"
