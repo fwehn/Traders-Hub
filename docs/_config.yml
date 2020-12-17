@@ -81,7 +81,7 @@ author:
 footer:
   links:
     - label: "Impressum"
-      icon: ""
+      icon: "fas fa-address-book"
       url: /impressum/
     - label: "Discord"
       icon: "fab fa-fw fa-discord"

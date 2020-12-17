@@ -25,6 +25,7 @@ Wenn du noch Anregungen für neue Features oder Verbesserungsvorschläge für Be
 | !ww     	| Anzahl der Spieler             	| Erstellt eine Partie Werwolf und teilt jedem Spieler eine Rolle zu. Erzähler wird derjenige, der den Command geschrieben hat. (Teilnahme per Reaktion) 	| !ww 20           	| Erstellt eine Partie Werwolf mit 20 Personen     	|
 | !roles  	| -                              	| Weist jedem, der noch keine Rolle hat, die niedrigste Rolle zu.                                                                                        	| -                	| -                                                	|
 
+*In Discord solltest du keine Zeilenumbrüche verwenden, diese entstehen durch die Formatierung der Seite.*
 
 ### "Fun" Commands
 
