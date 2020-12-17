@@ -81,11 +81,11 @@ author:
 footer:
   links:
     - label: "Impressum"
-      icon: "fas fa-address-book"
+      icon: "fas fa-fw fa-address-book"
       url: /impressum/
     - label: "Discord"
       icon: "fab fa-fw fa-discord"
       url: "https://discord.gg/jCYv5puCeY"
     - label: "GitHub"
-      icon: "fab fa-github-square"
+      icon: "fab fa-fw fa-github-square"
       url: "https://github.com/fwehn/Traders-Hub"
