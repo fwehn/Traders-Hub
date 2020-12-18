@@ -35,6 +35,7 @@ Einfach mal verwenden und sehen, was passiert:
 - `!luther`
 - `!mimimi`
 - `!standard`
+- `!trump`
 - `!würg`
 
 
