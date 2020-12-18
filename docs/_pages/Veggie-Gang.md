@@ -31,6 +31,7 @@ Wenn du noch Anregungen für neue Features oder Verbesserungsvorschläge für Be
 
 Einfach mal verwenden und sehen, was passiert:
 
+- `!chuck`
 - `!ehre`
 - `!luther`
 - `!mimimi`

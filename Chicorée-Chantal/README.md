@@ -14,6 +14,7 @@
 ### "Fun"
 Einfach mal verwenden und sehen, was passiert:
 
+- `!chuck`
 - `!ehre`
 - `!luther`
 - `!mimimi`

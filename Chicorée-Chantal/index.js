@@ -59,6 +59,12 @@ bot.on('message', message =>{
                 }
                 message.delete();
                 break;
+
+            case 'chuck':
+                fetch('https://api.chucknorris.io/jokes/random')
+                    .then(res => res.json())
+                    .then(json => message.channel.send('**Did you know?**\n' + json.value));
+                break;
             
             case 'clear':
                 message.channel.send('Funktioniert halt eh nicht');
@@ -244,7 +250,6 @@ bot.on('message', message =>{
                     .then(res => message.channel.send({files: [{
                             attachment: res.body
                         }]}));
-
                 break;
 
             case 'website':
