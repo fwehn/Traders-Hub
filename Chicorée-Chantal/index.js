@@ -43,7 +43,7 @@ bot.on('guildMemberAdd', member => {
 })
 
 bot.on('message', message =>{
-    if (message.author.bot) return;
+    if (message.author.bot || message.toString().indexOf("!") != 0) return;
     let args = message.content.substring(PREFIX.length).split(" ");
 
     {
