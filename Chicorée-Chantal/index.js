@@ -3,6 +3,11 @@ console.log("satrting...");
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
+const fetch = require('node-fetch');
+const Bluebird = require('bluebird');
+
+fetch.Promise = Bluebird;
+
 const fs = require('file-system');
 const Pool = require('./pool.js');
 const WWGame = require('./wwgame.js');
@@ -232,6 +237,18 @@ bot.on('message', message =>{
 
             case 'test':
                 message.reply(message.channel.id + " test " + message.member.voice.channel );
+                break;
+
+            case 'trump':
+                fetch('http://tronalddump.io/random/meme')
+                    .then(res => message.channel.send({files: [{
+                            attachment: res.body
+                        }]}));
+
+                break;
+
+            case 'website':
+                message.reply('http://traders-hub.de/ ist die beste Website, wo gibt!!!');
                 break;
 
             case 'würg':
