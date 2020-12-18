@@ -43,6 +43,7 @@ bot.on('guildMemberAdd', member => {
 })
 
 bot.on('message', message =>{
+    if (message.author.bot) return;
     let args = message.content.substring(PREFIX.length).split(" ");
 
     {
@@ -89,6 +90,30 @@ bot.on('message', message =>{
 
             case 'hello':
                 message.channel.send('Hi');
+                break;
+
+            case 'help':
+                var data = {
+                    "title": "Commands",
+                    "description": "Hallo, ich bin Chicorée-Chantal.\nIch bin ein mehr oder weniger nützlicher Discord-Bot.\nDie folgenden Commands kannst du nutzen, um mit mir zu reden oder mir Anweisungen zu geben.\n\n-----------------------------\n",
+                    "url": "http://traders-hub.de/veggie-gang/#chicor%C3%A9e-chantal",
+                    "color": 7419530,
+                    "footer": {
+                        "text": "Für genauere Informationen zu den Commands besuche unsere Website."
+                    },
+                    "fields": [
+                        {"name": "**Nützliche Commands**", "value": "-----------------------------"},
+                        {"name": "*!au*", "value": "Mutet alle Leute in deinem Voice-Channel."},
+                        {"name": "*!random*", "value": "Erstellt einen Randomizer und zieht Sieger, nachdem alle per Reaktion teilgenommen haben."},
+                        {"name": "*!saufen*", "value": "Startet/Beendet den Sauftimer: Immer nach Ablauf des Intervals, wird jemand der sich in einem Voice-Channel befindet auserwählt zum Saufen."},
+                        {"name": "*!teams*", "value": "Erstellt zufällig 2 Teams aus allen, die per Reaktion Teilnehmen."},
+                        {"name": "*!website*", "value": "Postet einen Link zu unserer Website."},
+                        {"name": "*!ww*", "value": "Erstellt eine Partie Werwolf und teilt jedem Spieler eine Rolle zu. Erzähler wird derjenige, der den Command geschrieben hat. (Teilnahme per Reaktion)\n\n-----------------------------"},
+                        {"name": "**Eher Unnütze Commands**", "value": "-----------------------------\n\n*!chuck*\n*!ehre*\n*!luther*\n*!mimimi*\n*!standard*\n*!trump*\n*!würg*"}
+                    ]
+                }
+
+                message.channel.send({embed: data});
                 break;
             
             case 'luther':
@@ -271,6 +296,11 @@ bot.on('message', message =>{
                 message.channel.send(prompText).then(botMsg => {
                     wwGames[botMsg.id] = new WWGame.WW(botMsg, playerSlots, wwGames.length+1, messageAuthor);
                 });
+                break;
+
+            default:
+                message.reply("das ist leider kein valider Command.\nUm zu sehen welche Commands du benutzen kannst, schreibe **!help**");
+                break;
         }
     }
 })

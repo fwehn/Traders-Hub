@@ -23,6 +23,7 @@ Wenn du noch Anregungen für neue Features oder Verbesserungsvorschläge für Be
 | !saufen 	| start/stopp, (Interval)        	| Startet/Beendet den Sauftimer: Immer nach Ablauf des Intervals, wird jemand der sich in einem Voice-Channel befindet auserwählt zum Saufen.            	| !saufen start 15 	| Alle 15 Minuten wird jemand erwählt zum Saufen.  	|
 | !teams  	| Anzahl der Spieler insgesamt   	| Erstellt zufällig 2 Teams aus allen, die per Reaktion Teilnehmen.                                                                                      	| !teams 6         	| Erstellt 2 Teams mit je 3 Personen.              	|
 | !ww     	| Anzahl der Spieler             	| Erstellt eine Partie Werwolf und teilt jedem Spieler eine Rolle zu. Erzähler wird derjenige, der den Command geschrieben hat. (Teilnahme per Reaktion) 	| !ww 20           	| Erstellt eine Partie Werwolf mit 20 Personen     	|
+| !website	| -                              	| Postet einen Link zu unserer Website.                                                                                                                 	| -                	| -                                                	|
 | !roles  	| -                              	| Weist jedem, der noch keine Rolle hat, die niedrigste Rolle zu.                                                                                        	| -                	| -                                                	|
 
 *In Discord solltest du keine Zeilenumbrüche verwenden, diese entstehen durch die Formatierung der Seite.*
