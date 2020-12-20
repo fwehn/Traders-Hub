@@ -76,7 +76,7 @@ bot.on('message', message =>{
                     });
                 }
                 break;
-            case 'clearDrinks':
+            case 'cleardrinks':
                 prostListe = [];
                 break;
             case 'clearvars':
@@ -88,14 +88,7 @@ bot.on('message', message =>{
                 break;
 
             case 'drinks':
-                let dataFrist = {
-                    "title": "Drinks",
-                    "description": "Hier ist ne Auflistung aller Drinks:\n\n",
-                    "url": "http://traders-hub.de/veggie-gang/#chicor%C3%A9e-chantal",
-                    "color": 7419530,
-                };
-                let embed = []
-                embed[0] = new Discord.MessageEmbed(dataFrist);
+
 
                 // prostListe = []; //Test-Daten
                 // prostListe["hallo"] = ["bia", "bia", "bia", "bia"];
@@ -105,14 +98,36 @@ bot.on('message', message =>{
                 // prostListe["habe"] = ["alk","alk","alk","alk"];
                 // prostListe["bock"] = ["alk","alk","bia","bia"];
                 // prostListe["drauf"] = ["bia", "bia", "bia", "bia"];
-
+                let fieldLength = 25;
+                let best = "";
+                let totalBest = 0;
+                let total = 0;
 
                 let prostListeLength = 0;
                 for (let i in prostListe){
+                    let current = 0;
+                    for (let j in prostListe[i]){
+                        total++;
+                        current++;
+                    }
+
+                    if (current > totalBest){
+                        best = i;
+                        totalBest = current;
+                    }
+
                     prostListeLength++;
                 }
                 console.log(prostListeLength);
-                let fieldLength = 25;
+
+                let dataFrist = {
+                    "title": "Drinks",
+                    "description": `Derzeit behält **${best}** die Führung mit **${totalBest}** Drinks!!!\nHier ist ne genaue Auflistung aller Drinks:\n\n`,
+                    "url": "http://traders-hub.de/veggie-gang/#chicor%C3%A9e-chantal",
+                    "color": 7419530,
+                };
+                let embed = []
+                embed[0] = new Discord.MessageEmbed(dataFrist);
 
                 if (prostListeLength > fieldLength){
                     let overhang = (prostListeLength%fieldLength);
@@ -123,8 +138,10 @@ bot.on('message', message =>{
                         embed[i] = ArrayFunctions.arrayToEmbed(new Discord.MessageEmbed({"color": 7419530}), ArrayFunctions.sliceArray(prostListe,fieldLength*i, fieldLength*(i+1)-1));
                     }
                     embed[slices] = ArrayFunctions.arrayToEmbed(new Discord.MessageEmbed({"color": 7419530}), ArrayFunctions.sliceArray(prostListe,fieldLength*slices, fieldLength*slices+overhang));
+                    embed[slices].setFooter(`Insgesamt wurden bereits ${total} Drinks getrunken!!!`);
                 }else{
                     embed[0] = ArrayFunctions.arrayToEmbed(embed[0], prostListe);
+                    embed[0].setFooter(`Insgesamt wurden bereits ${total} Drinks getrunken!!!`);
                 }
 
                 for (let i in embed){

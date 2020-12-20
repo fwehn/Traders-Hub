@@ -1,3 +1,5 @@
+const StringFunctions = require("./string-functions.js")
+
 function shuffle(a){
     for (let i = a.length-1; i>0; i--){
         const j = Math.floor(Math.random()*(i+1));
@@ -21,17 +23,16 @@ function arrayToEmbed(embed, array){
         let index = 1;
         let valText = "";
 
-        for (var y = 0; y < item.length; y++){
-            if (item[y+1] !== last || y === item.length-1){
+        for (var y = 0; y < item.length; y++) {
+            if (item[y + 1] !== last || y === item.length - 1) {
                 valText = valText + "\n - " + index + " " + item[y];
                 index = 1;
-                last = item[y+1];
-            }else{
+                last = item[y + 1];
+            } else {
                 index++;
             }
-
         }
-
+        valText = StringFunctions.truncate(valText,1024);
         embed.addField(x, valText);
     }
 
