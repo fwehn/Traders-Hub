@@ -13,6 +13,43 @@ function ArraySearch(a, val){
     return false;
 }
 
+function arrayToEmbed(embed, array){
+    console.log(array);
+    for (let x in array){
+        let item = array[x];
+        let last = item[0];
+        let index = 1;
+        let valText = "";
+
+        for (var y = 0; y < item.length; y++){
+            if (item[y+1] !== last || y === item.length-1){
+                valText = valText + "\n - " + index + " " + item[y];
+                index = 1;
+                last = item[y+1];
+            }else{
+                index++;
+            }
+
+        }
+
+        embed.addField(x, valText);
+    }
+
+    return embed;
+}
+
+function sliceArray(array , begin, end){
+    let current = 0;
+    let arrayOut = [];
+    for (let i in array){
+        if (current >= begin && current <= end){
+            arrayOut[i] = array[i];
+        }
+        current++;
+    }
+    return arrayOut;
+}
+
 module.exports = {
-    shuffle, ArraySearch
+    shuffle, ArraySearch, arrayToEmbed, sliceArray
 }

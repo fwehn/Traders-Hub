@@ -30,6 +30,7 @@ var wwGames = [];
 var randomizer = [];
 var gesoffen = [];
 var servers = [];
+var prostListe = [];
 
 console.log("waiting for discord...");
 
@@ -84,6 +85,51 @@ bot.on('message', message =>{
                 message.reply("Es wurden alle Variablen gelöscht.");
                 break;
 
+            case 'drinks':
+                let dataFrist = {
+                    "title": "Drinks",
+                    "description": "Hier ist ne Auflistung aller Drinks:\n\n",
+                    "url": "http://traders-hub.de/veggie-gang/#chicor%C3%A9e-chantal",
+                    "color": 7419530,
+                };
+                let embed = []
+                embed[0] = new Discord.MessageEmbed(dataFrist);
+
+                // prostListe = []; //Test-Daten
+                // prostListe["hallo"] = ["bia", "bia", "bia", "bia"];
+                // prostListe["welt"] = ["alk","alk","alk","alk"];
+                // prostListe["!"] = ["alk","alk","bia","bia"];
+                // prostListe["ich"] = ["bia", "bia", "bia", "bia"];
+                // prostListe["habe"] = ["alk","alk","alk","alk"];
+                // prostListe["bock"] = ["alk","alk","bia","bia"];
+                // prostListe["drauf"] = ["bia", "bia", "bia", "bia"];
+
+
+                let prostListeLength = 0;
+                for (let i in prostListe){
+                    prostListeLength++;
+                }
+                console.log(prostListeLength);
+                let fieldLength = 25;
+
+                if (prostListeLength > fieldLength){
+                    let overhang = (prostListeLength%fieldLength);
+                    let slices = (prostListeLength-overhang)/fieldLength;
+
+                    embed[0] = ArrayFunctions.arrayToEmbed(embed[0], ArrayFunctions.sliceArray(prostListe, 0, fieldLength-1));
+                    for (let i = 1; i < slices;i++){
+                        embed[i] = ArrayFunctions.arrayToEmbed(new Discord.MessageEmbed({"color": 7419530}), ArrayFunctions.sliceArray(prostListe,fieldLength*i, fieldLength*(i+1)-1));
+                    }
+                    embed[slices] = ArrayFunctions.arrayToEmbed(new Discord.MessageEmbed({"color": 7419530}), ArrayFunctions.sliceArray(prostListe,fieldLength*slices, fieldLength*slices+overhang));
+                }else{
+                    embed[0] = ArrayFunctions.arrayToEmbed(embed[0], prostListe);
+                }
+
+                for (let i in embed){
+                    message.channel.send(embed[i])
+                }
+                break;
+
             case 'ehre':
                 message.reply('ja EHRE ALLA!');
                 break;
@@ -104,6 +150,8 @@ bot.on('message', message =>{
                     "fields": [
                         {"name": "**Nützliche Commands**", "value": "-----------------------------"},
                         {"name": "*!au*", "value": "Mutet alle Leute in deinem Voice-Channel."},
+                        {"name": "*!drinks*", "value": "Gibt eine Liste aller Drinks aus, die an diesem Tag/Abend getrunken wurden."},
+                        {"name": "*!prost*", "value": "Fügt einen Drink deiner Liste an Drinks hinzu. "},
                         {"name": "*!random*", "value": "Erstellt einen Randomizer und zieht Sieger, nachdem alle per Reaktion teilgenommen haben."},
                         {"name": "*!saufen*", "value": "Startet/Beendet den Sauftimer: Immer nach Ablauf des Intervals, wird jemand der sich in einem Voice-Channel befindet auserwählt zum Saufen."},
                         {"name": "*!teams*", "value": "Erstellt zufällig 2 Teams aus allen, die per Reaktion Teilnehmen."},
@@ -171,6 +219,27 @@ bot.on('message', message =>{
 
                 
                 break;*/
+            case 'prost':
+                var user = message.member.user.username
+                if (!prostListe[user]){
+                    prostListe[user] = [];
+                }
+
+                var text = "";
+                for (var i = 1; i<args.length; i++){
+                    text = text + args[i] + " ";
+                }
+
+                if (text === ""){
+                    message.reply("du musst erst ein Getränk hinzufügen.");
+                    return;
+                }
+
+                prostListe[user].push(text);
+                prostListe[user].sort();
+                console.log(prostListe);
+                break;
+
             case 'random':
                 if (!args[1]){
                     message.reply("bitte füge zumindest eine Zahl hinzu.");
