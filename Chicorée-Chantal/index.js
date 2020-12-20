@@ -76,7 +76,9 @@ bot.on('message', message =>{
                     });
                 }
                 break;
-
+            case 'clearDrinks':
+                prostListe = [];
+                break;
             case 'clearvars':
                 pools = [];
                 wwGames = [];
@@ -238,6 +240,16 @@ bot.on('message', message =>{
                 prostListe[user].push(text);
                 prostListe[user].sort();
                 console.log(prostListe);
+
+                let feedbackSentences = [];
+                feedbackSentences[0] = "Klingt geil. Bitte mehr davon!";
+                feedbackSentences[1] = "Jo, schreib ich auf!";
+                feedbackSentences[2] = "Ist vermerkt!";
+                feedbackSentences[3] = "Davon tät ich auch einen nehmen!";
+                feedbackSentences[4] = "Mhhhh, legga!";
+
+                message.channel.send(feedbackSentences[Math.floor(Math.random() * (feedbackSentences.length))]);
+
                 break;
 
             case 'random':
