@@ -24,12 +24,12 @@ class Pool{
     }
 
     handleFullMatch(){
-        var teamOne = [];
-        var teamTwo = [];
-        var shuffledPlayers = arrayFuncs.shuffle([...this.players])
+        let teamOne = [];
+        let teamTwo = [];
+        let shuffledPlayers = arrayFuncs.shuffle([...this.players])
 
         shuffledPlayers.forEach((player, i) => {
-            var tag = "<@" + player + ">";
+            let tag = "<@" + player + ">";
             if (i%2){
                 teamOne.push(tag);
             }else{
@@ -37,13 +37,7 @@ class Pool{
             }
         })
 
-        this.message.channel.send([
-            "",
-            `*** TEAMS ***`,
-            `Team Eins: ${teamOne.join(", ")}`,
-            `**Gegen**`,
-            `Team Zwei: ${teamTwo.join(", ")}`
-        ]).then(() => {
+        this.message.channel.send(`***TEAMS***\nTeam Eins: ${teamOne.join(", ")}\n**Gegen**\nTeam Zwei: ${teamTwo.join(", ")}`).then(() => {
             this.message.edit("Die Teams sind bereits voll!");
         });
     }

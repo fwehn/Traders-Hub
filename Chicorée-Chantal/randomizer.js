@@ -25,10 +25,10 @@ class Randomizer{
     }
 
     handleFullMatch(){
-        var shuffledPlayers = arrayFuncs.shuffle([...this.players])
-        var selectedPlayers = "<@" + shuffledPlayers[0] + ">";
+        let shuffledPlayers = arrayFuncs.shuffle([...this.players])
+        let selectedPlayers = "<@" + shuffledPlayers[0] + ">";
 
-        for (var i = 1; i < this.returnCount; i++){
+        for (let i = 1; i < this.returnCount; i++){
             selectedPlayers = selectedPlayers + ", <@" + shuffledPlayers[i] + ">";
         }
 

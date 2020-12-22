@@ -158,7 +158,7 @@ bot.on('message', message =>{
                 break;
 
             case 'help':
-                var data = {
+                let data = {
                     "title": "Commands",
                     "description": "Hallo, ich bin Chicorée-Chantal.\nIch bin ein mehr oder weniger nützlicher Discord-Bot.\nDie folgenden Commands kannst du nutzen, um mit mir zu reden oder mir Anweisungen zu geben.\n\n-----------------------------\n",
                     "url": "http://traders-hub.de/veggie-gang/#chicor%C3%A9e-chantal",
@@ -239,13 +239,13 @@ bot.on('message', message =>{
                 
                 break;*/
             case 'prost':
-                var user = message.member.user.username
+                let user = message.member.user.username
                 if (!prostListe[user]){
                     prostListe[user] = [];
                 }
 
-                var text = "";
-                for (var i = 1; i<args.length; i++){
+                let text = "";
+                for (let i = 1; i<args.length; i++){
                     text = text + args[i] + " ";
                 }
 
@@ -273,23 +273,23 @@ bot.on('message', message =>{
                 if (!args[1]){
                     message.reply("bitte füge zumindest eine Zahl hinzu.");
                 }else{
-                    var randomizerSlots = parseInt(args[1]);
+                    let randomizerSlots = parseInt(args[1]);
                     randomizerSlots = Math.max(1, randomizerSlots);
                     
-                    var returnCount = 1;
+                    let returnCount = 1;
                     if (args[2] != null){
                         returnCount = Math.min(randomizerSlots, parseInt(args[2]));
                     }
 
-                    var prompText = `Es wurde ein neuer Randomizer mit ${randomizerSlots} Slots erstellt. Reagiere auf diese Nachricht, um hinzugefügt zu werden.`;
-                    message.reply(prompText).then(botMsg => {
+                    let prompTextRandomizer = `Es wurde ein neuer Randomizer mit ${randomizerSlots} Slots erstellt. Reagiere auf diese Nachricht, um hinzugefügt zu werden.`;
+                    message.reply(prompTextRandomizer).then(botMsg => {
                         randomizer[botMsg.id] = new Randomizer.Randomizer(botMsg, randomizerSlots, randomizer.length+1, returnCount);
                     });
                 }
                 break;
 
             case 'roles':
-                var role = message.guild.roles.cache.filter(role => role.id == lowestRole);
+                let role = message.guild.roles.cache.filter(role => role.id == lowestRole);
                 onlineMembers = message.guild.members.cache.filter(member => !member.user.bot && member.roles.hoist == undefined );
                 //console.log(role);
                 onlineMembers.each(member => console.log(member.user.username));
@@ -304,23 +304,23 @@ bot.on('message', message =>{
                 if (!args[1] && args[1] != "start" && args[1] != "stop"){
                     message.reply("bitte schreibe \"start\" oder \"stop\" um den Sauftimer zu starten bzw. zu stopen.");
                 }else if (args[1] == "start"){
-                    var interval = 1;
+                    let interval = 1;
 
                     if (args[2] != null){
                         interval = Math.max(interval, parseInt(args[2]));
                     }
                     
-                    var prompText = `ich hab für euch einen Sauftimer erstellt!!!\nAlle ${interval} Minuten muss jemand trinken!!!`;
-                    message.reply(prompText).then(
+                    let prompTextSaufen = `ich hab für euch einen Sauftimer erstellt!!!\nAlle ${interval} Minuten muss jemand trinken!!!`;
+                    message.reply(prompTextSaufen).then(
                         sauftimer = setInterval(function() {
-                            var onlineArray = [];
-                            var onlinePlayers = message.guild.members.cache.filter(member => member.presence.status == "online" && member.voice.channel != null);
+                            let onlineArray = [];
+                            let onlinePlayers = message.guild.members.cache.filter(member => member.presence.status == "online" && member.voice.channel != null);
                             onlinePlayers.forEach(member => onlineArray.push(member));
 
                             onlineArray = ArrayFunctions.shuffle([...onlineArray])
                             
-                            var found = false;
-                            var lengthBefore = gesoffen.length;
+                            let found = false;
+                            let lengthBefore = gesoffen.length;
                             onlineArray.forEach(member => {
                                 if (!found && !ArrayFunctions.ArraySearch(gesoffen, member.id)){
                                     gesoffen.push(member.id);
@@ -353,14 +353,14 @@ bot.on('message', message =>{
                 break;
             
             case 'teams':
-                var playerSlots = 0;
+                let playerSlotsTeams= 0;
                 if (args[1] != null){
-                    playerSlots = parseInt(args[1]);
+                    playerSlotsTeams = parseInt(args[1]);
                 }
-                playerSlots = Math.max(2, playerSlots);
-                var prompText = `Es wurde ein Matchmaking-Pool mit ${playerSlots} Slots eröffnet. Reagiere auf diese Nachricht, um hinzugefügt zu werden.`;
-                message.reply(prompText).then(botMsg => {
-                    pools[botMsg.id] = new Pool.Pool(botMsg, playerSlots, pools.length+1);
+                playerSlotsTeams = Math.max(2, playerSlotsTeams);
+                let prompTextTeams = `Es wurde ein Matchmaking-Pool mit ${playerSlotsTeams} Slots eröffnet. Reagiere auf diese Nachricht, um hinzugefügt zu werden.`;
+                message.reply(prompTextTeams).then(botMsg => {
+                    pools[botMsg.id] = new Pool.Pool(botMsg, playerSlotsTeams, pools.length+1);
                 });
                 break;
 
@@ -384,15 +384,15 @@ bot.on('message', message =>{
                 break;       
             
             case 'ww':
-                var playerSlots = 0;
+                let playerSlotsWW = 0;
                 if (args[1] != null){
-                    playerSlots = parseInt(args[1]);
+                    playerSlotsWW = parseInt(args[1]);
                 }
-                playerSlots = Math.max(8, playerSlots);
-                var messageAuthor = message.author
-                var prompText = `Es wurde eine Runde Werwolf mit ${playerSlots} Spielern erstellt. Ihr Erzähler ist <@${messageAuthor.id}>`;
-                message.channel.send(prompText).then(botMsg => {
-                    wwGames[botMsg.id] = new WWGame.WW(botMsg, playerSlots, wwGames.length+1, messageAuthor);
+                playerSlotsWW = Math.max(8, playerSlotsWW);
+                let messageAuthor = message.author
+                let prompTextWW = `Es wurde eine Runde Werwolf mit ${playerSlotsWW} Spielern erstellt. Ihr Erzähler ist <@${messageAuthor.id}>`;
+                message.channel.send(prompTextWW).then(botMsg => {
+                    wwGames[botMsg.id] = new WWGame.WW(botMsg, playerSlotsWW, wwGames.length+1, messageAuthor);
                 });
                 break;
 
@@ -412,17 +412,17 @@ bot.on('messageReactionAdd', async(reaction, user) => {
             return;
         }
     }
-    var pool = pools[reaction.message.id];
+    let pool = pools[reaction.message.id];
     if (pool){
         pool.addPlayer(user.id);
     }
 
-    var ww = wwGames[reaction.message.id];
+    let ww = wwGames[reaction.message.id];
     if (ww){
         ww.addPlayer(user.id);
     }
 
-    var rand = randomizer[reaction.message.id];
+    let rand = randomizer[reaction.message.id];
     if (rand){
         rand.addPlayer(user.id);
     }

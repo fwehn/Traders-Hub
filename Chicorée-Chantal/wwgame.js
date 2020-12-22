@@ -25,12 +25,12 @@ class WW{
     }
 
     handleFullMatch(){
-        var villager = [];
-        var werewolfs = [];
-        var seer = "";
-        var shuffledPlayers = arrayFuncs.shuffle([...this.players])
+        let villager = [];
+        let werewolfs = [];
+        let seer = "";
+        let shuffledPlayers = arrayFuncs.shuffle([...this.players])
 
-        var wwCount = 2;
+        let wwCount = 2;
         if (this.maxPlayers >= 12) wwCount = 3;
 
         shuffledPlayers.forEach((player) => {
@@ -43,7 +43,7 @@ class WW{
                 villager.push(player);
             }
         });
-        var playerRoles = [];
+        let playerRoles = [];
         this.message.guild.members.cache.forEach(member => {
                 if (member.id === seer && !member.user.bot){
                     playerRoles.push("Seher: " + member.user.username + "\n");
@@ -58,7 +58,7 @@ class WW{
         })
         playerRoles.sort();
 
-        var narratorText = "################################################################################# \n\n Du bist **Erzähler** von **Spiel " + this.wwNumber + "** \n \n";
+        let narratorText = "################################################################################# \n\n Du bist **Erzähler** von **Spiel " + this.wwNumber + "** \n \n";
         for (let i = 0; i < playerRoles.length; i++){
             narratorText += playerRoles[i];
         }

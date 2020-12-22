@@ -23,7 +23,7 @@ function arrayToEmbed(embed, array){
         let index = 1;
         let valText = "";
 
-        for (var y = 0; y < item.length; y++) {
+        for (let y = 0; y < item.length; y++) {
             if (item[y + 1] !== last || y === item.length - 1) {
                 valText = valText + "\n - " + index + " " + item[y];
                 index = 1;
