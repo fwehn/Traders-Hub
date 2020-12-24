@@ -264,6 +264,13 @@ bot.on('message', message =>{
                 feedbackSentences[2] = "Ist vermerkt!";
                 feedbackSentences[3] = "Davon tät ich auch einen nehmen!";
                 feedbackSentences[4] = "Mhhhh, legga!";
+                feedbackSentences[5] = "Der Rat der Fliesentischbesitzer begüßt das!";
+                feedbackSentences[6] = "Die Firma dankt!";
+                feedbackSentences[7] = "Rein in die Olga!";
+                feedbackSentences[8] = "Out of your mummy into tummy!";
+                feedbackSentences[9] = "Jetzt trink mal richtig, du Ratte!";
+                feedbackSentences[10] = "Nicht lang schnacken, Kopp in Nacken!";
+                feedbackSentences[11] = "Lekka, lekka in mein Mund rein, ALLA";
 
                 message.channel.send(feedbackSentences[Math.floor(Math.random() * (feedbackSentences.length))]);
 
