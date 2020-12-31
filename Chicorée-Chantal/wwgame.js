@@ -46,14 +46,26 @@ class WW{
         let playerRoles = [];
         this.message.guild.members.cache.forEach(member => {
                 if (member.id === seer && !member.user.bot){
-                    playerRoles.push("Seher: " + member.user.username + "\n");
-                    member.send("Du bist Seher.");
+                    playerRoles.push("**Seher**: " + member.user.username + "\n");
+                    member.send("Du bist **Seher**.");
                 }else if (arrayFuncs.ArraySearch(werewolfs, member.id)){
-                    playerRoles.push("Werwolf: " + member.user.username + "\n");
-                    member.send("Du bist Werwolf.");
+                    playerRoles.push("**Werwolf**: " + member.user.username + "\n");
+                    let promtext = "Du bist **Werwolf**.";
+
+                    // for (let i in werewolfs){
+                    //     if (werewolfs[i] !== member.id){
+                    //         let other = this.message.guild.members.cache.filter(member => member.id === werewolfs[i]);
+                    //         console.log(other.values().next());
+                    //         //other.forEach(member => promtext = promtext + "\n" + other.user.username);
+                    //         //promtext = promtext + "\n" + other.user.username;
+                    //     }
+                    // }
+
+
+                    member.send(promtext);
                 }else if (arrayFuncs.ArraySearch(villager, member.id)){
-                    playerRoles.push("Dorfbewohner: " + member.user.username + "\n");
-                    member.send("Du bist Dorfbewohner.");
+                    playerRoles.push("**Dorfbewohner**: " + member.user.username + "\n");
+                    member.send("Du bist **Dorfbewohner**.");
                 }
         })
         playerRoles.sort();

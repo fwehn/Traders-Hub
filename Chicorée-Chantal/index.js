@@ -175,7 +175,7 @@ bot.on('message', message =>{
                         {"name": "*!saufen*", "value": "Startet/Beendet den Sauftimer: Immer nach Ablauf des Intervals, wird jemand der sich in einem Voice-Channel befindet auserwählt zum Saufen."},
                         {"name": "*!teams*", "value": "Erstellt zufällig 2 Teams aus allen, die per Reaktion Teilnehmen."},
                         {"name": "*!website*", "value": "Postet einen Link zu unserer Website."},
-                        {"name": "*!ww*", "value": "Erstellt eine Partie Werwolf und teilt jedem Spieler eine Rolle zu. Erzähler wird derjenige, der den Command geschrieben hat. (Teilnahme per Reaktion)\n\n-----------------------------"},
+                        {"name": "*!ww*", "value": "Erstellt eine Partie Werwolf und teilt jedem Spieler eine Rolle zu. Erzähler wird derjenige, der den Command geschrieben hat. (Teilnahme per Reaktion, min 8 Leute)\n\n-----------------------------"},
                         {"name": "**Eher Unnütze Commands**", "value": "-----------------------------\n\n*!chuck*\n*!ehre*\n*!luther*\n*!mimimi*\n*!standard*\n*!trump*\n*!würg*"}
                     ]
                 }
@@ -271,6 +271,12 @@ bot.on('message', message =>{
                 feedbackSentences[9] = "Jetzt trink mal richtig, du Ratte!";
                 feedbackSentences[10] = "Nicht lang schnacken, Kopp in Nacken!";
                 feedbackSentences[11] = "Lekka, lekka in mein Mund rein, ALLA";
+                feedbackSentences[12] = "Von der M**** zur Titte, zum Sack unso...";
+                feedbackSentences[13] = "Denk immer dran: Nur soviel trinken, wie mit gewalt rein geht!";
+                feedbackSentences[14] = "Man muss ja auch trinken, wenn man kein";
+                feedbackSentences[15] = "Genug getrunken! Jetzt wird gesoffen!";
+                feedbackSentences[16] = "Sport ist Mord, nur Sprit hält fit!";
+                feedbackSentences[17] = "Wer tanzt hat bloß kein Geld zum Saufen!";
 
                 message.channel.send(feedbackSentences[Math.floor(Math.random() * (feedbackSentences.length))]);
 
@@ -396,8 +402,9 @@ bot.on('message', message =>{
                     playerSlotsWW = parseInt(args[1]);
                 }
                 playerSlotsWW = Math.max(8, playerSlotsWW);
+                playerSlotsWW = Math.min(18, playerSlotsWW);
                 let messageAuthor = message.author
-                let prompTextWW = `Es wurde eine Runde Werwolf mit ${playerSlotsWW} Spielern erstellt. Ihr Erzähler ist <@${messageAuthor.id}>`;
+                let prompTextWW = `Es wurde eine Runde **Werwolf** mit **${playerSlotsWW}** Spielern erstellt. Ihr **Erzähler** ist <@${messageAuthor.id}>.\nJeder Spieler kann per Reaktion auf diese Nachricht beitreten.`;
                 message.channel.send(prompTextWW).then(botMsg => {
                     wwGames[botMsg.id] = new WWGame.WW(botMsg, playerSlotsWW, wwGames.length+1, messageAuthor);
                 });
