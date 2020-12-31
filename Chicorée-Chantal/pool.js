@@ -38,7 +38,7 @@ class Pool{
         })
 
         this.message.channel.send(`***TEAMS***\nTeam Eins: ${teamOne.join(", ")}\n**Gegen**\nTeam Zwei: ${teamTwo.join(", ")}`).then(() => {
-            this.message.edit("Die Teams sind bereits voll!");
+            this.message.delete();
         });
     }
 }
