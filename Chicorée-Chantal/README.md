@@ -22,6 +22,7 @@ Einfach mal verwenden und sehen, was passiert:
 - `!ehre`
 - `!luther`
 - `!mimimi`
+- `!opa`
 - `!standard`
 - `!trump`
 - `!würg`

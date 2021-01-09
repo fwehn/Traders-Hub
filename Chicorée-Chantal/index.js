@@ -13,13 +13,18 @@ const Pool = require('./pool.js');
 const WWGame = require('./wwgame.js');
 const Randomizer = require('./randomizer.js');
 const ArrayFunctions = require('./array-functions.js');
-const ytdl = require('ytdl-core');
 
 const rawdata = fs.readFileSync('./variables.json');
 const variables = JSON.parse(rawdata);
 const token = variables.token;
 const PREFIX = variables.prefix;
 //console.log(token +"\n"+PREFIX + "\n" );
+
+const grandpaSentences = fs.readFileSync('./jessesOpa.txt', 'utf-8').split('\n');
+//console.log(grandpaSentences);
+//console.log(grandpaSentences[Math.floor(Math.random() * grandpaSentences.length)]);
+
+const feedbackSentences = fs.readFileSync('./saufantworten.txt', 'utf-8').split('\n');
 
 const lowestRole = variables.lowestRole;
 const saufChannelId = variables.saufChannelId;
@@ -176,7 +181,7 @@ bot.on('message', message =>{
                         {"name": "*!teams*", "value": "Erstellt zufällig 2 Teams aus allen, die per Reaktion Teilnehmen."},
                         {"name": "*!website*", "value": "Postet einen Link zu unserer Website."},
                         {"name": "*!ww*", "value": "Erstellt eine Partie Werwolf und teilt jedem Spieler eine Rolle zu. Erzähler wird derjenige, der den Command geschrieben hat. (Teilnahme per Reaktion, min 8 Leute)\n\n-----------------------------"},
-                        {"name": "**Eher Unnütze Commands**", "value": "-----------------------------\n\n*!chuck*\n*!ehre*\n*!luther*\n*!mimimi*\n*!standard*\n*!trump*\n*!würg*"}
+                        {"name": "**Eher Unnütze Commands**", "value": "-----------------------------\n\n*!chuck*\n*!ehre*\n*!luther*\n*!mimimi*\n*!opa*\n*!standard*\n*!trump*\n*!würg*"}
                     ]
                 }
 
@@ -190,54 +195,13 @@ bot.on('message', message =>{
             case 'mimimi':
                 message.reply('biste n ADC oder was?!?');
                 break;
-            
-            /*case 'play':
 
-                if (!message.guild.voiceConnection) message.member.voice.channel.join()//.then(connection => {               play(connection, message);         });
-                
-                function play(connection, message, path){
-                    var server = servers[message.guild.id];
+            case 'opa':
+                let prompTextGrandpa = `<@691205795076898847>'s Opa hat immer gesagt: \n`;
+                prompTextGrandpa = prompTextGrandpa + grandpaSentences[Math.floor(Math.random() * grandpaSentences.length)];
+                message.channel.send(prompTextGrandpa);
+                break;
 
-                    server.dispatcher = connection.play(ytdl(server.queue[0]));//, {filter: "audioonly"}
-                    server.queue.shift();
-                    server.dispatcher.on("end", function(){
-                        if (server.queue[0]){
-                            play(connection, message);
-                        }else{
-                            connection.disconnect();
-                        }
-                    });
-                }
-
-
-                if (!args[1]){
-                    message.reply(" tu mal n Link oder so da rein.");
-                    return;
-                }else {
-                    switch(args[1]){
-                        case 'luther':
-                            play(connection, message, "");
-                            break;
-                        default:
-                            message.reply(" nö das spiel ich jetzt nicht");
-                            break;
-                    }
-                }
-
-                if (!message.member.voice.channel){
-                    message.reply("geh erst mal in nen Voice-Channel, bevor du mich hier so zu textest von der side of life!");
-                    return;
-                }
-
-                if (!servers[message.guild.id]) servers[message.guild.id] = {
-                    queue: []
-                }
-
-                var server = servers[message.guild.id];
-                server.queue.push(args[1]);
-
-                
-                break;*/
             case 'prost':
                 let user = message.member.user.username
                 if (!prostListe[user]){
@@ -257,26 +221,6 @@ bot.on('message', message =>{
                 prostListe[user].push(text);
                 prostListe[user].sort();
                 console.log(prostListe);
-
-                let feedbackSentences = [];
-                feedbackSentences[0] = "Klingt geil. Bitte mehr davon!";
-                feedbackSentences[1] = "Jo, schreib ich auf!";
-                feedbackSentences[2] = "Ist vermerkt!";
-                feedbackSentences[3] = "Davon tät ich auch einen nehmen!";
-                feedbackSentences[4] = "Mhhhh, legga!";
-                feedbackSentences[5] = "Der Rat der Fliesentischbesitzer begüßt das!";
-                feedbackSentences[6] = "Die Firma dankt!";
-                feedbackSentences[7] = "Rein in die Olga!";
-                feedbackSentences[8] = "Out of your mummy into tummy!";
-                feedbackSentences[9] = "Jetzt trink mal richtig, du Ratte!";
-                feedbackSentences[10] = "Nicht lang schnacken, Kopp in Nacken!";
-                feedbackSentences[11] = "Lekka, lekka in mein Mund rein, ALLA";
-                feedbackSentences[12] = "Von der M**** zur Titte, zum Sack unso...";
-                feedbackSentences[13] = "Denk immer dran: Nur soviel trinken, wie mit gewalt rein geht!";
-                feedbackSentences[14] = "Man muss auch trinken, wenn man keinen Durst hat!";
-                feedbackSentences[15] = "Genug getrunken! Jetzt wird gesoffen!";
-                feedbackSentences[16] = "Sport ist Mord, nur Sprit hält fit!";
-                feedbackSentences[17] = "Wer tanzt hat bloß kein Geld zum Saufen!";
 
                 message.channel.send(feedbackSentences[Math.floor(Math.random() * (feedbackSentences.length))]);
 
@@ -379,6 +323,9 @@ bot.on('message', message =>{
 
             case 'test':
                 message.reply(message.channel.id + " test " + message.member.voice.channel );
+
+                let roleToRemove = message.member.guild.roles.cache.filter(role => role.id == "796852092194521128");
+                message.member.roles.remove(roleToRemove);
                 break;
 
             case 'trump':
