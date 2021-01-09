@@ -20,11 +20,11 @@ const token = variables.token;
 const PREFIX = variables.prefix;
 //console.log(token +"\n"+PREFIX + "\n" );
 
-const grandpaSentences = fs.readFileSync('./jessesOpa.txt', 'utf-8').split('\n');
+const grandpaSentences = fs.readFileSync('./txt-files/jessesOpa.txt', 'utf-8').split('\n');
 //console.log(grandpaSentences);
 //console.log(grandpaSentences[Math.floor(Math.random() * grandpaSentences.length)]);
 
-const feedbackSentences = fs.readFileSync('./saufantworten.txt', 'utf-8').split('\n');
+const feedbackSentences = fs.readFileSync('./txt-files/saufantworten.txt', 'utf-8').split('\n');
 
 const lowestRole = variables.lowestRole;
 const saufChannelId = variables.saufChannelId;
