@@ -20,9 +20,16 @@ const token = variables.token;
 const PREFIX = variables.prefix;
 //console.log(token +"\n"+PREFIX + "\n" );
 
-const grandpaSentences = fs.readFileSync('./txt-files/jessesOpa.txt', 'utf-8').split('\n');
-//console.log(grandpaSentences);
-//console.log(grandpaSentences[Math.floor(Math.random() * grandpaSentences.length)]);
+const grandpaSentences = [];
+fs.readdir('./txt-files/Jesses Opa', function (err, files) {
+    for (var i = 0; i < files.length; i++) {
+        let fileLines = fs.readFileSync(`./txt-files/Jesses Opa/${files[i]}`, 'utf-8').split(`\n`);
+        for (let i in fileLines){
+            grandpaSentences.push(fileLines[i]);
+        }
+    }
+    //console.log(grandpaSentences);
+});
 
 const feedbackSentences = fs.readFileSync('./txt-files/saufantworten.txt', 'utf-8').split('\n');
 

@@ -16,5 +16,8 @@
     "node-fetch": "^2.6.1",
     "opusscript": "0.0.7",
     "ytdl-core": "^4.1.4"
+  },
+  "devDependencies": {
+    "promise": "^8.1.0"
   }
 }
