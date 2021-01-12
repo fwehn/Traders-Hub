@@ -206,7 +206,7 @@ bot.on('message', message =>{
                 break;
 
             case 'opa':
-                let prompTextGrandpa = `<@691205795076898847>'s Opa hat immer gesagt: \n`;
+                let prompTextGrandpa = `**Jesse's Opa** hat immer gesagt: \n`;
                 prompTextGrandpa = prompTextGrandpa + grandpaSentences[Math.floor(Math.random() * grandpaSentences.length)];
                 message.channel.send(prompTextGrandpa);
                 break;
