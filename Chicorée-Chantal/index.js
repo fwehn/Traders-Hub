@@ -23,12 +23,14 @@ const PREFIX = variables.prefix;
 const grandpaSentences = [];
 fs.readdir('./txt-files/Jesses Opa', function (err, files) {
     for (var i = 0; i < files.length; i++) {
-        let fileLines = fs.readFileSync(`./txt-files/Jesses Opa/${files[i]}`, 'utf-8').split(`\n`);
+        let fileLines = fs.readFileSync(`./txt-files/Jesses Opa/${files[i]}`, 'utf-8').split(`\r\n`);
         for (let i in fileLines){
-            grandpaSentences.push(fileLines[i]);
+            if (fileLines[i] !== "" && fileLines[i] !== " "){
+                grandpaSentences.push(fileLines[i]);
+            }
         }
     }
-    //console.log(grandpaSentences);
+    console.log(grandpaSentences);
 });
 
 const feedbackSentences = fs.readFileSync('./txt-files/saufantworten.txt', 'utf-8').split('\n');
