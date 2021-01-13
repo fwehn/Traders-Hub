@@ -20,12 +20,13 @@ const token = variables.token;
 const PREFIX = variables.prefix;
 //console.log(token +"\n"+PREFIX + "\n" );
 
+const jesseID = variables.jesse;
 const grandpaSentences = [];
 fs.readdir('./txt-files/Jesses Opa', function (err, files) {
     for (var i = 0; i < files.length; i++) {
-        let fileLines = fs.readFileSync(`./txt-files/Jesses Opa/${files[i]}`, 'utf-8').split(`\r\n`);
+        let fileLines = fs.readFileSync(`./txt-files/Jesses Opa/${files[i]}`, 'utf-8').split(`\n`);
         for (let i in fileLines){
-            if (fileLines[i] !== "" && fileLines[i] !== " "){
+            if (fileLines[i] !== "" && fileLines[i] !== " " && fileLines[i] !== "\n" && fileLines[i] !== "\r"){
                 grandpaSentences.push(fileLines[i]);
             }
         }
@@ -206,7 +207,14 @@ bot.on('message', message =>{
                 break;
 
             case 'opa':
-                let prompTextGrandpa = `**Jesse's Opa** hat immer gesagt: \n`;
+                let jesseMember = message.member.guild.members.cache.get(jesseID);
+                let jesseName = jesseMember.user.username;
+
+                if (jesseMember.nickname !== null){
+                    jesseName = jesseMember.nickname;
+                }
+
+                let prompTextGrandpa = `**${jesseName}'s Opa** hat immer gesagt: \n`;
                 prompTextGrandpa = prompTextGrandpa + grandpaSentences[Math.floor(Math.random() * grandpaSentences.length)];
                 message.channel.send(prompTextGrandpa);
                 break;
@@ -332,9 +340,6 @@ bot.on('message', message =>{
 
             case 'test':
                 message.reply(message.channel.id + " test " + message.member.voice.channel );
-
-                let roleToRemove = message.member.guild.roles.cache.filter(role => role.id == "796852092194521128");
-                message.member.roles.remove(roleToRemove);
                 break;
 
             case 'trump':
