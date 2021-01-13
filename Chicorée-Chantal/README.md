@@ -39,7 +39,8 @@ In diese Datei fügst du folgenden Code ein und passt ihn deinen Umständen ents
   "testChannelId": "",
 
   "lowestRole": "",
-  "saufChannelId": ""
+  "saufChannelId": "",
+  "jesse": ""
 }
 ```
 
