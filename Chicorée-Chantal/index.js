@@ -13,12 +13,14 @@ const Pool = require('./pool.js');
 const WWGame = require('./wwgame.js');
 const Randomizer = require('./randomizer.js');
 const ArrayFunctions = require('./array-functions.js');
+const drinkAPI = require('./drinksAPI.js');
+
+drinkAPI.startUp();
 
 const rawdata = fs.readFileSync('./variables.json');
 const variables = JSON.parse(rawdata);
 const token = variables.token;
 const PREFIX = variables.prefix;
-//console.log(token +"\n"+PREFIX + "\n" );
 
 const jesseID = variables.jesse;
 const grandpaSentences = [];
@@ -31,7 +33,7 @@ fs.readdir('./txt-files/Jesses Opa', function (err, files) {
             }
         }
     }
-    console.log(grandpaSentences);
+    // console.log(grandpaSentences);
 });
 
 const feedbackSentences = fs.readFileSync('./txt-files/saufantworten.txt', 'utf-8').split('\n');
@@ -64,6 +66,11 @@ bot.on('message', message =>{
 
     {
         switch(args[0].toLowerCase()){
+            case 'save':
+                drinkAPI.saveDrinks(prostListe);
+                prostListe = [];
+                break;
+
             case 'au':
                 if (message.member.voice.channel) {
                     let channel = message.guild.channels.cache.get(message.member.voice.channel.id);
@@ -103,16 +110,6 @@ bot.on('message', message =>{
                 break;
 
             case 'drinks':
-
-
-                // prostListe = []; //Test-Daten
-                // prostListe["hallo"] = ["bia", "bia", "bia", "bia"];
-                // prostListe["welt"] = ["alk","alk","alk","alk"];
-                // prostListe["!"] = ["alk","alk","bia","bia"];
-                // prostListe["ich"] = ["bia", "bia", "bia", "bia"];
-                // prostListe["habe"] = ["alk","alk","alk","alk"];
-                // prostListe["bock"] = ["alk","alk","bia","bia"];
-                // prostListe["drauf"] = ["bia", "bia", "bia", "bia"];
                 let fieldLength = 25;
                 let best = "";
                 let totalBest = 0;
@@ -220,11 +217,6 @@ bot.on('message', message =>{
                 break;
 
             case 'prost':
-                let user = message.member.user.username
-                if (!prostListe[user]){
-                    prostListe[user] = [];
-                }
-
                 let text = "";
                 for (let i = 1; i<args.length; i++){
                     text = text + args[i] + " ";
@@ -233,6 +225,11 @@ bot.on('message', message =>{
                 if (text === ""){
                     message.reply("du musst erst ein Getränk hinzufügen.");
                     return;
+                }
+
+                let user = message.member.user.username
+                if (!prostListe[user]){
+                    prostListe[user] = [];
                 }
 
                 prostListe[user].push(text);
@@ -372,7 +369,9 @@ bot.on('message', message =>{
                 break;
 
             default:
-                message.reply("das ist leider kein valider Command.\nUm zu sehen welche Commands du benutzen kannst, schreibe **!help**");
+                if (message.channel.id !== variables.testChannelId){
+                    message.reply("das ist leider kein valider Command.\nUm zu sehen welche Commands du benutzen kannst, schreibe **!help**");
+                }
                 break;
         }
     }
