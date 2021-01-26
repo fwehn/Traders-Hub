@@ -2,10 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('file-system');
 
-const rawdata = fs.readFileSync('./variables.json');
-const variables = JSON.parse(rawdata);
+const rawData = fs.readFileSync('./variables.json');
+const variables = JSON.parse(rawData);
 
 const app = express();
+// const port = process.env.PORT;
 const port = 2712;
 
 const personSchema = new mongoose.Schema({
@@ -30,11 +31,32 @@ function startUp(){
         .then(console.log("I guess we're connected?"))
         .catch(err => console.log(err));
     // console.log("mongodb://" + variables.mongo.user + ":" + encodeURIComponent(variables.mongo.password) + "@" + variables.mongo.hostString)
-    app.get("/", (req, res) => {
-        drinksModel.find({}, function (err, persons) {
-            if (err) return handleError(err);
-            res.send(JSON.stringify(persons));
-            console.log(persons);
+    app.get("/",(req, res) => {
+        res.send("Hi im Chicorée-Chantal!");
+    });
+
+    app.get("/drinks", (req, res) => {
+        drinksModel.find({}, function (err, dates) {
+            if (err) {
+                console.log(err)
+                return;
+            }
+            let datesToSend = [];
+            for (let date in dates){
+                datesToSend.push(dates[date].date);
+            }
+            res.send(datesToSend);
+            console.log(datesToSend);
+        });
+    });
+
+    app.get("/drinks/d/:date", (req, res) => {
+        drinksModel.findOne({date: new Date(req.params.date)}, function (err, data){
+           if (err || data == null) {
+               res.send("There is no data for " + new Date(req.params.date));
+               return;
+           }
+           res.send(data);
         });
     });
 
@@ -44,7 +66,7 @@ function startUp(){
 }
 
 async function saveDrinks(prostListe) {
-    if (prostListe !== null){
+    if (prostListe !== []){
         let lastDay = {}
         await drinksModel.findOne({}, {}, {sort: {'date': -1}}, function (err, day) {
             console.log(day);
@@ -78,7 +100,7 @@ async function saveDrinks(prostListe) {
             }
 
             if (lastDay != null){
-                for (person in lastDay.persons) {
+                for (let person in lastDay.persons) {
                     if (lastDay.persons[person].name === i) {
                         lastTotal = lastDay.persons[person].total;
                         console.log(lastTotal);
@@ -108,30 +130,15 @@ async function saveDrinks(prostListe) {
 
         let myData = new drinksModel({date: new Date(), persons: personsOfList, dailyBest: bestPersonDaily, totalBest: bestPersonTotal});
         myData.save()
-            .then(item => {
+            .then(() => {
                 console.log("item saved to database");
             })
-            .catch(err => {
+            .catch(() => {
                 console.log("unable to save to database");
             });
     }
 }
 
-function saveDrinksTest(){
-    let dateTest = new Date()
-    console.log(dateTest);
-
-    let testPerson = {name: "InFINNity", total: 5, daily: 5, drinks: ["3 peddas", "2 kleine don papa"]}
-
-    let myData = new drinksModel({date: dateTest, persons: [testPerson], dailyBest: testPerson, totalBest: testPerson});
-    myData.save()
-        .then(item => {
-            console.log("item saved to database");
-        })
-        .catch(err => {
-            console.log("unable to save to database");
-        });
-}
 
 function loadAllDrinks(){
     drinksModel.find({}, function (err, persons) {
@@ -143,5 +150,5 @@ function loadAllDrinks(){
 }
 
 module.exports = {
-    startUp, saveDrinksTest, loadAllDrinks, saveDrinks
+    startUp, loadAllDrinks, saveDrinks
 }
