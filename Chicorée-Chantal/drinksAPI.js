@@ -1,13 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('file-system');
+const cors = require('cors');
 
 const rawData = fs.readFileSync('./variables.json');
 const variables = JSON.parse(rawData);
 
 const app = express();
-// const port = process.env.PORT;
-const port = 2712;
+const port = process.env.PORT;
+// const port = 2712;
+
+app.use(cors())
 
 const personSchema = new mongoose.Schema({
     name: String,
@@ -32,7 +35,8 @@ function startUp(){
         .catch(err => console.log(err));
     // console.log("mongodb://" + variables.mongo.user + ":" + encodeURIComponent(variables.mongo.password) + "@" + variables.mongo.hostString)
     app.get("/",(req, res) => {
-        res.send("Hi im Chicorée-Chantal!");
+
+        res.send("Hi I'm Chicorée-Chantal!");
     });
 
     app.get("/drinks", (req, res) => {
@@ -45,6 +49,7 @@ function startUp(){
             for (let date in dates){
                 datesToSend.push(dates[date].date);
             }
+            res.type('json');
             res.send(datesToSend);
             console.log(datesToSend);
         });
@@ -56,6 +61,7 @@ function startUp(){
                res.send("There is no data for " + new Date(req.params.date));
                return;
            }
+           res.type('json');
            res.send(data);
         });
     });

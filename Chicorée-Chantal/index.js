@@ -66,6 +66,9 @@ bot.on('message', message =>{
 
     {
         switch(args[0].toLowerCase()){
+            case 'load':
+
+                break;
             case 'save':
                 drinkAPI.saveDrinks(prostListe);
                 prostListe = [];
