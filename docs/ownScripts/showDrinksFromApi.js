@@ -40,7 +40,7 @@ function detailsOf(dateString){
                 listOfPersons = listOfPersons + '<tr class="tableRowOfPersons"><th>' + persons[i].name + '</th><th>' + persons[i].daily + '</th><th>' + drinksOfPerson.slice(0, -2) + '</th></tr>';
             }
             listOfPersons = listOfPersons + '</table></section></section>';
-            listOfPersons = listOfPersons + '<button onclick="getDates()">Zur&uuml;ck zur &Uuml;bersicht</button><br><br>';
+            // listOfPersons = listOfPersons + '<button onclick="getDates()">Zur&uuml;ck zur &Uuml;bersicht</button><br><br>';
             document.getElementById("list").innerHTML = listOfPersons;
         }).catch(() => document.getElementById("list").innerHTML = "Oha! Das ist aber nicht so gut gelaufen!");
 }

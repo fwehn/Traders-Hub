@@ -7,8 +7,8 @@ const rawData = fs.readFileSync('./variables.json');
 const variables = JSON.parse(rawData);
 
 const app = express();
-const port = process.env.PORT;
-// const port = 2712;
+// const port = process.env.PORT;
+const port = 2712;
 
 app.use(cors())
 
@@ -49,6 +49,8 @@ function startUp(){
             for (let date in dates){
                 datesToSend.push(dates[date].date);
             }
+            datesToSend.sort();
+            datesToSend.reverse();
             res.type('json');
             res.send(datesToSend);
             console.log(datesToSend);
