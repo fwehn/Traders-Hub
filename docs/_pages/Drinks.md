@@ -13,5 +13,80 @@ Mit `!drinks` kannst du dir dann den aktuellen Tagesstand in Discord anzeigen la
 <p id="list">loading data...</p>
 
 <script src="./../ownScripts/showDrinksFromApi.js"></script>
+<style>
+    .container{
+        height: 200px;
+        position: relative;
+    }
 
+    .dateSection{
+        width: 70%;
+        height: 300px;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+
+        overflow-y: scroll;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    .dateSection::-webkit-scrollbar {
+        display: none;
+    }
+
+    .dateButton{
+        width: 100%;
+        height: 30px;
+
+    }
+
+    .tableOfHeaders {
+        width: 100%;
+        display: table;
+        background-color: #eaeaea;
+        color: #252a34;
+        height: 30px;
+    }
+
+    .headerRow th{
+        width: calc(100%/3);
+        background-color: #eaeaea;
+        color: #252a34;
+        border-color: #eaeaea;
+        display: table-cell;
+        height: 30px;
+    }
+
+    .sectionForTable{
+        width: 100%;
+        overflow-y: scroll;
+        height: 300px;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        display: block;
+    }
+
+    .sectionForTable::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tableOfPersons {
+        width: 100%;
+        display: table;
+        border-left: 1px solid;
+        border-right: 1px solid;
+        background-color: #eaeaea;
+    }
+
+    .tableRowOfPersons th{
+        width: calc(100%/3);
+        background-color: #252a34;
+        color: #eaeaea;
+        display: table-cell;
+    }
+</style>
 </body>

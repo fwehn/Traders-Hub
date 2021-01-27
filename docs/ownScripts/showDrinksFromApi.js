@@ -6,13 +6,13 @@ function getDates(){
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            let listOfDates = "";
+            let listOfDates = '<section class="container"><section class="dateSection">';
             for (let i in data){
                 dates[i] = data[i];
                 let currentDate = dates[i].split("T")[0].toString().split("-");
-                listOfDates = listOfDates + '<button onclick="detailsOf(&quot;' + dates[i].toString() + '&quot;)">' + currentDate[2] + " " + currentDate[1] + " " + currentDate[0] + '</button><br><br>';
+                listOfDates = listOfDates + '<button class="dateButton" onclick="detailsOf(&quot;' + dates[i].toString() + '&quot;)">' + currentDate[2] + " " + currentDate[1] + " " + currentDate[0] + '</button><br><br>';
             }
-            document.getElementById("list").innerHTML = listOfDates;
+            document.getElementById("list").innerHTML = listOfDates + '</section></section>';
         }).catch(() => document.getElementById("list").innerHTML = "Oha! Das ist aber nicht so gut gelaufen!");
 }
 
@@ -23,10 +23,10 @@ function detailsOf(dateString){
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            let listOfPersons = '<button onclick="getDates()">Zur&uuml;ck zur &Uuml;bersicht</button><br><br>'
-
-            listOfPersons = listOfPersons + 'Mitarbeiter/-in dieses Tages ist: ' + data.dailyBest.name + ' mit ' + data.dailyBest.daily + ' Drink(s)! <br><br><br>';
-            listOfPersons = listOfPersons + '<table class="tableOfPersons"><tr><th>Name</th><th>Anzahl</th><th>Detail</th></tr>';
+            let listOfPersons = '';
+            listOfPersons = listOfPersons + '<button onclick="getDates()">Zur&uuml;ck zur &Uuml;bersicht</button><br><br>';
+            listOfPersons = listOfPersons + 'Mitarbeiter/-in dieses Tages ist: <b>' + data.dailyBest.name + '</b> mit <b>' + data.dailyBest.daily + '</b> Drink(s)! <br><br><br>';
+            listOfPersons = listOfPersons + '<section class="wholeTable"><table class="tableOfHeaders"><tr><th>Name</th><th>Anzahl</th><th>Detail</th></tr></table><section class="sectionForTable"><table class="tableOfPersons">';
 
 
             let persons = data.persons;
@@ -36,8 +36,11 @@ function detailsOf(dateString){
                 for (let j in drinks){
                     drinksOfPerson = drinksOfPerson + drinks[j].slice(0, -1) + ", ";
                 }
+
                 listOfPersons = listOfPersons + '<tr class="tableRowOfPersons"><th>' + persons[i].name + '</th><th>' + persons[i].daily + '</th><th>' + drinksOfPerson.slice(0, -2) + '</th></tr>';
             }
-            document.getElementById("list").innerHTML = listOfPersons + '</table>';
+            listOfPersons = listOfPersons + '</table></section></section>';
+            listOfPersons = listOfPersons + '<button onclick="getDates()">Zur&uuml;ck zur &Uuml;bersicht</button><br><br>';
+            document.getElementById("list").innerHTML = listOfPersons;
         }).catch(() => document.getElementById("list").innerHTML = "Oha! Das ist aber nicht so gut gelaufen!");
 }
