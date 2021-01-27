@@ -16,16 +16,16 @@ Mit `!drinks` kannst du dir dann den aktuellen Tagesstand in Discord anzeigen la
 <script src="./../ownScripts/showDrinksFromApi.js"></script>
 <style>
     .container{
-        height: 300px;
+        height: 200px;
         position: relative;
     }
 
-   .dateSection {
+    .dateSection {
         width: 100%;
-        height: 300px;
+        height: 500px;
         margin: 0;
         position: relative;
-        top: 80%;
+        top: 130%;
         left: 50%;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
