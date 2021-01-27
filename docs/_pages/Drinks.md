@@ -9,7 +9,7 @@ Mit `!prost <Name-deine-Getränks>` in einem [Discord-Textkanal](./Discord.md) d
 (Bei gleicher Schreibweise der Getränke, werden diese automatisch addiert!)  
 Mit `!drinks` kannst du dir dann den aktuellen Tagesstand in Discord anzeigen lassen.  
 
-<body onload="getDates()">
+<section onload="getDates()">
 <p id="list">loading data...</p>
 
 <script src="./../ownScripts/showDrinksFromApi.js"></script>
@@ -89,4 +89,4 @@ Mit `!drinks` kannst du dir dann den aktuellen Tagesstand in Discord anzeigen la
         display: table-cell;
     }
 </style>
-</body>
+</section>
