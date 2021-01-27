@@ -20,19 +20,18 @@ Mit `!drinks` kannst du dir dann den aktuellen Tagesstand in Discord anzeigen la
         position: relative;
     }
 
-    .dateSection{
-        width: 70%;
+   .dateSection {
+        width: 100%;
         height: 300px;
         margin: 0;
-        position: absolute;
-        top: 50%;
+        position: relative;
+        top: 80%;
         left: 50%;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
-
         overflow-y: scroll;
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 
     .dateSection::-webkit-scrollbar {
