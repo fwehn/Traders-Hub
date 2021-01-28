@@ -14,16 +14,22 @@ app.use(cors())
 
 const personSchema = new mongoose.Schema({
     name: String,
-    total: Number,
+    total: Number
+});
+
+const personModel = mongoose.model("Person", personSchema);
+
+const personDrinkSchema = new mongoose.Schema({
+    person: {type: mongoose.Schema.Types.ObjectId, ref: 'Person'},
     daily: Number,
     drinks: [String]
 });
 
 const drinksSchema = new mongoose.Schema({
     date: Date,
-    persons: [personSchema],
-    dailyBest: personSchema,
-    totalBest: personSchema
+    persons: [personDrinkSchema],
+    dailyBest: {type: mongoose.Schema.Types.ObjectId, ref: 'Person'},
+    dailyBestCounter: Number
 });
 
 const drinksModel = mongoose.model("Drinks", drinksSchema);
@@ -63,8 +69,14 @@ function startUp(){
                res.send("There is no data for " + new Date(req.params.date));
                return;
            }
-           res.type('json');
-           res.send(data);
+           let resData = data;
+           changeIdWithPerson(resData).then(returnVal => {
+               console.log(returnVal)
+               res.type('json');
+               res.send(returnVal);
+           });
+           // console.log(resData);
+
         });
     });
 
@@ -73,19 +85,30 @@ function startUp(){
     });
 }
 
-async function saveDrinks(prostListe) {
-    if (prostListe !== []){
-        let lastDay = {}
-        await drinksModel.findOne({}, {}, {sort: {'date': -1}}, function (err, day) {
-            console.log(day);
-            lastDay = day;
+async function changeIdWithPerson(data){
+    for (let i in data.persons){
+        // console.log(data.persons[i].person);
+        await personModel.findById(data.persons[i].person, function (err, person){
+            // console.log(person);
+            if (err) console.log(err);
+            data.persons[i].person = person;
+            // console.log(data.persons[i].person);
         });
+    }
+    return data;
+}
 
+async function saveDrinks(prostListe) {
+
+    let counter = 0;
+    for (let i in prostListe){
+        counter++;
+    }
+    console.log(counter);
+    if (counter > 0){
+        console.log("verstanden")
         let bestCounterDaily = 0;
         let bestPersonDaily = {};
-
-        let bestCounterTotal = 0;
-        let bestPersonTotal = {};
 
         let personsOfList = []
         for (let i in prostListe) {
@@ -94,8 +117,36 @@ async function saveDrinks(prostListe) {
             let last = drinksRaw[0];
             let index = 1;
             let drinksFormatted = [];
-            let lastTotal = 0;
-            let currentTotal = 0;
+            let currentPerson = {};
+            let personDrinkToSave = {};
+
+            await personModel.findOne({name: i}, function (err, person) {
+                if (err){console.log(err)}
+
+                if (person !== null){
+                    person.total += prostListe[i].length;
+                    person.save().then(savedPerson =>{
+                        currentPerson = savedPerson;
+                    });
+                }else{
+                    let personData = new personModel({name: i, total: prostListe[i].length});
+                    personData.save().then(savedPerson =>{
+
+                        currentPerson = savedPerson;
+                    });
+                }
+            });
+            console.log(currentPerson);
+
+            await personModel.findOne({name: i}, function (err, person) {
+                if (err){console.log(err)}
+                currentPerson = person;
+            });
+
+            if (prostListe[i].length > bestCounterDaily){
+                bestCounterDaily = prostListe[i].length;
+                bestPersonDaily = currentPerson;
+            }
 
             for (let j = 0; j < drinksRaw.length; j++) {
                 if (drinksRaw[j + 1] !== last || j === drinksRaw.length - 1) {
@@ -107,53 +158,26 @@ async function saveDrinks(prostListe) {
                 }
             }
 
-            if (lastDay != null){
-                for (let person in lastDay.persons) {
-                    if (lastDay.persons[person].name === i) {
-                        lastTotal = lastDay.persons[person].total;
-                        console.log(lastTotal);
-                    }
-                }
-            }
-
-
-            let dailyToSave = prostListe[i].length;
-            currentTotal = lastTotal + dailyToSave;
-
-            let personToSave = {name: i, daily: dailyToSave, drinks: drinksFormatted, total: currentTotal};
-            console.log(personToSave);
-
-            if (currentTotal > bestCounterTotal){
-                bestCounterTotal = currentTotal;
-                bestPersonTotal = personToSave;
-            }
-
-            if (dailyToSave > bestCounterDaily){
-                bestCounterDaily = dailyToSave;
-                bestPersonDaily = personToSave;
-            }
-
-            personsOfList.push(personToSave);
+            personDrinkToSave = {person: currentPerson, daily: prostListe[i].length, drinks: drinksFormatted};
+            personsOfList.push(personDrinkToSave);
         }
-
-        let myData = new drinksModel({date: new Date(), persons: personsOfList, dailyBest: bestPersonDaily, totalBest: bestPersonTotal});
+        let dateToSave = new Date().toISOString().split("T")[0] + "T23:59:59";
+        let myData = new drinksModel({date: new Date(dateToSave), persons: personsOfList, dailyBest: bestPersonDaily, dailyBestCounter: bestCounterDaily});
         myData.save()
             .then(() => {
                 console.log("item saved to database");
             })
-            .catch(() => {
+            .catch(err => {
                 console.log("unable to save to database");
+                console.log(err);
             });
     }
 }
 
 
 function loadAllDrinks(){
-    drinksModel.find({}, function (err, persons) {
-        if (err) return handleError(err);
-        console.log(persons);
-        // console.log(persons[0].persons);
-
+    personModel.findOne({name: "InFINNity"}, function (err, person) {
+        console.log(person);
     });
 }
 

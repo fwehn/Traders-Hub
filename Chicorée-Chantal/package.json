@@ -18,6 +18,7 @@
     "http": "0.0.1-security",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.12",
+    "node-cron": "^2.0.3",
     "node-fetch": "^2.6.1",
     "opusscript": "0.0.7",
     "promise": "^8.1.0",

@@ -31,13 +31,14 @@ function detailsOf(dateString){
 
             let persons = data.persons;
             for (let i in persons){
+                console.log(persons[i]);
                 let drinks = persons[i].drinks;
                 let drinksOfPerson = "";
                 for (let j in drinks){
                     drinksOfPerson = drinksOfPerson + drinks[j].slice(0, -1) + ", ";
                 }
 
-                listOfPersons = listOfPersons + '<tr class="tableRowOfPersons"><th>' + persons[i].name + '</th><th>' + persons[i].daily + '</th><th>' + drinksOfPerson.slice(0, -2) + '</th></tr>';
+                listOfPersons = listOfPersons + '<tr class="tableRowOfPersons"><th>' + persons[i].person.name + '</th><th>' + persons[i].daily + '</th><th>' + drinksOfPerson.slice(0, -2) + '</th></tr>';
             }
             listOfPersons = listOfPersons + '</table></section></section>';
             // listOfPersons = listOfPersons + '<button onclick="getDates()">Zur&uuml;ck zur &Uuml;bersicht</button><br><br>';

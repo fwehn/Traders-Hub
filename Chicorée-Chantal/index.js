@@ -14,6 +14,8 @@ const WWGame = require('./wwgame.js');
 const Randomizer = require('./randomizer.js');
 const ArrayFunctions = require('./array-functions.js');
 const drinkAPI = require('./drinksAPI.js');
+const cron = require('node-cron');
+
 
 drinkAPI.startUp();
 
@@ -51,6 +53,12 @@ var prostListe = [];
 
 console.log("waiting for discord...");
 
+cron.schedule('59 23 * * *', function() {
+    drinkAPI.saveDrinks(prostListe);
+    prostListe = [];
+    console.log("Cron-Job done!");
+});
+
 bot.on('ready', () => {
     console.log('This Bot is Online');
 })
@@ -66,14 +74,6 @@ bot.on('message', message =>{
 
     {
         switch(args[0].toLowerCase()){
-            case 'load':
-
-                break;
-            case 'save':
-                drinkAPI.saveDrinks(prostListe);
-                prostListe = [];
-                break;
-
             case 'au':
                 if (message.member.voice.channel) {
                     let channel = message.guild.channels.cache.get(message.member.voice.channel.id);
@@ -101,9 +101,11 @@ bot.on('message', message =>{
                     });
                 }
                 break;
+
             case 'cleardrinks':
                 prostListe = [];
                 break;
+
             case 'clearvars':
                 pools = [];
                 wwGames = [];
@@ -269,7 +271,7 @@ bot.on('message', message =>{
                 onlineMembers.each(member => console.log(member.user.username));
                 onlineMembers.each(member => member.roles.add(role));
                 break;
-            
+
             case 'saufen':
                 const saufChannel = message.guild.channels.cache.filter(channel => channel.id == saufChannelId);
                 
@@ -318,6 +320,14 @@ bot.on('message', message =>{
                     message.reply("ich habe den derzeitigen Sauftimer gestoppt.")
                 }
 
+                break;
+
+            case 'load':
+                drinkAPI.loadAllDrinks();
+                break;
+
+            case 'save':
+                drinkAPI.saveDrinks(prostListe).then(prostListe = []);
                 break;
 
             case 'standard':
