@@ -7,8 +7,8 @@ const rawData = fs.readFileSync('./variables.json');
 const variables = JSON.parse(rawData);
 
 const app = express();
-const port = process.env.PORT;
-// const port = 2712;
+// const port = process.env.PORT;
+const port = 2712;
 
 app.use(cors())
 
@@ -70,6 +70,7 @@ function startUp(){
     app.get("/drinks/d/:date", (req, res) => {
         drinksModel.findOne({date: new Date(req.params.date)}, 'date persons dailyBest dailyBestCounter -_id')
             .populate({ path: 'persons.person', select: 'name total -_id'})
+            .populate({ path: 'dailyBest', select: 'name total -_id'})
             .then(data => {
                 console.log(data.persons[0].person);
                 res.type('json');

@@ -27,7 +27,7 @@ function detailsOf(dateString){
             console.log(data);
             let listOfPersons = '';
             listOfPersons = listOfPersons + '<button onclick="getDates()">Zur&uuml;ck zur &Uuml;bersicht</button><br><br>';
-            listOfPersons = listOfPersons + 'Mitarbeiter/-in dieses Tages ist: <b>' + data.dailyBest.name + '</b> mit <b>' + data.dailyBest.daily + '</b> Drink(s)! <br><br><br>';
+            listOfPersons = listOfPersons + 'Mitarbeiter/-in dieses Tages ist: <b>' + data.dailyBest.name + '</b> mit <b>' + data.dailyBestCounter + '</b> Drink(s)! <br><br><br>';
             listOfPersons = listOfPersons + '<section class="wholeTable"><table class="tableOfHeaders"><tr><th>Name</th><th>Anzahl</th><th>Detail</th></tr></table><section class="sectionForTable"><table class="tableOfPersons">';
 
 
