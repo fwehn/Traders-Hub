@@ -2,6 +2,24 @@ const apiString = "http://chicoree-chantal.traders-hub.de/drinks";
 // const apiString = "http://localhost:2712/drinks";
 
 function getDates(){
+    fetch(apiString + '/ladder')
+        .then(response => response.json())
+        .then(data => {
+            let ladder = '<table>';
+            console.log(data);
+            let newArray = new Array(10);
+
+            for (let i = 0; i<10; i++){
+                if (data[i] !== undefined){
+                    ladder = ladder + '<tr class="ladderPos' + i + '"><th>' + data[i].name + '</th><th>' + data[i].total + '</th></tr>';
+                }else{
+                    ladder = ladder + '<tr><th>Ausstehend</th><th>Ausstehend</th></tr>';
+                }
+            }
+            console.log(newArray);
+            document.getElementById("ladder").innerHTML = ladder + '</table>';
+        }).catch(() => document.getElementById("list").innerHTML = "Oha! Das ist aber nicht so gut gelaufen!");
+
     fetch(apiString)
         .then(response => response.json())
         .then(data => {
