@@ -2,13 +2,6 @@ const apiString = "http://chicoree-chantal.traders-hub.de/drinks";
 // const apiString = "http://localhost:2712/drinks";
 
 function getDates(){
-    document.getElementById("markdownSection").innerHTML = '<p markdown=1>\n' +
-        'Hier ist eine Auflistung aller Drinks, die auf diesem Server getrunken und eingetragen wurden.  \n' +
-        'Du willst auch hier stehen? Dann halte dich ran!  \n' +
-        'Mit `!prost <Name-deines-Getränks>` in einem [Discord-Textkanal](./Discord.md) deiner Wahl, kannst du dein Getränk aufschreiben lassen.  \n' +
-        '(Bei gleicher Schreibweise der Getränke, werden diese automatisch addiert!)  \n' +
-        'Mit `!drinks` kannst du dir dann den aktuellen Tagesstand in Discord anzeigen lassen.\n' +
-        '</p>'
     fetch(apiString + '/ladder')
         .then(response => response.json())
         .then(data => {
