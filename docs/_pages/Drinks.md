@@ -13,7 +13,7 @@ Hier ist eine Auflistung aller Drinks, die auf diesem Server getrunken und einge
 Du willst auch hier stehen? Dann halte dich ran!  
 Mit `!prost <Name-deines-Getränks>` in einem [Discord-Textkanal](./Discord.md) deiner Wahl, kannst du dein Getränk aufschreiben lassen.  
 (Bei gleicher Schreibweise der Getränke, werden diese automatisch addiert!)  
-Mit `!drinks` kannst du dir dann den aktuellen Tagesstand in Discord anzeigen lassen.
+Mit `!drinks` kannst du dir dann den aktuellen Tagesstand in Discord anzeigen lassen.</Name-deines-Getränks>
 </p>
 <p id="list">loading data...</p>
 
