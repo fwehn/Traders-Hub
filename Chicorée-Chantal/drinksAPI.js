@@ -2,9 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('file-system');
 const cors = require('cors');
+const arrayFunctions = require('./array-functions');
 
 const rawData = fs.readFileSync('./variables.json');
 const variables = JSON.parse(rawData);
+
 
 const app = express();
 const port = process.env.PORT;
@@ -76,6 +78,22 @@ function startUp(){
                 res.type('json');
                 res.send(data);
         })
+    });
+
+    app.get("/drinks/ladder", (req, res) => {
+       personModel.find({}, 'name total -_id')
+           .limit(10)
+           .then(data => {
+           console.log(data);
+           let resData = [];
+           for (let i in data){
+                resData[i] = data[i];
+           }
+           resData.sort(arrayFunctions.compareArrayOfObjectsByFieldTotal);
+           resData.reverse();
+           res.type('json');
+           res.send(resData);
+       }).catch(err => console.log(err));
     });
 
     app.listen(port, () => {

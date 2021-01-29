@@ -51,6 +51,16 @@ function sliceArray(array , begin, end){
     return arrayOut;
 }
 
+function compareArrayOfObjectsByFieldTotal( a, b ) {
+    if ( a.total < b.total ){
+        return -1;
+    }
+    if ( a.total > b.total ){
+        return 1;
+    }
+    return 0;
+}
+
 module.exports = {
-    shuffle, ArraySearch, arrayToEmbed, sliceArray
+    shuffle, ArraySearch, arrayToEmbed, sliceArray, compareArrayOfObjectsByFieldTotal
 }
