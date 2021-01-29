@@ -54,8 +54,7 @@ var prostListe = [];
 console.log("waiting for discord...");
 
 cron.schedule('59 23 * * *', function() {
-    drinkAPI.saveDrinks(prostListe);
-    prostListe = [];
+    drinkAPI.saveDrinks(prostListe).then(prostListe = []);
     console.log("Cron-Job done!");
 });
 

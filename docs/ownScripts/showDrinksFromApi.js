@@ -1,16 +1,18 @@
 const apiString = "http://chicoree-chantal.traders-hub.de/drinks";
-let dates = [];
+// const apiString = "http://localhost:2712/drinks";
 
 function getDates(){
     fetch(apiString)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             let listOfDates = '<section class="container"><section class="dateSection">';
             for (let i in data){
-                dates[i] = data[i];
-                let currentDate = dates[i].split("T")[0].toString().split("-");
-                listOfDates = listOfDates + '<button class="dateButton" onclick="detailsOf(&quot;' + dates[i].toString() + '&quot;)">' + currentDate[2] + " " + currentDate[1] + " " + currentDate[0] + '</button><br><br>';
+                console.log(i)
+                let date = data[i];
+                console.log(date);
+                let currentDate = date.date.split("T")[0].toString().split("-");
+                listOfDates = listOfDates + '<button class="dateButton" onclick="detailsOf(&quot;' + date.date.toString() + '&quot;)">' + currentDate[2] + ' ' + currentDate[1] + ' ' + currentDate[0] + '   Beste/-r ist <b>' + date.dailyBest + '</b> mit <b>' + date.dailyBestCounter + '</b> Drinks!' + '</button><br><br>';
             }
             document.getElementById("list").innerHTML = listOfDates + '</section></section>';
         }).catch(() => document.getElementById("list").innerHTML = "Oha! Das ist aber nicht so gut gelaufen!");

@@ -37,7 +37,8 @@ Mit `!drinks` kannst du dir dann den aktuellen Tagesstand in Discord anzeigen la
     .dateButton{
         width: 100%;
         height: 30px;
-
+        text-align: left;
+        padding-left: 20%;
     }
 
     .tableOfHeaders {

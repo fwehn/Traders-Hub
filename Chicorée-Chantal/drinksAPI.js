@@ -46,56 +46,40 @@ function startUp(){
     });
 
     app.get("/drinks", (req, res) => {
-        drinksModel.find({}, function (err, dates) {
-            if (err) {
-                console.log(err)
-                return;
-            }
-            let datesToSend = [];
+        drinksModel.find({}, 'date dailyBest dailyBestCounter -_id')
+            .populate({ path: 'dailyBest', select: 'name -_id'})
+            .then(dates => {
+            console.log(dates);
+            let resData = [];
             for (let date in dates){
-                datesToSend.push(dates[date].date);
+                let dateDTO = {
+                    date: dates[date].date,
+                    dailyBest: dates[date].dailyBest.name,
+                    dailyBestCounter: dates[date].dailyBestCounter
+                }
+                resData.push(dateDTO)
             }
-            datesToSend.sort();
-            datesToSend.reverse();
+            resData.sort();
+            resData.reverse();
             res.type('json');
-            res.send(datesToSend);
-            console.log(datesToSend);
+            res.send(resData);
+            console.log(resData);
         });
     });
 
     app.get("/drinks/d/:date", (req, res) => {
-        drinksModel.findOne({date: new Date(req.params.date)}, function (err, data){
-           if (err || data == null) {
-               res.send("There is no data for " + new Date(req.params.date));
-               return;
-           }
-           let resData = data;
-           changeIdWithPerson(resData).then(returnVal => {
-               console.log(returnVal)
-               res.type('json');
-               res.send(returnVal);
-           });
-           // console.log(resData);
-
-        });
+        drinksModel.findOne({date: new Date(req.params.date)}, 'date persons dailyBest dailyBestCounter -_id')
+            .populate({ path: 'persons.person', select: 'name total -_id'})
+            .then(data => {
+                console.log(data.persons[0].person);
+                res.type('json');
+                res.send(data);
+        })
     });
 
     app.listen(port, () => {
         console.log("Server listening on port " + port);
     });
-}
-
-async function changeIdWithPerson(data){
-    for (let i in data.persons){
-        // console.log(data.persons[i].person);
-        await personModel.findById(data.persons[i].person, function (err, person){
-            // console.log(person);
-            if (err) console.log(err);
-            data.persons[i].person = person;
-            // console.log(data.persons[i].person);
-        });
-    }
-    return data;
 }
 
 async function saveDrinks(prostListe) {
