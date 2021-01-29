@@ -5,6 +5,7 @@ title: "Drinks"
 
 <body class="layout--single" onload="getDates()">
 <section>
+    <p>Hier ist eine Auflistung aller Drinks, die auf diesem Server getrunken und eingetragen wurden.</p>
     <h2>Top 10:</h2>
     <p id="ladder">loading data...</p>
     <p>
@@ -13,7 +14,7 @@ title: "Drinks"
         (Bei gleicher Schreibweise der Getränke, werden diese automatisch addiert!)<br>
         Mit <code class="language-plaintext highlighter-rouge">!drinks</code> kannst du dir dann den aktuellen Tagesstand in Discord anzeigen lassen.<br>
     </p>
-    <h3>Hier ist eine Auflistung aller Drinks, die auf diesem Server getrunken und eingetragen wurden:</h3>
+    <h2>Alle Drinks:</h2>
     <p id="list">loading data...</p>
 
     <script src="./../ownScripts/showDrinksFromApi.js"></script>
