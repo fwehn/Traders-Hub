@@ -12,7 +12,7 @@ function getDates(){
                 let date = data[i];
                 console.log(date);
                 let currentDate = date.date.split("T")[0].toString().split("-");
-                listOfDates = listOfDates + '<button class="dateButton" onclick="detailsOf(&quot;' + date.date.toString() + '&quot;)">' + currentDate[2] + ' ' + currentDate[1] + ' ' + currentDate[0] + '   Beste/-r ist <b>' + date.dailyBest + '</b> mit <b>' + date.dailyBestCounter + '</b> Drinks!' + '</button><br><br>';
+                listOfDates = listOfDates + '<button class="dateButton" onclick="detailsOf(&quot;' + date.date.toString() + '&quot;)"><b>' + currentDate[2] + ' ' + currentDate[1] + ' ' + currentDate[0] + '</b>   Beste/-r ist <b>' + date.dailyBest + '</b> mit <b>' + date.dailyBestCounter + '</b> Drinks!' + '</button><br><br>';
             }
             document.getElementById("list").innerHTML = listOfDates + '</section></section>';
         }).catch(() => document.getElementById("list").innerHTML = "Oha! Das ist aber nicht so gut gelaufen!");
