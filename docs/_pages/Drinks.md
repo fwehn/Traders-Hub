@@ -38,6 +38,7 @@ Mit `!drinks` kannst du dir dann den aktuellen Tagesstand in Discord anzeigen la
         width: 100%;
         height: 30px;
         text-align: justify;
+        text-justify: inter-word;
         padding-left: 10%;
         padding-right: 10%;
     }
