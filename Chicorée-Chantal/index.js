@@ -323,6 +323,7 @@ bot.on('message', message =>{
 
             case 'load':
                 drinkAPI.loadAllDrinks();
+
                 break;
 
             case 'save':
