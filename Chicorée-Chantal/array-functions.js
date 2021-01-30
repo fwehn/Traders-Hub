@@ -61,6 +61,16 @@ function compareArrayOfObjectsByFieldTotal( a, b ) {
     return 0;
 }
 
+function compareArrayOfObjectsByFieldDaily( a, b ) {
+    if ( a.daily < b.daily ){
+        return -1;
+    }
+    if ( a.daily > b.daily ){
+        return 1;
+    }
+    return 0;
+}
+
 module.exports = {
-    shuffle, ArraySearch, arrayToEmbed, sliceArray, compareArrayOfObjectsByFieldTotal
+    shuffle, ArraySearch, arrayToEmbed, sliceArray, compareArrayOfObjectsByFieldTotal, compareArrayOfObjectsByFieldDaily
 }

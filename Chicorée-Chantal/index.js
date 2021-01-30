@@ -53,7 +53,7 @@ var prostListe = [];
 
 console.log("waiting for discord...");
 
-cron.schedule('59 23 * * *', function() {
+cron.schedule('59 22 * * *', function() {
     drinkAPI.saveDrinks(prostListe).then(prostListe = []);
     console.log("Cron-Job done!");
 });

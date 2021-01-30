@@ -74,6 +74,8 @@ function startUp(){
             .populate({ path: 'persons.person', select: 'name total -_id'})
             .populate({ path: 'dailyBest', select: 'name total -_id'})
             .then(data => {
+                data.persons.sort(arrayFunctions.compareArrayOfObjectsByFieldDaily);
+                data.persons.reverse();
                 console.log(data.persons[0].person);
                 res.type('json');
                 res.send(data);
