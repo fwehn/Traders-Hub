@@ -1,7 +1,7 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const fs = require('file-system');
-const cors = require('cors');
 const arrayFunctions = require('./array-functions');
 
 const rawData = fs.readFileSync('./variables.json');
@@ -12,13 +12,19 @@ const app = express();
 const port = process.env.PORT;
 // const port = 2712;
 
-app.use(cors())
+app.use(cors());
+
+const opaSchema = new mongoose.Schema({
+    sentence: String
+}, {versionKey: false});
+
+const opaModel = mongoose.model("Opa", opaSchema);
 
 const personSchema = new mongoose.Schema({
     name: String,
     total: Number,
     nickname: String
-});
+}, {versionKey: false});
 
 const personModel = mongoose.model("Person", personSchema);
 
@@ -26,14 +32,14 @@ const personDrinkSchema = new mongoose.Schema({
     person: {type: mongoose.Schema.Types.ObjectId, ref: 'Person'},
     daily: Number,
     drinks: [String]
-});
+}, {versionKey: false});
 
 const drinksSchema = new mongoose.Schema({
     date: Date,
     persons: [personDrinkSchema],
     dailyBest: {type: mongoose.Schema.Types.ObjectId, ref: 'Person'},
     dailyBestCounter: Number
-});
+}, {versionKey: false});
 
 const drinksModel = mongoose.model("Drinks", drinksSchema);
 
@@ -44,7 +50,6 @@ function startUp(){
         .catch(err => console.log(err));
     // console.log("mongodb://" + variables.mongo.user + ":" + encodeURIComponent(variables.mongo.password) + "@" + variables.mongo.hostString)
     app.get("/",(req, res) => {
-
         res.send("Hi I'm Chicorée-Chantal!");
     });
 
@@ -97,6 +102,26 @@ function startUp(){
            res.type('json');
            res.send(resData);
        }).catch(err => console.log(err));
+    });
+
+    app.post("/opa", (req, res) =>{
+        console.log(req.query);
+        res.type('text');
+        if (req.query.sentence !== undefined){
+            let newSentence = new opaModel({sentence: req.query.sentence});
+            newSentence.save()
+                .then(() => {
+                    console.log("item saved to database");
+                    res.send("Saved: " + req.query.sentence);
+                })
+                .catch(err => {
+                    console.log("unable to save to database");
+                    console.log(err);
+                    res.send("Unable to save: " + req.query.sentence);
+                });
+        }else{
+            res.send("U have to set a \"sentence\" query.");
+        }
     });
 
     app.listen(port, () => {
@@ -187,6 +212,21 @@ function loadAllDrinks(){
     });
 }
 
+async function getOpa(){
+    return new Promise((resolve, reject) => {
+        opaModel.countDocuments().exec(function (err, count) {
+            let random = Math.floor(Math.random() * count)
+            opaModel.findOne()
+                .skip(random)
+                .then(result => {
+                    resolve(result.sentence)
+                }).catch(err => {
+                reject(err);
+            });
+        });
+    });
+}
+
 module.exports = {
-    startUp, loadAllDrinks, saveDrinks
+    startUp, loadAllDrinks, saveDrinks, getOpa
 }

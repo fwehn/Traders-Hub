@@ -13,11 +13,11 @@ const Pool = require('./pool.js');
 const WWGame = require('./wwgame.js');
 const Randomizer = require('./randomizer.js');
 const ArrayFunctions = require('./array-functions.js');
-const drinkAPI = require('./drinksAPI.js');
+const api = require('./api.js');
 const cron = require('node-cron');
 
 
-drinkAPI.startUp();
+api.startUp();
 
 const rawdata = fs.readFileSync('./variables.json');
 const variables = JSON.parse(rawdata);
@@ -25,18 +25,6 @@ const token = variables.token;
 const PREFIX = variables.prefix;
 
 const jesseID = variables.jesse;
-const grandpaSentences = [];
-fs.readdir('./txt-files/Jesses Opa', function (err, files) {
-    for (var i = 0; i < files.length; i++) {
-        let fileLines = fs.readFileSync(`./txt-files/Jesses Opa/${files[i]}`, 'utf-8').split(`\n`);
-        for (let i in fileLines){
-            if (fileLines[i] !== "" && fileLines[i] !== " " && fileLines[i] !== "\n" && fileLines[i] !== "\r"){
-                grandpaSentences.push(fileLines[i]);
-            }
-        }
-    }
-    // console.log(grandpaSentences);
-});
 
 const feedbackSentences = fs.readFileSync('./txt-files/saufantworten.txt', 'utf-8').split('\n');
 
@@ -54,7 +42,7 @@ var prostListe = [];
 console.log("waiting for discord...");
 
 cron.schedule('59 22 * * *', function() {
-    drinkAPI.saveDrinks(prostListe).then(prostListe = []);
+    api.saveDrinks(prostListe).then(prostListe = []);
     console.log("Cron-Job done!");
 });
 
@@ -216,8 +204,11 @@ bot.on('message', message =>{
                 }
 
                 let prompTextGrandpa = `**${jesseName}'s Opa** hat immer gesagt: \n`;
-                prompTextGrandpa = prompTextGrandpa + grandpaSentences[Math.floor(Math.random() * grandpaSentences.length)];
-                message.channel.send(prompTextGrandpa);
+
+                api.getOpa().then(sentence => {
+                    prompTextGrandpa = prompTextGrandpa + sentence;
+                    message.channel.send(prompTextGrandpa);
+                }).catch(err => console.log(err));
                 break;
 
             case 'prost':
@@ -322,12 +313,12 @@ bot.on('message', message =>{
                 break;
 
             case 'load':
-                drinkAPI.loadAllDrinks();
+                api.loadAllDrinks();
 
                 break;
 
             case 'save':
-                drinkAPI.saveDrinks(prostListe).then(prostListe = []);
+                api.saveDrinks(prostListe).then(prostListe = []);
                 break;
 
             case 'standard':
