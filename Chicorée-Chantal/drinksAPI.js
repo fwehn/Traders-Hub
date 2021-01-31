@@ -16,7 +16,8 @@ app.use(cors())
 
 const personSchema = new mongoose.Schema({
     name: String,
-    total: Number
+    total: Number,
+    nickname: String
 });
 
 const personModel = mongoose.model("Person", personSchema);
@@ -134,7 +135,7 @@ async function saveDrinks(prostListe) {
                         currentPerson = savedPerson;
                     });
                 }else{
-                    let personData = new personModel({name: i, total: prostListe[i].length});
+                    let personData = new personModel({name: i, total: prostListe[i].length, nickname: ""});
                     personData.save().then(savedPerson =>{
 
                         currentPerson = savedPerson;
