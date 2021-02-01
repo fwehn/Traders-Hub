@@ -178,6 +178,7 @@ bot.on('message', message =>{
                         {"name": "*!random*", "value": "Erstellt einen Randomizer und zieht Sieger, nachdem alle per Reaktion teilgenommen haben."},
                         {"name": "*!saufen*", "value": "Startet/Beendet den Sauftimer: Immer nach Ablauf des Intervals, wird jemand der sich in einem Voice-Channel befindet auserwählt zum Saufen."},
                         {"name": "*!teams*", "value": "Erstellt zufällig 2 Teams aus allen, die per Reaktion Teilnehmen."},
+                        {"name": "*!topdrinks*", "value": "Gibt eine Topliste der Trinker aus."},
                         {"name": "*!website*", "value": "Postet einen Link zu unserer Website."},
                         {"name": "*!ww*", "value": "Erstellt eine Partie Werwolf und teilt jedem Spieler eine Rolle zu. Erzähler wird derjenige, der den Command geschrieben hat. (Teilnahme per Reaktion, min 8 Leute)\n\n-----------------------------"},
                         {"name": "**Eher Unnütze Commands**", "value": "-----------------------------\n\n*!chuck*\n*!ehre*\n*!luther*\n*!mimimi*\n*!opa*\n*!standard*\n*!trump*\n*!würg*"}
