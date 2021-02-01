@@ -312,11 +312,6 @@ bot.on('message', message =>{
 
                 break;
 
-            case 'load':
-                api.loadAllDrinks();
-
-                break;
-
             case 'save':
                 api.saveDrinks(prostListe).then(prostListe = []);
                 break;
@@ -341,6 +336,39 @@ bot.on('message', message =>{
 
             case 'test':
                 message.reply(message.channel.id + " test " + message.member.voice.channel );
+                break;
+
+            case 'topdrinks':
+                let yesterday = new Date();
+                // new Date().toISOString().split("T")[0] + "T23:59:59")
+                yesterday.setDate(yesterday.getDate() - 1);
+
+                yesterday = new Date(yesterday.toISOString().split("T")[0] + "T23:59:59");
+
+                let drinksLadder = {
+                    "title": "Topliste",
+                    "description": "Hier ist die aktuelle Topliste der Trinker!\n\n-----------------------------\n",
+                    "url": "http://traders-hub.de/drinks",
+                    "color": 7419530,
+                    "footer": {
+                        "text": `Für genauere Informationen zu den Drinks besuche unsere Website!\nStand: ${yesterday.toString().split("G")[0]} Uhr`
+                    },
+                    "fields": []
+                };
+
+                fetch('http://chicoree-chantal.traders-hub.de/drinks/ladder')
+                    .then(response => response.json())
+                    .then(drinksData =>{
+                        let drinkFields = [];
+                        let pos = 1;
+                        for (i in drinksData){
+                            drinkFields[i] = {};
+                            drinkFields[i].name = `${pos++}. ${drinksData[i].name}`;
+                            drinkFields[i].value = `${drinksData[i].total} Drink(s)`;
+                        }
+                        drinksLadder.fields = drinkFields;
+                        message.channel.send({embed: drinksLadder});
+                    });
                 break;
 
             case 'trump':
