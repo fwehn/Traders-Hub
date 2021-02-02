@@ -3,13 +3,13 @@ layout: splash
 title: Willkommen
 header:
     overlay_color: "#000"
-    overlay_filter: "0.5"
+    overlay_filter: "0.7"
     overlay_image: /assets/images/splash/placeholderSplash.png
     actions:
         - label: "Komm Rum!"
           url: "http://traders-hub.de/discord/"
           caption: "Photo credit: [**Is halt n Screenshot IDK**](http://traders-hub.de/)"
-excerpt: 'Moin, willkommen im Traders-Hub.\nHier gibts leider noch nicht viel zu sehen, da sich die Seite immer noch im Aufbau befindet.'
+excerpt: 'Moin, willkommen im Traders-Hub.<br>Hier gibts leider noch nicht viel zu sehen, da sich die Seite immer noch im Aufbau befindet.'
 intro:  
     - excerpt: "Hier bissl `Lorem Ipsum` dies das! Wenn du bock hast dich hier einzubringen, dann meld dich!"
 feature_row:
