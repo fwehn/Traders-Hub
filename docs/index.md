@@ -9,7 +9,7 @@ header:
         - label: "Komm Rum!"
           url: "http://traders-hub.de/discord/"
     caption: "Photo credit: [**Is halt n Screenshot IDK**](http://traders-hub.de/)"
-excerpt: 'Moin, willkommen im Traders-Hub.<br>Hier gibts leider noch nicht viel zu sehen, da sich die Seite immer noch im Aufbau befindet.'
+excerpt: 'Moin,<br>willkommen im Traders-Hub.<br>Hier gibts leider noch nicht viel zu sehen,<br>da sich die Seite immer noch im Aufbau befindet.'
 intro:  
     - excerpt: "Hier bissl `Lorem Ipsum` dies das! Wenn du bock hast dich hier einzubringen, dann meld dich!"
 feature_row:
@@ -17,7 +17,7 @@ feature_row:
       image_caption: "Platzhalter"
       alt: "Posts"
       title: "Posts"
-      excerpt: "Hier findest du Infos zu aktuellen Events oder sonstigem Kram!"
+      excerpt: "Hier findest du Infos zu aktuellen Events<br>oder sonstigem Kram!"
       url: "http://traders-hub.de/posts/"
       btn_label: "Was läuft?"
       btn_class: "btn--primary"
@@ -25,7 +25,7 @@ feature_row:
       image_caption: "Platzhalter"
       alt: "Veggie-Gang"
       title: "Veggie-Gang"
-      excerpt: "Du möchtest unsere Bots benutzen, weißt allerdings nicht wie?"
+      excerpt: "Du möchtest unsere Bots benutzen,<br>weißt allerdings nicht wie?"
       url: "http://traders-hub.de/veggie-gang/"
       btn_label: "Schau hier!"
       btn_class: "btn--primary"
@@ -33,7 +33,7 @@ feature_row:
       image_caption: "Platzhalter"
       alt: "Drinks"
       title: "Drinks"
-      excerpt: "Hier findest du die Ergebnisse des `!prost`-Commands!"
+      excerpt: "Hier findest du die Ergebnisse des <br>`!prost`-Commands!"
       url: "http://traders-hub.de/drinks/"
       btn_label: "Sauf!"
       btn_class: "btn--primary"
