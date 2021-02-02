@@ -5,18 +5,18 @@ title: "Impressum"
 
 ## Angaben gemäß § 5 TMG  
 
-Finn Wehn
-Hasenweg, 12
-51789 Lindlar
+Finn Wehn  
+Hasenweg, 12  
+51789 Lindlar  
 
 ## Kontakt
 
-Telefon: +49 15115279619
+Telefon: +49 15115279619  
 E-Mail: finn.wehn@web.de  
 
 ## Redaktionell Verantwortlicher
 
-Finn Wehn
+Finn Wehn  
 
 ### Haftung für Inhalte  
 
