@@ -11,7 +11,7 @@ header:
     caption: "Photo credit: [**Is halt n Screenshot IDK**](http://traders-hub.de/)"
 excerpt: 'Moin Meistas und Meistasinnen,<br>willkommen im Traders-Hub.<br>Hier gibts leider noch nicht viel zu sehen,<br>da sich die Seite immer noch im Aufbau befindet.'
 intro:  
-    - excerpt: "Hier bissl `Lorem Ipsum` dies das! Wenn du bock hast dich hier einzubringen, dann meld dich!"
+    - excerpt: "Hier bissl `Lorem Ipsum` dies das!<br>Wenn du bock hast dich hier einzubringen, dann meld dich!"
 feature_row:
     - image_path: /assets/images/splash/placeholder1.png
       image_caption: "Platzhalter"
