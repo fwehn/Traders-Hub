@@ -4,7 +4,7 @@ title: Willkommen
 header:
     overlay_color: "#000"
     overlay_filter: "0.5"
-    overlay_image: /assets/images/placeholderSplash.png
+    overlay_image: /assets/images/splash/placeholderSplash.png
     actions:
         - label: "Komm Rum!"
           url: "http://traders-hub.de/discord/"
@@ -12,9 +12,9 @@ header:
 excerpt: "Moin,     willkommen im Traders-Hub.
           Hier gibts leider noch nicht viel zu sehen da sich die Seite noch im Aufbau befindet."
 intro:  
-    - excerpt: "Hier bissl `Lorem Ipsum` dies das!"
+    - excerpt: "Hier bissl `Lorem Ipsum` dies das! Wenn du bock hast dich hier einzubringen, dann meld dich!"
 feature_row:
-    - image_path: /assets/images/placeholder1.png
+    - image_path: /assets/images/splash/placeholder1.png
       image_caption: "Platzhalter"
       alt: "Posts"
       title: "Posts"
@@ -22,7 +22,7 @@ feature_row:
       url: "http://traders-hub.de/posts/"
       btn_label: "Was läuft?"
       btn_class: "btn--primary"
-    - image_path: /assets/images/placeholder2.png
+    - image_path: /assets/images/splash/placeholder2.png
       image_caption: "Platzhalter"
       alt: "Veggie-Gang"
       title: "Veggie-Gang"
@@ -30,7 +30,7 @@ feature_row:
       url: "http://traders-hub.de/veggie-gang/"
       btn_label: "Schau hier!"
       btn_class: "btn--primary"
-    - image_path: /assets/images/placeholder3.png
+    - image_path: /assets/images/splash/placeholder3.png
       image_caption: "Platzhalter"
       alt: "Drinks"
       title: "Drinks"
