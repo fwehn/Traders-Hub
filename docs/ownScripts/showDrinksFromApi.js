@@ -13,7 +13,7 @@ function getDates(){
                 console.log(Math.min(i, 3));
                 if (data[i] !== undefined){
 
-                    ladder = ladder + '<tr class="ladderPos' + Math.min(i, 3) + '"><th>' + data[i].name + '</th><th>' + data[i].total + '</th></tr>';
+                    ladder = ladder + '<tr class="ladderPos' + Math.min(i, 3) + '"><th>' + (i+1) + '. ' + data[i].name + '</th><th>' + data[i].total + '</th></tr>';
                 }else{
                     ladder = ladder + '<tr class="ladderPos' + Math.min(i, 3) + '"><th>Ausstehend</th><th>Ausstehend</th></tr>';
                 }
