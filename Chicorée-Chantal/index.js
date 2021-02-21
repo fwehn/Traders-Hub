@@ -42,7 +42,7 @@ var prostListe = [];
 console.log("waiting for discord...");
 
 cron.schedule('59 22 * * *', function() {
-    api.saveDrinks(prostListe).then(prostListe = []);
+    api.saveDrinks(prostListe, bot.guilds.cache.get(variables.guild).members.cache).then(prostListe = []);
     console.log("Cron-Job done!");
 });
 
@@ -314,7 +314,7 @@ bot.on('message', message =>{
                 break;
 
             case 'save':
-                api.saveDrinks(prostListe).then(prostListe = []);
+                api.saveDrinks(prostListe, bot.guilds.cache.get(variables.guild).members.cache).then(prostListe = []);
                 break;
 
             case 'standard':
@@ -336,7 +336,8 @@ bot.on('message', message =>{
                 break;
 
             case 'test':
-                message.reply(message.channel.id + " test " + message.member.voice.channel );
+                // message.reply(message.channel.id + " test " + message.member.voice.channel )
+                console.log(bot.guilds.cache.get(variables.guild).members.cache.filter(member => member.user.username == "InFINNity").entries().next().value[1].nickname);
                 break;
 
             case 'topdrinks':

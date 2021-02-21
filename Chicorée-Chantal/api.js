@@ -21,6 +21,7 @@ const opaSchema = new mongoose.Schema({
 const opaModel = mongoose.model("Opa", opaSchema);
 
 const personSchema = new mongoose.Schema({
+    discordId: String,
     name: String,
     total: Number,
     nickname: String
@@ -90,9 +91,8 @@ function startUp(){
 
     app.get("/drinks/ladder", (req, res) => {
        personModel.find({}, 'name total -_id')
-           .limit(10)
            .then(data => {
-           console.log(data);
+           // console.log(data);
            let resData = [];
            for (let i in data){
                 resData[i] = data[i];
@@ -100,7 +100,7 @@ function startUp(){
            resData.sort(arrayFunctions.compareArrayOfObjectsByFieldTotal);
            resData.reverse();
            res.type('json');
-           res.send(resData);
+           res.send(resData.slice(0, 10));
        }).catch(err => console.log(err));
     });
 
@@ -129,7 +129,9 @@ function startUp(){
     });
 }
 
-async function saveDrinks(prostListe) {
+async function saveDrinks(prostListe, members) {
+
+    //members.filter(member => member.user.username == "InFINNity").entries().next().value
 
     let counter = 0;
     for (let i in prostListe){
@@ -151,16 +153,24 @@ async function saveDrinks(prostListe) {
             let currentPerson = {};
             let personDrinkToSave = {};
 
-            await personModel.findOne({name: i}, function (err, person) {
+            let discordPerson = members.filter(member => member.user.username == i).entries().next().value
+
+            if (discordPerson === undefined || discordPerson === null){
+                continue;
+            }
+
+            await personModel.findOne({discordId: discordPerson[1].user.id}, function (err, person) {
                 if (err){console.log(err)}
 
                 if (person !== null){
                     person.total += prostListe[i].length;
+                    person.name = i;
+                    person.nickname = discordPerson[1].nickname;
                     person.save().then(savedPerson =>{
                         currentPerson = savedPerson;
                     });
                 }else{
-                    let personData = new personModel({name: i, total: prostListe[i].length, nickname: ""});
+                    let personData = new personModel({discordId: discordPerson[1].user.id, name: i, total: prostListe[i].length, nickname: discordPerson[1].nickname});
                     personData.save().then(savedPerson =>{
 
                         currentPerson = savedPerson;
@@ -207,9 +217,10 @@ async function saveDrinks(prostListe) {
 
 
 function loadAllDrinks(){
-    personModel.findOne({name: "InFINNity"}, function (err, person) {
-        console.log(person);
-    });
+    // personModel.findOne({name: "InFINNity"}, function (err, person) {
+    //     console.log(person);
+    // });
+
 }
 
 async function getOpa(){
