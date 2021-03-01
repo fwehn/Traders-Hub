@@ -2,6 +2,8 @@ const apiString = "http://chicoree-chantal.traders-hub.de/drinks";
 // const apiString = "http://localhost:2712/drinks";
 
 function getDates(){
+
+    //Ladder
     fetch(apiString + '/ladder')
         .then(response => response.json())
         .then(data => {
@@ -12,8 +14,12 @@ function getDates(){
             for (let i = 0; i<10; i++){
                 console.log(Math.min(i, 3));
                 if (data[i] !== undefined){
+                    let nicknameAddon = "";
+                    if (data[i].nickname !== "" && data[i].nickname !== null && data[i].nickname !== undefined){
+                        nicknameAddon = data[i].nickname + " | ";
+                    }
 
-                    ladder = ladder + '<tr class="ladderPos' + Math.min(i, 3) + '"><th>' + (i+1) + '. ' + data[i].name + '</th><th>' + data[i].total + '</th></tr>';
+                    ladder = ladder + '<tr class="ladderPos' + Math.min(i, 3) + '"><th>' + (i+1) + '. ' + nicknameAddon + data[i].name + '</th><th>' + data[i].total + '</th></tr>';
                 }else{
                     ladder = ladder + '<tr class="ladderPos' + Math.min(i, 3) + '"><th>Ausstehend</th><th>Ausstehend</th></tr>';
                 }
@@ -23,7 +29,7 @@ function getDates(){
         }).catch(() => document.getElementById("list").innerHTML = "Oha! Das ist aber nicht so gut gelaufen!");
 
 
-
+    //Buttons
     fetch(apiString)
         .then(response => response.json())
         .then(data => {
@@ -34,12 +40,19 @@ function getDates(){
                 let date = data[i];
                 console.log(date);
                 let currentDate = date.date.split("T")[0].toString().split("-");
-                listOfDates = listOfDates + '<button class="dateButton" onclick="detailsOf(&quot;' + date.date.toString() + '&quot;)"><b>' + currentDate[2] + ' ' + currentDate[1] + ' ' + currentDate[0] + '</b>   Beste/-r ist <b>' + date.dailyBest + '</b> mit <b>' + date.dailyBestCounter + '</b> Drinks!' + '</button><br><br>';
+
+                let nicknameAddon = "";
+                if (date.dailyBestNickname !== "" && date.dailyBestNickname !== null && date.dailyBestNickname !== undefined){
+                    nicknameAddon = date.dailyBestNickname + " | ";
+                }
+
+                listOfDates = listOfDates + '<button class="dateButton" onclick="detailsOf(&quot;' + date.date.toString() + '&quot;)"><b>' + currentDate[2] + ' ' + currentDate[1] + ' ' + currentDate[0] + '</b>   Beste/-r ist <b>' + nicknameAddon + date.dailyBest + '</b> mit <b>' + date.dailyBestCounter + '</b> Drinks!' + '</button><br><br>';
             }
             document.getElementById("list").innerHTML = listOfDates + '</section></section>';
         }).catch(() => document.getElementById("list").innerHTML = "Oha! Das ist aber nicht so gut gelaufen!");
 }
 
+//Details
 function detailsOf(dateString){
     // console.log(dateString);
     let detailApiString = apiString + '/d/' + dateString;
@@ -62,7 +75,12 @@ function detailsOf(dateString){
                     drinksOfPerson = drinksOfPerson + drinks[j].slice(0, -1) + ", ";
                 }
 
-                listOfPersons = listOfPersons + '<tr class="tableRowOfPersons"><th>' + persons[i].person.name + '</th><th>' + persons[i].daily + '</th><th>' + drinksOfPerson.slice(0, -2) + '</th></tr>';
+                let nicknameAddon = "";
+                if (persons[i].person.nickname !== "" && persons[i].person.nickname !== null && persons[i].person.nickname !== undefined){
+                    nicknameAddon = persons[i].person.nickname + " | ";
+                }
+
+                listOfPersons = listOfPersons + '<tr class="tableRowOfPersons"><th>' + nicknameAddon + persons[i].person.name + '</th><th>' + persons[i].daily + '</th><th>' + drinksOfPerson.slice(0, -2) + '</th></tr>';
             }
             listOfPersons = listOfPersons + '</table></section></section>';
             // listOfPersons = listOfPersons + '<button onclick="getDates()">Zur&uuml;ck zur &Uuml;bersicht</button><br><br>';

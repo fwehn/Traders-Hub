@@ -9,7 +9,7 @@ const variables = JSON.parse(rawData);
 
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 2712;
 // const port = 2712;
 
 app.use(cors());
@@ -56,7 +56,7 @@ function startUp(){
 
     app.get("/drinks", (req, res) => {
         drinksModel.find({}, 'date dailyBest dailyBestCounter -_id')
-            .populate({ path: 'dailyBest', select: 'name -_id'})
+            .populate({ path: 'dailyBest', select: 'name nickname -_id'})
             .then(dates => {
             console.log(dates);
             let resData = [];
@@ -64,6 +64,7 @@ function startUp(){
                 let dateDTO = {
                     date: dates[date].date,
                     dailyBest: dates[date].dailyBest.name,
+                    dailyBestNickname: dates[date].dailyBest.nickname,
                     dailyBestCounter: dates[date].dailyBestCounter
                 }
                 resData.push(dateDTO)
@@ -78,8 +79,8 @@ function startUp(){
 
     app.get("/drinks/d/:date", (req, res) => {
         drinksModel.findOne({date: new Date(req.params.date)}, 'date persons dailyBest dailyBestCounter -_id')
-            .populate({ path: 'persons.person', select: 'name total -_id'})
-            .populate({ path: 'dailyBest', select: 'name total -_id'})
+            .populate({ path: 'persons.person', select: 'name nickname total -_id'})
+            .populate({ path: 'dailyBest', select: 'name nickname total -_id'})
             .then(data => {
                 data.persons.sort(arrayFunctions.compareArrayOfObjectsByFieldDaily);
                 data.persons.reverse();
@@ -90,7 +91,7 @@ function startUp(){
     });
 
     app.get("/drinks/ladder", (req, res) => {
-       personModel.find({}, 'name total -_id')
+       personModel.find({}, 'name nickname total -_id')
            .then(data => {
            // console.log(data);
            let resData = [];
@@ -159,18 +160,23 @@ async function saveDrinks(prostListe, members) {
                 continue;
             }
 
+            let discordNickname = discordPerson[1].nickname;
+            if (discordNickname == null){
+                discordNickname = "";
+            }
+
             await personModel.findOne({discordId: discordPerson[1].user.id}, function (err, person) {
                 if (err){console.log(err)}
 
                 if (person !== null){
                     person.total += prostListe[i].length;
                     person.name = i;
-                    person.nickname = discordPerson[1].nickname;
+                    person.nickname = discordNickname;
                     person.save().then(savedPerson =>{
                         currentPerson = savedPerson;
                     });
                 }else{
-                    let personData = new personModel({discordId: discordPerson[1].user.id, name: i, total: prostListe[i].length, nickname: discordPerson[1].nickname});
+                    let personData = new personModel({discordId: discordPerson[1].user.id, name: i, total: prostListe[i].length, nickname: discordNickname});
                     personData.save().then(savedPerson =>{
 
                         currentPerson = savedPerson;
