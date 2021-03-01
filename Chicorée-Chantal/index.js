@@ -46,6 +46,10 @@ cron.schedule('59 22 * * *', function() {
     console.log("Cron-Job done!");
 });
 
+cron.schedule('50 * * * *', function(){
+    api.updateNicknames(bot.guilds.cache.get(variables.guild).members.cache).then(console.log('Nicknames updated!'));
+});
+
 bot.on('ready', () => {
     console.log('This Bot is Online');
 })
@@ -378,6 +382,10 @@ bot.on('message', message =>{
                     .then(res => message.channel.send({files: [{
                             attachment: res.body
                         }]}));
+                break;
+
+            case 'updatenicks':
+                api.updateNicknames(message.guild.members.cache);
                 break;
 
             case 'website':

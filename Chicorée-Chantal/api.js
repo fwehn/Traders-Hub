@@ -130,6 +130,28 @@ function startUp(){
     });
 }
 
+async function updateNicknames(members){
+    personModel.find({})
+        .then(data => {
+            // console.log(data);
+            for (let person in data){
+                // console.log(person)
+                let discordPerson = members.get(data[person].discordId);
+
+                let discordNickname = discordPerson.nickname;
+                if (discordNickname == null){
+                    // console.log("nix");
+                    data[person].nickname = "";
+                    data[person].save();
+                }else{
+                    // console.log(discordNickname);
+                    data[person].nickname = discordNickname;
+                    data[person].save();
+                }
+            }
+        }).catch(err => console.log(err));
+}
+
 async function saveDrinks(prostListe, members) {
 
     //members.filter(member => member.user.username == "InFINNity").entries().next().value
@@ -245,5 +267,5 @@ async function getOpa(){
 }
 
 module.exports = {
-    startUp, loadAllDrinks, saveDrinks, getOpa
+    startUp, loadAllDrinks, saveDrinks, getOpa, updateNicknames
 }
