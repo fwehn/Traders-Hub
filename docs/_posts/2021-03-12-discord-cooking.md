@@ -13,7 +13,7 @@ Das Gericht mit den meisten Stimmen gewinnt.
 Zu allen Gerichten gibt es auch eine vegetarische Alternative, falls gewünscht.
 
 
-![discord-cooking](../assets/images/posts/discord-cooking.png)
+![discord-cooking](./../assets/images/posts/discord-cooking.png)
 ---
 
 Wir haben uns die folgenden drei Gerichte überlegt (mitsamt vegetarischer Alternative)
