@@ -1,8 +1,6 @@
 ---
 title: "Discord-Cooking"
 author: Finn Wehn
-header:
-    image: /assets/images/dcc.png
 ---
 
 ![discord](http://traders-hub.de/assets/images/posts/discord-cooking.png)
@@ -22,4 +20,4 @@ Wir haben uns die folgenden drei Gerichte überlegt (mitsamt vegetarischer Alter
 - Asiatische Chicken Wings mit Coleslaw
 - Hähnchen Smashed Burger mit Kartoffel Wedges und Dip
 
-Hier geht es zur [Umfrage](https://strawpoll.de/7146xxr)!
+Hier geht es zur [Umfrage](https://xoyondo.com/op/mllbetQKtuJW916)!
