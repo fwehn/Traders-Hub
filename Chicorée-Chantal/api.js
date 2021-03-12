@@ -137,6 +137,9 @@ async function updateNicknames(members){
             for (let person in data){
                 // console.log(person)
                 let discordPerson = members.get(data[person].discordId);
+                if (discordPerson === undefined || discordPerson === null){
+                    continue;
+                }
 
                 let discordNickname = discordPerson.nickname;
                 if (discordNickname == null){
@@ -176,7 +179,7 @@ async function saveDrinks(prostListe, members) {
             let currentPerson = {};
             let personDrinkToSave = {};
 
-            let discordPerson = members.filter(member => member.user.username == i).entries().next().value
+            let discordPerson = members.filter(member => member.user.username === i).entries().next().value
 
             if (discordPerson === undefined || discordPerson === null){
                 continue;
