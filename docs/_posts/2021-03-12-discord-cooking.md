@@ -1,10 +1,9 @@
 ---
 title: "Discord-Cooking"
 author: Finn Wehn
+header:
+  image: /assets/images/discord-cooking.png
 ---
-
-
-![discord-cooking](./../assets/images/posts/discord-cooking.png)
 
 Hallo zusammen,  
 wir würden gerne am 27. März gemeinsam mit euch im Discord kochen und uns danach einen rein tanken.
