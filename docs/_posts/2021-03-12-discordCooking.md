@@ -5,7 +5,7 @@ header:
     image: /assets/images/dcc.png
 ---
 
-![Discord-Cooking]({{ site.url }}{{ site.baseurl }}/assets/images/discord-cooking.png)
+![discord](./../assets/images/discord-cooking.png)
 
 Hallo zusammen,  
 wir würden gerne am 27. März gemeinsam mit euch im Discord kochen und uns danach einen rein tanken.
