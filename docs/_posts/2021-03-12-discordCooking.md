@@ -3,7 +3,7 @@ title: "Discord-Cooking"
 author: Finn Wehn
 ---
 
-![discord](http://traders-hub.de/assets/images/posts/discord-cooking.png)
+![discord]({{ site.url }}{{ site.baseurl }}/assets/images/posts/discord-cooking.png)
 
 Hallo zusammen,  
 wir würden gerne am 27. März gemeinsam mit euch im Discord kochen und uns danach einen rein tanken.
