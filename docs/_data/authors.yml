@@ -27,7 +27,7 @@ Lukas Diekmann:
 Mats Wehn:
   name: "Mats Wehn"
   bio: ""
-  avatar: ""
+  avatar: "/assets/images/Avatar-Default.png"
   links:
 #    - label: "Email"
 #      icon: "fas fa-fw fa-envelope-square"
