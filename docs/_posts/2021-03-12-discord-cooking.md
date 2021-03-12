@@ -1,6 +1,6 @@
 ---
 title: "Discord-Cooking"
-author: Mats Wehn
+author: Finn Wehn
 ---
 
 ![discord-cooking](../assets/images/posts/discord-cooking.png)
