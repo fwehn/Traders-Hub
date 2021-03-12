@@ -23,3 +23,12 @@ Lukas Diekmann:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
       url: ""
+
+Mats Wehn:
+  name: "Mats Wehn"
+  bio: ""
+  avatar: ""
+  links:
+#    - label: "Email"
+#      icon: "fas fa-fw fa-envelope-square"
+#      url: ""
