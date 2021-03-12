@@ -14,7 +14,7 @@ intro:
     - excerpt: "Hier bissl `Lorem Ipsum` dies das!<br>Wenn du bock hast dich hier einzubringen, dann meld dich!"
 feature_row:
     - image_path: /assets/images/splash/posts.png
-      image_caption: "Mats Wehn"
+      image_caption: "Bild: Mats Wehn"
       alt: "Posts"
       title: "Posts"
       excerpt: "Hier findest du Infos zu aktuellen Events<br>oder sonstigem Kram!"
@@ -22,7 +22,7 @@ feature_row:
       btn_label: "Was läuft?"
       btn_class: "btn--primary"
     - image_path: /assets/images/splash/veggie-gang.png
-      image_caption: "Mats Wehn"
+      image_caption: "Bild: Mats Wehn"
       alt: "Veggie-Gang"
       title: "Veggie-Gang"
       excerpt: "Du möchtest unsere Bots benutzen,<br>weißt allerdings nicht wie?"
@@ -30,7 +30,7 @@ feature_row:
       btn_label: "Schau hier!"
       btn_class: "btn--primary"
     - image_path: /assets/images/splash/drinks.png
-      image_caption: "Mats Wehn"
+      image_caption: "Bild: Mats Wehn"
       alt: "Drinks"
       title: "Drinks"
       excerpt: "Hier findest du die Ergebnisse des <br>`!prost`-Commands!"
