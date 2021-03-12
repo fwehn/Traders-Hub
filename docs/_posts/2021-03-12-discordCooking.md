@@ -2,7 +2,7 @@
 title: "Discord-Cooking"
 author: Finn Wehn
 header:
-    image: /assets/images/discord-cooking.png
+    image: /assets/images/dcc.png
 ---
 
 ![Discord-Cooking]({{ site.url }}{{ site.baseurl }}/assets/images/discord-cooking.png)
