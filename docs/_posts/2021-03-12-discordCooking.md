@@ -5,7 +5,7 @@ header:
     image: /assets/images/dcc.png
 ---
 
-![discord](./../assets/images/posts/discord-cooking.png)
+![discord](http://traders-hub.de/assets/images/posts/discord-cooking.png)
 
 Hallo zusammen,  
 wir würden gerne am 27. März gemeinsam mit euch im Discord kochen und uns danach einen rein tanken.
