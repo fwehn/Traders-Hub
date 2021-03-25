@@ -65,6 +65,11 @@ bot.on('message', message =>{
 
     {
         switch(args[0].toLowerCase()){
+            case 'test':
+                let  members = bot.guilds.cache.get(variables.guild).members.cache
+                console.log(members.get('242732534432006144').user);
+                break;
+
             case 'au':
                 if (message.member.voice.channel) {
                     let channel = message.guild.channels.cache.get(message.member.voice.channel.id);
@@ -111,10 +116,18 @@ bot.on('message', message =>{
                 let totalBest = 0;
                 let total = 0;
 
+                let currentMembers = message.guild.members.cache;
+                let formattedProstListe = [];
+
                 let prostListeLength = 0;
+
                 for (let i in prostListe){
+                    formattedProstListe[currentMembers.get(i).user.username] = prostListe[i];
+                }
+
+                for (let i in formattedProstListe){
                     let current = 0;
-                    for (let j in prostListe[i]){
+                    for (let j in formattedProstListe[i]){
                         total++;
                         current++;
                     }
@@ -124,9 +137,11 @@ bot.on('message', message =>{
                         totalBest = current;
                     }
 
+
+
                     prostListeLength++;
                 }
-                console.log(prostListeLength);
+                // console.log(prostListeLength);
 
                 let dataFrist = {
                     "title": "Drinks",
@@ -141,14 +156,14 @@ bot.on('message', message =>{
                     let overhang = (prostListeLength%fieldLength);
                     let slices = (prostListeLength-overhang)/fieldLength;
 
-                    embed[0] = ArrayFunctions.arrayToEmbed(embed[0], ArrayFunctions.sliceArray(prostListe, 0, fieldLength-1));
+                    embed[0] = ArrayFunctions.arrayToEmbed(embed[0], ArrayFunctions.sliceArray(formattedProstListe, 0, fieldLength-1));
                     for (let i = 1; i < slices;i++){
-                        embed[i] = ArrayFunctions.arrayToEmbed(new Discord.MessageEmbed({"color": 7419530}), ArrayFunctions.sliceArray(prostListe,fieldLength*i, fieldLength*(i+1)-1));
+                        embed[i] = ArrayFunctions.arrayToEmbed(new Discord.MessageEmbed({"color": 7419530}), ArrayFunctions.sliceArray(formattedProstListe,fieldLength*i, fieldLength*(i+1)-1));
                     }
-                    embed[slices] = ArrayFunctions.arrayToEmbed(new Discord.MessageEmbed({"color": 7419530}), ArrayFunctions.sliceArray(prostListe,fieldLength*slices, fieldLength*slices+overhang));
+                    embed[slices] = ArrayFunctions.arrayToEmbed(new Discord.MessageEmbed({"color": 7419530}), ArrayFunctions.sliceArray(formattedProstListe,fieldLength*slices, fieldLength*slices+overhang));
                     embed[slices].setFooter(`Insgesamt wurden bereits ${total} Drinks getrunken!!!`);
                 }else{
-                    embed[0] = ArrayFunctions.arrayToEmbed(embed[0], prostListe);
+                    embed[0] = ArrayFunctions.arrayToEmbed(embed[0], formattedProstListe);
                     embed[0].setFooter(`Insgesamt wurden bereits ${total} Drinks getrunken!!!`);
                 }
 
@@ -217,6 +232,11 @@ bot.on('message', message =>{
                 break;
 
             case 'prost':
+                if (message.member.voice.channel === null || message.member.voice.channel === undefined){
+                    message.reply("join erstmal nem Voice-Channel, ALLA!");
+                    return;
+                }
+
                 let text = "";
                 for (let i = 1; i<args.length; i++){
                     text = text + args[i] + " ";
@@ -227,7 +247,7 @@ bot.on('message', message =>{
                     return;
                 }
 
-                let user = message.member.user.username
+                let user = message.member.user.id;
                 if (!prostListe[user]){
                     prostListe[user] = [];
                 }

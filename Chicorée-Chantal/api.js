@@ -179,29 +179,24 @@ async function saveDrinks(prostListe, members) {
             let currentPerson = {};
             let personDrinkToSave = {};
 
-            let discordPerson = members.filter(member => member.user.username === i).entries().next().value
+            let discordPerson = members.get('242732534432006144');
 
             if (discordPerson === undefined || discordPerson === null){
                 continue;
             }
 
-            let discordNickname = discordPerson[1].nickname;
-            if (discordNickname == null){
-                discordNickname = "";
-            }
-
-            await personModel.findOne({discordId: discordPerson[1].user.id}, function (err, person) {
+            await personModel.findOne({discordId: i}, function (err, person) {
                 if (err){console.log(err)}
 
                 if (person !== null){
                     person.total += prostListe[i].length;
-                    person.name = i;
-                    person.nickname = discordNickname;
+                    person.name = discordPerson.user.username;
+                    person.nickname = discordPerson.nickname;
                     person.save().then(savedPerson =>{
                         currentPerson = savedPerson;
                     });
                 }else{
-                    let personData = new personModel({discordId: discordPerson[1].user.id, name: i, total: prostListe[i].length, nickname: discordNickname});
+                    let personData = new personModel({discordId: i, name: discordPerson.user.username, total: prostListe[i].length, nickname: discordPerson.nickname});
                     personData.save().then(savedPerson =>{
 
                         currentPerson = savedPerson;
@@ -210,7 +205,7 @@ async function saveDrinks(prostListe, members) {
             });
             console.log(currentPerson);
 
-            await personModel.findOne({name: i}, function (err, person) {
+            await personModel.findOne({discordId: i}, function (err, person) {
                 if (err){console.log(err)}
                 currentPerson = person;
             });
