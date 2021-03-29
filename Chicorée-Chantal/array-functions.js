@@ -71,6 +71,19 @@ function compareArrayOfObjectsByFieldDaily( a, b ) {
     return 0;
 }
 
+function compareArrayOfObjectsByFieldDate( a, b ){
+    let newDate1 = new Date(a.date).getTime();
+    let newDate2 = new Date(b.date).getTime();
+
+    if ( newDate1 < newDate2 ){
+        return -1;
+    }
+    if ( newDate1  > newDate2 ){
+        return 1;
+    }
+    return 0;
+}
+
 module.exports = {
-    shuffle, ArraySearch, arrayToEmbed, sliceArray, compareArrayOfObjectsByFieldTotal, compareArrayOfObjectsByFieldDaily
+    shuffle, ArraySearch, arrayToEmbed, sliceArray, compareArrayOfObjectsByFieldTotal, compareArrayOfObjectsByFieldDaily, compareArrayOfObjectsByFieldDate
 }

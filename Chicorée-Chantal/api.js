@@ -69,7 +69,7 @@ function startUp(){
                 }
                 resData.push(dateDTO)
             }
-            resData.sort();
+            resData.sort(arrayFunctions.compareArrayOfObjectsByFieldDate);
             resData.reverse();
             res.type('json');
             res.send(resData);
@@ -157,8 +157,6 @@ async function updateNicknames(members){
 
 async function saveDrinks(prostListe, members) {
 
-    //members.filter(member => member.user.username == "InFINNity").entries().next().value
-
     let counter = 0;
     for (let i in prostListe){
         counter++;
@@ -176,7 +174,6 @@ async function saveDrinks(prostListe, members) {
             let last = drinksRaw[0];
             let index = 1;
             let drinksFormatted = [];
-            let currentPerson = {};
             let personDrinkToSave = {};
 
             let discordPerson = members.get(i);
@@ -197,15 +194,10 @@ async function saveDrinks(prostListe, members) {
                     person.total += prostListe[i].length;
                     person.name = discordPerson.user.username;
                     person.nickname = discordNickname;
-                    person.save().then(savedPerson =>{
-                        currentPerson = savedPerson;
-                    });
+                    person.save();
                 }else{
                     let personData = new personModel({discordId: i, name: discordPerson.user.username, total: prostListe[i].length, nickname: discordNickname});
-                    personData.save().then(savedPerson =>{
-
-                        currentPerson = savedPerson;
-                    });
+                    personData.save();
                 }
             });
 
@@ -213,11 +205,10 @@ async function saveDrinks(prostListe, members) {
                 if (err){
                     console.log(err)
                 }
-                currentPerson = person;
 
                 if (prostListe[i].length > bestCounterDaily){
                     bestCounterDaily = prostListe[i].length;
-                    bestPersonDaily = currentPerson;
+                    bestPersonDaily = person;
                 }
 
                 for (let j = 0; j < drinksRaw.length; j++) {
@@ -230,7 +221,7 @@ async function saveDrinks(prostListe, members) {
                     }
                 }
 
-                personDrinkToSave = {person: currentPerson, daily: prostListe[i].length, drinks: drinksFormatted};
+                personDrinkToSave = {person: person, daily: prostListe[i].length, drinks: drinksFormatted};
                 personsOfList.push(personDrinkToSave);
             });
 
