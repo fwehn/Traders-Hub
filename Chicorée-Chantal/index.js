@@ -41,7 +41,7 @@ var prostListe = [];
 
 console.log("waiting for discord...");
 
-cron.schedule('59 22 * * *', function() {
+cron.schedule('59 21 * * *', function() {
     api.saveDrinks(prostListe, bot.guilds.cache.get(variables.guild).members.cache).then(prostListe = []);
     console.log("Cron-Job done!");
 });
@@ -66,8 +66,7 @@ bot.on('message', message =>{
     {
         switch(args[0].toLowerCase()){
             case 'test':
-                let  members = bot.guilds.cache.get(variables.guild).members.cache
-                console.log(members.get('242732534432006144').user);
+                message.reply("Test!");
                 break;
 
             case 'au':

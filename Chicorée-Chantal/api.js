@@ -58,7 +58,7 @@ function startUp(){
         drinksModel.find({}, 'date dailyBest dailyBestCounter -_id')
             .populate({ path: 'dailyBest', select: 'name nickname -_id'})
             .then(dates => {
-            console.log(dates);
+            // console.log(dates);
             let resData = [];
             for (let date in dates){
                 let dateDTO = {
@@ -73,7 +73,7 @@ function startUp(){
             resData.reverse();
             res.type('json');
             res.send(resData);
-            console.log(resData);
+            // console.log(resData);
         });
     });
 
@@ -84,7 +84,7 @@ function startUp(){
             .then(data => {
                 data.persons.sort(arrayFunctions.compareArrayOfObjectsByFieldDaily);
                 data.persons.reverse();
-                console.log(data.persons[0].person);
+                // console.log(data.persons[0].person);
                 res.type('json');
                 res.send(data);
         })
@@ -179,10 +179,15 @@ async function saveDrinks(prostListe, members) {
             let currentPerson = {};
             let personDrinkToSave = {};
 
-            let discordPerson = members.get('242732534432006144');
+            let discordPerson = members.get(i);
 
             if (discordPerson === undefined || discordPerson === null){
                 continue;
+            }
+
+            let discordNickname = discordPerson.nickname;
+            if (discordNickname === undefined || discordNickname === null){
+                discordNickname = "";
             }
 
             await personModel.findOne({discordId: i}, function (err, person) {
@@ -191,42 +196,45 @@ async function saveDrinks(prostListe, members) {
                 if (person !== null){
                     person.total += prostListe[i].length;
                     person.name = discordPerson.user.username;
-                    person.nickname = discordPerson.nickname;
+                    person.nickname = discordNickname;
                     person.save().then(savedPerson =>{
                         currentPerson = savedPerson;
                     });
                 }else{
-                    let personData = new personModel({discordId: i, name: discordPerson.user.username, total: prostListe[i].length, nickname: discordPerson.nickname});
+                    let personData = new personModel({discordId: i, name: discordPerson.user.username, total: prostListe[i].length, nickname: discordNickname});
                     personData.save().then(savedPerson =>{
 
                         currentPerson = savedPerson;
                     });
                 }
             });
-            console.log(currentPerson);
 
             await personModel.findOne({discordId: i}, function (err, person) {
-                if (err){console.log(err)}
+                if (err){
+                    console.log(err)
+                }
                 currentPerson = person;
+
+                if (prostListe[i].length > bestCounterDaily){
+                    bestCounterDaily = prostListe[i].length;
+                    bestPersonDaily = currentPerson;
+                }
+
+                for (let j = 0; j < drinksRaw.length; j++) {
+                    if (drinksRaw[j + 1] !== last || j === drinksRaw.length - 1) {
+                        drinksFormatted.push(index + " " + drinksRaw[j]);
+                        index = 1;
+                        last = drinksRaw[j + 1];
+                    } else {
+                        index++;
+                    }
+                }
+
+                personDrinkToSave = {person: currentPerson, daily: prostListe[i].length, drinks: drinksFormatted};
+                personsOfList.push(personDrinkToSave);
             });
 
-            if (prostListe[i].length > bestCounterDaily){
-                bestCounterDaily = prostListe[i].length;
-                bestPersonDaily = currentPerson;
-            }
 
-            for (let j = 0; j < drinksRaw.length; j++) {
-                if (drinksRaw[j + 1] !== last || j === drinksRaw.length - 1) {
-                    drinksFormatted.push(index + " " + drinksRaw[j]);
-                    index = 1;
-                    last = drinksRaw[j + 1];
-                } else {
-                    index++;
-                }
-            }
-
-            personDrinkToSave = {person: currentPerson, daily: prostListe[i].length, drinks: drinksFormatted};
-            personsOfList.push(personDrinkToSave);
         }
         let dateToSave = new Date().toISOString().split("T")[0] + "T23:59:59";
         let myData = new drinksModel({date: new Date(dateToSave), persons: personsOfList, dailyBest: bestPersonDaily, dailyBestCounter: bestCounterDaily});
@@ -242,10 +250,7 @@ async function saveDrinks(prostListe, members) {
 }
 
 
-function loadAllDrinks(){
-    // personModel.findOne({name: "InFINNity"}, function (err, person) {
-    //     console.log(person);
-    // });
+async function loadAllDrinks() {
 
 }
 
