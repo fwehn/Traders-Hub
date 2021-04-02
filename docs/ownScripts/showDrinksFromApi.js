@@ -16,7 +16,7 @@ function getDates(){
                 if (data[i] !== undefined){
                     let nicknameAddon = "";
                     if (data[i].nickname !== "" && data[i].nickname !== null && data[i].nickname !== undefined){
-                        nicknameAddon = data[i].nickname + " | ";
+                        nicknameAddon = ""//data[i].nickname + " | ";
                     }
 
                     ladder = ladder + '<tr class="ladderPos' + Math.min(i, 3) + '"><th>' + (i+1) + '. ' + nicknameAddon + data[i].name + '</th><th>' + data[i].total + '</th></tr>';
