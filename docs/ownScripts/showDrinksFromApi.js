@@ -16,7 +16,7 @@ function getDates(){
                 if (data[i] !== undefined){
                     let nicknameAddon = "";
                     if (data[i].nickname !== "" && data[i].nickname !== null && data[i].nickname !== undefined){
-                        nicknameAddon = ""//data[i].nickname + " | ";
+                        nicknameAddon = data[i].nickname + " | ";
                     }
 
                     ladder = ladder + '<tr class="ladderPos' + Math.min(i, 3) + '"><th>' + (i+1) + '. ' + nicknameAddon + data[i].name + '</th><th>' + data[i].total + '</th></tr>';
@@ -43,7 +43,7 @@ function getDates(){
 
                 let nicknameAddon = "";
                 if (date.dailyBestNickname !== "" && date.dailyBestNickname !== null && date.dailyBestNickname !== undefined){
-                    nicknameAddon = date.dailyBestNickname + " | ";
+                    nicknameAddon = ""//date.dailyBestNickname + " | ";
                 }
 
                 listOfDates = listOfDates + '<button class="dateButton" onclick="detailsOf(&quot;' + date.date.toString() + '&quot;)"><b>' + currentDate[2] + ' ' + currentDate[1] + ' ' + currentDate[0] + '</b>   Beste/-r ist <b>' + nicknameAddon + date.dailyBest + '</b> mit <b>' + date.dailyBestCounter + '</b> Drinks!' + '</button><br><br>';
