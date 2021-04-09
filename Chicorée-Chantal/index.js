@@ -347,15 +347,34 @@ bot.on('message', message =>{
                 break;
             
             case 'teams':
-                let playerSlotsTeams= 0;
-                if (args[1] != null){
+                if (!parseInt(args[1])){
+                    if (message.member.voice.channel === null){
+                        message.reply("entweder joinen du und deine Mates nem Voice-Channel oder du gibst ne Zahl an wie viele Spieler mitmachen!");
+                        return;
+                    }
+
+                    let membersToAdd = message.member.voice.channel.members;
+                    let memberIDs = [];
+                    membersToAdd.forEach(member => {
+                        memberIDs.push(member.id);
+                    });
+
+                    let prompTextTeams = `Es wurde ein Matchmaking-Pool mit ${memberIDs.length} Slots eröffnet.`;
+                    message.reply(prompTextTeams).then(botMsg => {
+                        let pool = new Pool.Pool(botMsg, memberIDs.length, pools.length+1);
+                        for (let i in memberIDs){
+                            pool.addPlayerSilently(memberIDs[i]);
+                        }
+                    });
+                }else{
+                    let playerSlotsTeams= 0;
                     playerSlotsTeams = parseInt(args[1]);
+                    playerSlotsTeams = Math.max(2, playerSlotsTeams);
+                    let prompTextTeams = `Es wurde ein Matchmaking-Pool mit ${playerSlotsTeams} Slots eröffnet. Reagiere auf diese Nachricht, um hinzugefügt zu werden.`;
+                    message.reply(prompTextTeams).then(botMsg => {
+                        pools[botMsg.id] = new Pool.Pool(botMsg, playerSlotsTeams, pools.length+1);
+                    });
                 }
-                playerSlotsTeams = Math.max(2, playerSlotsTeams);
-                let prompTextTeams = `Es wurde ein Matchmaking-Pool mit ${playerSlotsTeams} Slots eröffnet. Reagiere auf diese Nachricht, um hinzugefügt zu werden.`;
-                message.reply(prompTextTeams).then(botMsg => {
-                    pools[botMsg.id] = new Pool.Pool(botMsg, playerSlotsTeams, pools.length+1);
-                });
                 break;
 
             case 'test':

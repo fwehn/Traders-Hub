@@ -19,6 +19,16 @@ class Pool{
         }
     }
 
+    addPlayerSilently(id){
+        if (!arrayFuncs.ArraySearch(this.players, id)) {
+            this.players.push(id);
+        }
+
+        if (this.players.length === this.maxPlayers){
+            this.handleFullMatch();
+        }
+    }
+
     announcePlayerCount(){
         this.message.channel.send(`Aktuell sind ${this.players.length} Spieler in Pool ${this.poolNumber}`);
     }
