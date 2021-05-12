@@ -1,0 +1,27 @@
+{
+  "name": "chicoree-chantal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "author": "Finn Wehn",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "cors": "^2.8.5",
+    "discord.js": "^12.2.0",
+    "express": "^4.17.1",
+    "file-system": "^2.2.2",
+    "http": "0.0.1-security",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.12",
+    "node-cron": "^2.0.3",
+    "node-fetch": "^2.6.1",
+    "opusscript": "0.0.7",
+    "promise": "^8.1.0",
+    "ytdl-core": "^4.1.4"
+  }
+}

@@ -1,7 +1,7 @@
 {
-  "name": "chicoree-chantal",
+  "name": "drinksapi",
   "version": "1.0.0",
-  "description": "Custom Discord-Bot",
+  "description": "Standalone API for the Drinks-Database",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
