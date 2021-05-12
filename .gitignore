@@ -5,6 +5,14 @@ Chicorée-Chantal-Alt/package-lock.json
 
 docs/_site
 
+API/node_modules
+API/package-lock.json
+Chicorée-Chantal/node_modules
+Chicorée-Chantal/package-lock.json
+
+
+
+
 # Created by https://www.gitignore.io
 
 ### Intellij ###
