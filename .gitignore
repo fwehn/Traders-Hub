@@ -3,6 +3,8 @@ Chicorée-Chantal/variables.json
 node_modules
 Chicorée-Chantal/package-lock.json
 
+docs/_site
+
 # Created by https://www.gitignore.io
 
 ### Intellij ###

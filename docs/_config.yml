@@ -23,7 +23,7 @@ kramdown:
   enable_coderay: false
 
 
-repository: "https://github.com/fwehn/Traders-Hub"
+repository: "fwehn/Traders-Hub"
 logo: "/assets/images/Traders-Hub.png"
 masthead_title: "Traders-Hub"
 
@@ -85,7 +85,7 @@ footer:
       url: /impressum/
     - label: "Discord"
       icon: "fab fa-fw fa-discord"
-      url: "https://discord.gg/jCYv5puCeY"
+      url: "https://discord.gg/3Hq6QCE"
     - label: "GitHub"
       icon: "fab fa-fw fa-github-square"
       url: "https://github.com/fwehn/Traders-Hub"
