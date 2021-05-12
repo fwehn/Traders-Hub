@@ -28,13 +28,14 @@ client.on("ready", async () => {
 
 client.ws.on("INTERACTION_CREATE", async (interaction) => {
     console.log(interaction.data.name);
-    await sendWaiting(interaction)
-    let responseClient = await new discord.WebhookClient(client.user.id, interaction.token);
 
     if (!commands[interaction.data.name]){
+        await sendPrivateResponse(interaction, "Sorry, aber mein Schöpfer war dumm!");
         return;
     }
-    await responseClient.send(commands[interaction.data.name].commandCallback(interaction));
+
+    await handleCommand(interaction);
+
 });
 
 client.login(process.env.TOKEN).catch((err)=>console.log(err));
@@ -49,10 +50,44 @@ async function createGuildCommand(commandData, guildID){
     return await client.api.applications(client.user.id).guilds(guildID).commands.post({data: commandData});
 }
 
+async function handleCommand(interaction){
+    let callbackData = commands[interaction.data.name].commandCallback(interaction);
+
+    switch (callbackData.type){
+        case "public":
+            await sendWaiting(interaction);
+            await sendPublicResponse(interaction, callbackData.content);
+            break;
+
+        case "private":
+            await sendPrivateResponse(interaction, callbackData.content);
+            break;
+
+        default:
+            await sendPrivateResponse(interaction, callbackData.content);
+    }
+}
+
 async function sendWaiting(interaction){
     client.api.interactions(interaction.id, interaction.token).callback.post({
         data:{
             type:5
         }
     });
+}
+
+async function sendPrivateResponse(interaction, content){
+    client.api.interactions(interaction.id, interaction.token).callback.post({
+        data:{
+            type:4,
+            data: {
+                content: content,
+                flags: 64
+            }
+        }
+    });
+}
+
+async function sendPublicResponse(interaction, content){
+    await new discord.WebhookClient(client.user.id, interaction.token).send(content);
 }

@@ -13,7 +13,10 @@ const commandData = {
 
 function commandCallback(interaction){
     console.log(interaction)
-    return "zeug"
+    return {
+        type: "public",
+        content: `${interaction.data.name}`
+    };
 }
 
 module.exports = {
