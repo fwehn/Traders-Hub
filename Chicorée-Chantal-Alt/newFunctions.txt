@@ -1,7 +1,3 @@
 !franzose @<name> -> gibt jmdm die Rolle Franzose für einen Tag (Broker exclusive)
 !mimimi -> gibt verfasser die rolle ADC für einen Tag
 !och/!strinke @manotelli -> Jesse ist schon 12 mal zu weit gegangen
-
-ladder für !drinks auf website (API und MongoDB)
-
-

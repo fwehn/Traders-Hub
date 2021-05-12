@@ -7,8 +7,11 @@ docs/_site
 
 API/node_modules
 API/package-lock.json
+API/.env
+
 Chicorée-Chantal/node_modules
 Chicorée-Chantal/package-lock.json
+Chicorée-Chantal/.env
 
 
 

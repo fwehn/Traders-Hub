@@ -8,5 +8,10 @@
     "start": "node index.js"
   },
   "author": "Finn Wehn",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "dotenv": "^9.0.2",
+    "file-system": "^2.2.2"
+  }
 }
