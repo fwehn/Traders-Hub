@@ -7,7 +7,7 @@ const commandData = {
 
 function commandCallback(interaction){
     return new Promise((resolve, reject) => {
-        fetch('http://tronalddump.io/random/meme')
+        fetch('https://tronalddump.io/random/meme')
             .then( (res) => {
                 resolve({
                     type: "public",

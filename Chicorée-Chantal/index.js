@@ -14,7 +14,7 @@ const client = new discord.Client()
 client.on("ready", async () => {
     //Delete all old Commands
     let oldCommands = await client.api.applications(client.user.id).guilds(process.env.GUILDID).commands.get();
-    for (let i in oldCommands){
+    for (let i in oldCommands) {
         await client.api.applications(client.user.id).guilds(process.env.GUILDID).commands(oldCommands[i].id).delete().catch(err => console.log(err));
     }
 
