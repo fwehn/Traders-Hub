@@ -240,11 +240,6 @@ async function saveDrinks(prostListe, members) {
     }
 }
 
-
-async function loadAllDrinks() {
-
-}
-
 async function getOpa(){
     return new Promise((resolve, reject) => {
         opaModel.countDocuments().exec(function (err, count) {
@@ -261,5 +256,5 @@ async function getOpa(){
 }
 
 module.exports = {
-    startUp, loadAllDrinks, saveDrinks, getOpa, updateNicknames
+    startUp, saveDrinks, getOpa, updateNicknames
 }

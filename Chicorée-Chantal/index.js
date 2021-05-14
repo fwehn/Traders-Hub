@@ -27,7 +27,7 @@ client.on("ready", async () => {
 
 
 client.ws.on("INTERACTION_CREATE", async (interaction) => {
-    console.log(interaction.data.name);
+    // console.log(interaction.data.name);
 
     if (!commands[interaction.data.name]){
         await sendPrivateResponse(interaction, "Sorry, aber mein Schöpfer war dumm!");
@@ -51,21 +51,24 @@ async function createGuildCommand(commandData, guildID){
 }
 
 async function handleCommand(interaction){
-    let callbackData = commands[interaction.data.name].commandCallback(interaction);
+    commands[interaction.data.name]
+        .commandCallback(interaction)
+        .then((callbackData) => {
+            // console.log(callbackData);
+            switch (callbackData.type){
+                case "public":
+                    sendWaiting(interaction);
+                    sendPublicResponse(interaction, callbackData.content);
+                    break;
 
-    switch (callbackData.type){
-        case "public":
-            await sendWaiting(interaction);
-            await sendPublicResponse(interaction, callbackData.content);
-            break;
+                case "private":
+                    sendPrivateResponse(interaction, callbackData.content);
+                    break;
 
-        case "private":
-            await sendPrivateResponse(interaction, callbackData.content);
-            break;
-
-        default:
-            await sendPrivateResponse(interaction, callbackData.content);
-    }
+                default:
+                    sendPrivateResponse(interaction, callbackData.content);
+                }
+        }).catch(err => console.log(err));
 }
 
 async function sendWaiting(interaction){
