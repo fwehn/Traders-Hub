@@ -18,10 +18,15 @@ client.on("ready", async () => {
         await client.api.applications(client.user.id).guilds(process.env.GUILDID).commands(oldCommands[i].id).delete().catch(err => console.log(err));
     }
 
+    console.log("")
     //Add all new Commands
     for (let i in commands){
-        await createGuildCommand(commands[i].commandData, process.env.GUILDID).catch(err => console.log(err));
+        if (i === "opa"){
+            await createGuildCommand(commands[i].commandData, process.env.GUILDID).catch(err => console.log(err));
+            console.log(`Registered: ${i}`);
+        }
     }
+    console.log("")
     console.log("Ready!");
 });
 
