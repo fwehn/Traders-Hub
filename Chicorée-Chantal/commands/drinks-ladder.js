@@ -14,14 +14,14 @@ async function commandCallback(interaction){
     yesterday = new Date(yesterday.toISOString().split("T")[0] + "T23:59:59");
 
     let drinksLadder = {
-        "title": "Topliste",
-        "description": "Hier ist die aktuelle Topliste der Trinker!\n\n-----------------------------\n",
-        "url": "http://traders-hub.de/drinks",
-        "color": 7419530,
-        "footer": {
-            "text": `Für genauere Informationen zu den Drinks besuche unsere Website!\nStand: ${yesterday.toString().split("G")[0]} Uhr`
+        title: "Topliste",
+        description: "Hier ist die aktuelle Topliste der Trinker!\n\n-----------------------------\n",
+        url: "http://traders-hub.de/drinks",
+        color: 7419530,
+        footer: {
+            text: `Für genauere Informationen zu den Drinks besuche unsere Website!\nStand: ${yesterday.toString().split("G")[0]} Uhr`
         },
-        "fields": []
+        fields: []
     };
 
     return new Promise((resolve, reject) => {

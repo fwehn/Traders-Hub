@@ -43,6 +43,22 @@ app.get("/drinks", (req, res) => {
         });
 });
 
+//TODO GET /drinks/today || req: {} || res: {drinks: [{id: STRING, drinks: STRING}, ...], total: NUMBER, leader: [name: STRING, ...]}
+app.get("/drinks/today", (req, res) => {
+    //TODO send correct data
+    res.type('json');
+    res.send({
+        drinks: [
+            {name: "1", drinks: "3 Peddas"},
+            {name: "Finn", drinks: "3 Nicht-Wein"},
+            {name: "InFINNity", drinks: "3 Schnaps"}
+        ],
+        total: 9,
+        leader: ["1", "Finn", "InFINNity"],
+        bestCount: 3
+    });
+});
+
 app.get("/drinks/d/:date", (req, res) => {
     drinksModel.findOne({date: new Date(req.params.date)}, 'date persons dailyBest dailyBestCounter -_id')
         .populate({ path: 'persons.person', select: 'name nickname total -_id'})
@@ -69,6 +85,16 @@ app.get("/drinks/ladder", (req, res) => {
         }).catch(err => console.log(err));
 });
 
+//TODO POST /drinks/p/:id || req: {nickname: STRING, drink: STRING, content: NUMBER, amount: DOUBLE}
+//creates a JS-Object and posts it via cronjob on database
+
+app.get("/opa", (req, res) => {
+    getOpa().then(sentence => {
+        res.type('json');
+        res.send({sentence: `**Jesse's Opa** hat immer gesagt:\n${sentence}`})
+    }).catch(err => console.log(err));
+})
+
 app.post("/opa", (req, res) =>{
     console.log(req.query);
     res.type('text');
@@ -88,13 +114,6 @@ app.post("/opa", (req, res) =>{
         res.send("U have to set a \"sentence\" query.");
     }
 });
-
-app.get("/opa", (req, res) => {
-    getOpa().then(sentence => {
-        res.type('json');
-        res.send({sentence: `**Jesse's Opa** hat immer gesagt:\n${sentence}`})
-    }).catch(err => console.log(err));
-})
 
 app.listen(port, () => {
     console.log("Server listening on port " + port);
