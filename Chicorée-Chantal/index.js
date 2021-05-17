@@ -73,7 +73,10 @@ async function handleCommand(interaction){
                 default:
                     sendPrivateResponse(interaction, callbackData.content);
                 }
-        }).catch(err => console.log(err));
+        }).catch(err => {
+            console.log(err)
+            sendPrivateResponse(interaction, "Mit diesem Command gibt es derzeit Probleme!\nWende dich bitte an unsere Technik!")
+        });
 }
 
 async function sendWaiting(interaction){
