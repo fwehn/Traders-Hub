@@ -21,7 +21,7 @@ client.on("ready", async () => {
     console.log("")
     //Add all new Commands
     for (let i in commands){
-        if (i === "suggest"){
+        if (i === "prost"){
             await createGuildCommand(commands[i].commandData, process.env.GUILDID).catch(err => console.log(err));
             console.log(`Registered: ${i}`);
         }

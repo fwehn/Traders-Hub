@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT
 const config = JSON.parse(process.env.APP_CONFIG);
 
-const {opaModel, personModel, drinksModel, drinkSentenceModel} = require('./api-models.js');
+const {opaModel, personModel, drinksModel, drinkSentenceModel, personModelSS2021, drinksModelSS2021} = require('./api-models.js');
 
 app.use(cors());
 
@@ -85,15 +85,96 @@ app.get("/drinks/ladder", (req, res) => {
         }).catch(err => console.log(err));
 });
 
-
 app.post("/drinks/prost", (req, res) => {
-    console.log(req.query);
-    res.type('json');
-    res.send({response: "Lekka, lekka in mein Mund rein, ALLA!"});
+    let params = req.query;
+
+    personModelSS2021.findOne({_id: params.id})
+        .then(data => {
+            params.name = params.name.split("|")[0];
+            let amount = parseFloat(params.amount);
+            let alcohol = amount/100*parseFloat(params.proof);
+            let drink = `${params.proof}|${params.amount}|${params.name}`
+
+            if (params.nickname === null || params.nickname === "null") params.nickname = "";
+
+            //Create or Update person-entry
+            if (data === null || data === undefined){
+                data = new personModelSS2021({
+                    _id: params.id,
+                    username: params.username,
+                    nickname: params.nickname,
+                    totalCount: 1,
+                    totalAmount: amount,
+                    totalAlcohol: alcohol
+                })
+            }else{
+                data.username = params.username;
+                data.nickname = params.nickname;
+                data.totalCount = data.totalCount + 1;
+                data.totalAmount = data.totalAmount + amount;
+                data.totalAlcohol = data.totalAlcohol + alcohol;
+            }
+
+            data.save().then(() => {
+                let today = new Date().setHours(0,0,0,0)
+                //Create or Update drinks-entry
+                drinksModelSS2021.findOne({date: today})
+                    .then(data => {
+                        if (data === null || data === undefined){
+                            let personDrink = {
+                                person: params.id,
+                                drinks: [drink],
+                                alcoholAmount: alcohol
+                            }
+
+                            data = new drinksModelSS2021({
+                                date: today,
+                                data: [personDrink]
+                            })
+                        }else{
+                            let foundPerson = data.data.findIndex(element => element.person === params.id);
+                            if (foundPerson === -1){
+                                let personDrink = {
+                                    person: params.id,
+                                    drinks: [drink],
+                                    alcoholAmount: alcohol
+                                }
+
+                                data.data.push(personDrink);
+                            }else{
+                                let foundDrink = data.data[foundPerson].drinks.findIndex(element => element.split("|")[0] === params.proof && element.split("|")[2] === params.name)
+
+                                if (foundDrink === -1){
+                                    data.data[foundPerson].drinks.push(drink);
+                                }else{
+                                    let newDrinks = data.data[foundPerson].drinks
+                                    let currentAmount = parseFloat(newDrinks[foundDrink].split("|")[1]) + amount;
+                                    newDrinks[foundDrink] = `${params.proof}|${currentAmount}|${params.name}`;
+                                    data.data[foundPerson].drinks = [];
+                                    data.data[foundPerson].drinks = newDrinks;
+                                }
+
+                                data.data[foundPerson].alcoholAmount = data.data[foundPerson].alcoholAmount + alcohol;
+                            }
+                        }
+
+                        data.save()
+                            .then(() => {
+                                res.type('json');
+                                getSentence("prost")
+                                    .then(sentence => res.send({response: sentence}))
+                                    .catch((err) => {
+                                        res.send({response: "Aufgeschrieben hab ich es, aber hab leider keinen guten Satz für dich!"})
+                                        console.log(err)
+                                    });
+                            })
+                    })
+            })
+        })
 });
 
 app.get("/opa", (req, res) => {
-    getOpa().then(sentence => {
+    getSentence("opa").then(sentence => {
         res.type('json');
         res.send({sentence: `**Jesse's Opa** hat immer gesagt:\n${sentence}`})
     }).catch(err => console.log(err));
@@ -136,11 +217,23 @@ app.listen(port, () => {
 
 
 
-async function getOpa(){
+async function getSentence(type){
     return new Promise((resolve, reject) => {
-        opaModel.countDocuments().exec(function (err, count) {
+        let model;
+        switch (type){
+            case "opa":
+                model = opaModel;
+                break;
+            case "prost":
+                model = drinkSentenceModel;
+                break;
+            default:
+                reject(new Error("Diesen Satz-Typen gibts nicht!"));
+        }
+
+        model.countDocuments().exec(function (err, count) {
             let random = Math.floor(Math.random() * count)
-            opaModel.findOne()
+            model.findOne()
                 .skip(random)
                 .then(result => {
                     resolve(result.sentence)

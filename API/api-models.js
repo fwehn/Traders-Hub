@@ -36,6 +36,60 @@ const drinksSchema = new mongoose.Schema({
 
 const drinksModel = mongoose.model("Drinks", drinksSchema);
 
+
+
+
+
+
+
+
+
+
+
+
+
+const personSchemaSS2021 = new mongoose.Schema({
+    _id: {type: String, required: true},
+    username: String,
+    nickname: String,
+    totalCount: Number,
+    totalAmount: Number,
+    totalAlcohol: Number
+}, {versionKey: false});
+
+const personModelSS2021 = mongoose.model("Persons2021", personSchemaSS2021);
+
+const personDrinkSchemaSS2021 = new mongoose.Schema({
+    person: {type: String, ref: "Persons2021"},
+    drinks: [String],
+    alcoholAmount: Number
+}, {_id: false, versionKey: false});
+
+const drinksSchemaSS2021 = new mongoose.Schema({
+    date: Date,
+    data: [personDrinkSchemaSS2021]
+}, {versionKey: false});
+
+const drinksModelSS2021 = mongoose.model("DrinksSS2021", drinksSchemaSS2021);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = {
-    opaModel, personModel, drinksModel, drinkSentenceModel
+    opaModel, personModel, drinksModel, drinkSentenceModel, personModelSS2021, drinksModelSS2021
 }
