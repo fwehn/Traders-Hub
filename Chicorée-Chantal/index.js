@@ -21,7 +21,7 @@ client.on("ready", async () => {
     console.log("")
     //Add all new Commands
     for (let i in commands){
-        if (i === "drinks"){
+        if (i === "suggest"){
             await createGuildCommand(commands[i].commandData, process.env.GUILDID).catch(err => console.log(err));
             console.log(`Registered: ${i}`);
         }
@@ -70,6 +70,11 @@ async function handleCommand(interaction){
                     sendPrivateResponse(interaction, callbackData.content);
                     break;
 
+                case "channel":
+                    sendMessageToBotChannel(callbackData.content.announcement);
+                    sendPrivateResponse(interaction, callbackData.content.response);
+                    break;
+
                 default:
                     sendPrivateResponse(interaction, callbackData.content);
                 }
@@ -101,4 +106,8 @@ async function sendPrivateResponse(interaction, content){
 
 async function sendPublicResponse(interaction, content){
     await new discord.WebhookClient(client.user.id, interaction.token).send(content);
+}
+
+async function sendMessageToBotChannel(content){
+    client.channels.cache.get(process.env.BOT_CHANNEL).send(content);
 }

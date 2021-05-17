@@ -6,6 +6,12 @@ const opaSchema = new mongoose.Schema({
 
 const opaModel = mongoose.model("Opa", opaSchema);
 
+const drinkSentenceSchema = new mongoose.Schema({
+    sentence: String
+}, {versionKey: false});
+
+const drinkSentenceModel = mongoose.model("DrinkSentences", drinkSentenceSchema);
+
 const personSchema = new mongoose.Schema({
     discordId: String,
     name: String,
@@ -31,5 +37,5 @@ const drinksSchema = new mongoose.Schema({
 const drinksModel = mongoose.model("Drinks", drinksSchema);
 
 module.exports = {
-    opaModel, personModel, drinksModel
+    opaModel, personModel, drinksModel, drinkSentenceModel
 }

@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT
 const config = JSON.parse(process.env.APP_CONFIG);
 
-const {opaModel, personModel, drinksModel} = require('./api-models.js');
+const {opaModel, personModel, drinksModel, drinkSentenceModel} = require('./api-models.js');
 
 app.use(cors());
 
@@ -50,11 +50,11 @@ app.get("/drinks/today", (req, res) => {
     res.send({
         drinks: [
             {name: "1", drinks: "3 Peddas"},
-            {name: "Finn", drinks: "3 Nicht-Wein"},
-            {name: "InFINNity", drinks: "3 Schnaps"}
+            {name: "InFINNity", drinks: "3 Schnaps"},
+            {name: "Finn", drinks: "2 Nicht-Wein"}
         ],
-        total: 9,
-        leader: ["1", "Finn", "InFINNity"],
+        total: 8,
+        leader: ["1", "InFINNity"],
         bestCount: 3
     });
 });
@@ -85,8 +85,12 @@ app.get("/drinks/ladder", (req, res) => {
         }).catch(err => console.log(err));
 });
 
-//TODO POST /drinks/p/:id || req: {nickname: STRING, drink: STRING, content: NUMBER, amount: DOUBLE}
-//creates a JS-Object and posts it via cronjob on database
+
+app.post("/drinks/prost", (req, res) => {
+    console.log(req.query);
+    res.type('json');
+    res.send({response: "Lekka, lekka in mein Mund rein, ALLA!"});
+});
 
 app.get("/opa", (req, res) => {
     getOpa().then(sentence => {
