@@ -11,7 +11,7 @@ function commandCallback(interaction){
         fetch(`${process.env.APILINK}/opa`)
             .then(response => response.json())
             .then( (res) => {
-                console.log(res);
+                // console.log(res);
                 resolve({
                     type: "public",
                     content: res.sentence

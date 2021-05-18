@@ -25,8 +25,8 @@ function commandCallback(interaction){
         fetch(`${process.env.APILINK}/drinks/today`)
             .then(response => response.json())
             .then(data =>{
-                console.log(data)
-                console.log(Object.keys(data).length)
+                // console.log(data)
+                // console.log(Object.keys(data).length)
                 if (Object.keys(data).length !== 0){
                     let dataArray = createArrayFromObject(data);
                     dataArray.sort(function (a,b){

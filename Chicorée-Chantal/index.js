@@ -7,21 +7,23 @@ console.log("Imported!");
 
 
 //Initializing Section
-console.log("Starting...")
-const client = new discord.Client()
+console.log("Starting...\n");
+const client = new discord.Client();
+const updateCommands = [];
 
 
 client.on("ready", async () => {
     //Delete all old Commands
     let oldCommands = await client.api.applications(client.user.id).guilds(process.env.GUILDID).commands.get();
     for (let i in oldCommands) {
-        await client.api.applications(client.user.id).guilds(process.env.GUILDID).commands(oldCommands[i].id).delete().catch(err => console.log(err));
+        if (updateCommands.includes(oldCommands[i].name)) {
+            await client.api.applications(client.user.id).guilds(process.env.GUILDID).commands(oldCommands[i].id).delete().catch(err => console.log(err));
+            console.log(`Deleted: ${oldCommands[i].name}`);
+        }
     }
-
-    console.log("")
     //Add all new Commands
     for (let i in commands){
-        if (i === "drinks" || i === "prost"){
+        if (updateCommands.includes(i)){
             await createGuildCommand(commands[i].commandData, process.env.GUILDID).catch(err => console.log(err));
             console.log(`Registered: ${i}`);
         }

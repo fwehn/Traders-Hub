@@ -6,20 +6,13 @@ const commandData = {
 };
 
 async function commandCallback(interaction){
-
-    let yesterday = new Date();
-    // new Date().toISOString().split("T")[0] + "T23:59:59")
-    yesterday.setDate(yesterday.getDate() - 1);
-
-    yesterday = new Date(yesterday.toISOString().split("T")[0] + "T23:59:59");
-
     let drinksLadder = {
         title: "Topliste",
         description: "Hier ist die aktuelle Topliste der Trinker!\n\n-----------------------------\n",
         url: "http://traders-hub.de/drinks",
         color: 7419530,
         footer: {
-            text: `Für genauere Informationen zu den Drinks besuche unsere Website!\nStand: ${yesterday.toString().split("G")[0]} Uhr`
+            text: `Für genauere Informationen zu den Drinks besuche unsere Website!`
         },
         fields: []
     };
@@ -31,9 +24,10 @@ async function commandCallback(interaction){
                 let drinkFields = [];
                 let pos = 1;
                 for (let i in drinksData){
+                    let name = drinksData[i].nickname || drinksData[i].username
                     drinkFields[i] = {};
-                    drinkFields[i].name = `${pos++}. ${drinksData[i].name}`;
-                    drinkFields[i].value = `${drinksData[i].total} Drink(s)`;
+                    drinkFields[i].name = `${pos++}. ${name}`;
+                    drinkFields[i].value = `${drinksData[i].totalCount} Drink(s) ~ ${drinksData[i].totalAlcohol.toFixed(3)}l Alkohol`;
                 }
                 drinksLadder.fields = drinkFields;
             }).then( () => {
