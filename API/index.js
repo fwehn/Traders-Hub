@@ -21,6 +21,7 @@ app.get("/",(req, res) => {
     res.send("Hi I'm Chicorée-Chantal!");
 });
 
+//TODO change to ss2021
 app.get("/drinks", (req, res) => {
     drinksModel.find({}, 'date dailyBest dailyBestCounter -_id')
         .populate({ path: 'dailyBest', select: 'name nickname -_id'})
@@ -43,24 +44,40 @@ app.get("/drinks", (req, res) => {
         });
 });
 
-//TODO GET /drinks/today || req: {} || res: {drinks: [{id: STRING, drinks: STRING}, ...], total: NUMBER, leader: [name: STRING, ...]}
 app.get("/drinks/today", (req, res) => {
-    //TODO send correct data
-    res.type('json');
-    res.send({
-        drinks: [
-            {name: "1", drinks: "3 Peddas"},
-            {name: "InFINNity", drinks: "3 Schnaps"},
-            {name: "Finn", drinks: "2 Nicht-Wein"}
-        ],
-        total: 8,
-        leader: ["1", "InFINNity"],
-        bestCount: 3
-    });
+    let today = new Date();
+    today.setHours(0,0,0,0);
+    today = today.toLocaleString();
+    drinksModelSS2021.findOne({date: today})
+        .populate({path: 'data.person', select: 'username nickname -_id'})
+        .then(data => {
+        // console.log(data)
+        res.type('json');
+        if (data === null || data === undefined){
+            res.send({});
+        }else{
+            let resData = {};
+            let drinks = data.data;
+            for (let i = 0; i < drinks.length; i++){
+                let name = drinks[i].person.nickname|| drinks[i].person.username
+                resData[name] = {
+                    drinks: drinks[i].drinks,
+                    alcoholAmount: drinks[i].alcoholAmount
+                }
+            }
+            res.send(resData);
+        }
+
+
+    })
 });
 
 app.get("/drinks/d/:date", (req, res) => {
-    drinksModel.findOne({date: new Date(req.params.date)}, 'date persons dailyBest dailyBestCounter -_id')
+    let day = new Date(req.params.date);
+    day.setHours(0,0,0,0);
+    day = day.toLocaleString();
+
+    drinksModel.findOne({date: day}, 'date persons dailyBest dailyBestCounter -_id')
         .populate({ path: 'persons.person', select: 'name nickname total -_id'})
         .populate({ path: 'dailyBest', select: 'name nickname total -_id'})
         .then(data => {
@@ -71,6 +88,7 @@ app.get("/drinks/d/:date", (req, res) => {
         })
 });
 
+//TODO change to ss2021
 app.get("/drinks/ladder", (req, res) => {
     personModel.find({}, 'name nickname total -_id')
         .then(data => {
@@ -85,6 +103,7 @@ app.get("/drinks/ladder", (req, res) => {
         }).catch(err => console.log(err));
 });
 
+//TODO change to ss2021
 app.post("/drinks/prost", (req, res) => {
     let params = req.query;
 
@@ -116,7 +135,9 @@ app.post("/drinks/prost", (req, res) => {
             }
 
             data.save().then(() => {
-                let today = new Date().setHours(0,0,0,0)
+                let today = new Date();
+                today.setHours(0,0,0,0);
+                today = today.toLocaleString()
                 //Create or Update drinks-entry
                 drinksModelSS2021.findOne({date: today})
                     .then(data => {
@@ -204,6 +225,7 @@ app.listen(port, () => {
     console.log("Server listening on port " + port);
     console.log(`http://localhost:${port}`);
     console.log(`http://localhost:${port}/drinks`);
+    console.log(`http://localhost:${port}/drinks/today`);
     console.log(`http://localhost:${port}/drinks/ladder`);
     console.log(`http://localhost:${port}/opa`);
 });
