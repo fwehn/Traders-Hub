@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const mongoPassword = require('./mongoPassword.js');
 
 const app = express();
 const port = process.env.PORT
@@ -12,7 +13,7 @@ const {opaModel, drinkSentenceModel, personModelSS2021, drinksModelSS2021} = req
 app.use(cors());
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://" + config.mongo.user + ":" + encodeURIComponent(config.mongo.password) + "@" + config.mongo.hostString, {useNewUrlParser: true, useUnifiedTopology:true})
+mongoose.connect("mongodb://" + config.mongo.user + ":" + encodeURIComponent(mongoPassword) + "@" + config.mongo.hostString, {useNewUrlParser: true, useUnifiedTopology:true})
     .then(() => console.log("I guess we're connected?"))
     .catch(err => console.log(err));
 
@@ -27,7 +28,7 @@ app.get("/drinks", (req, res) => {
             let resData = [];
 
             for (let i in dates){
-                let date = new Date(dates[i].date.toLocaleString("de-De", {timeZone: process.env.TZ})).toLocaleString("de-De", {timeZone: process.env.TZ});
+                let date = new Date(dates[i].date)
                 resData.push({"date": date});
             }
 
@@ -39,11 +40,11 @@ app.get("/drinks", (req, res) => {
 app.get("/drinks/today", (req, res) => {
     let today = new Date();
     today.setHours(0,0,0,0);
-    today = today.toLocaleString();
+    console.log(today);
     drinksModelSS2021.findOne({date: today})
         .populate({path: 'data.person', select: 'username nickname -_id'})
         .then(data => {
-        // console.log(data)
+        console.log(data)
         res.type('json');
         if (data === null || data === undefined){
             res.send({});
@@ -59,22 +60,29 @@ app.get("/drinks/today", (req, res) => {
             }
             res.send(resData);
         }
-
-
     })
 });
 
 app.get("/drinks/d/:date", (req, res) => {
     let day = new Date(req.params.date);
-    day.setHours(0,0,0,0);
-    day = day.toLocaleString();
 
     drinksModelSS2021.findOne({date: day}, 'date data -_id')
         .populate({ path: 'data.person', select: 'username nickname -_id'})
         .then(data => {
-            res.type('json');
-            res.send(data.data);
-        })
+            if (data !== null){
+                let sortedData = data.data;
+                sortedData.sort(function (a, b) {
+                    if (a.alcoholAmount > b.alcoholAmount) return -1;
+                    if (a.alcoholAmount < b.alcoholAmount) return 1;
+                    return 0;
+                });
+                res.type('json');
+                res.send(sortedData);
+            }else{
+                res.type('json');
+                res.send({});
+            }
+        }).catch(err => console.log(err))
 });
 
 app.get("/drinks/ladder", (req, res) => {
@@ -119,8 +127,6 @@ app.post("/drinks/prost", (req, res) => {
 
             data.save().then(() => {
                 let today = new Date();
-                today.setHours(0,0,0,0);
-                today = today.toLocaleString()
                 //Create or Update drinks-entry
                 drinksModelSS2021.findOne({date: today})
                     .then(data => {

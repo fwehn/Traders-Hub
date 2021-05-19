@@ -8,6 +8,7 @@ docs/_site
 API/node_modules
 API/package-lock.json
 API/.env
+API/mongoPassword.js
 
 Chicorée-Chantal/node_modules
 Chicorée-Chantal/package-lock.json

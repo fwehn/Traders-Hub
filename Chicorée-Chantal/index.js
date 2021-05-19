@@ -9,7 +9,7 @@ console.log("Imported!");
 //Initializing Section
 console.log("Starting...\n");
 const client = new discord.Client();
-const updateCommands = [];
+const updateCommands = process.env.UPDATE_COMMANDS;
 
 
 client.on("ready", async () => {
