@@ -17,6 +17,11 @@ const commandData = {
                     name: "prost",
                     description: "Ein Satz für den Prost-Command!",
                     value: "Prost"
+                },
+                {
+                    name: "command",
+                    description: "Ideen für neue Commands!",
+                    value: "Command"
                 }
             ]
         },
@@ -35,7 +40,7 @@ function commandCallback(interaction){
     let sentence = interaction.data.options[1].value;
 
     return new Promise((resolve, reject) => {
-        resolve({type: "channel", content: {response: `Vielen Dank, für die Einreichung!`, announcement: `**<@${user}>** hat folgenden **${type}**-Satz eingereicht:\n**${sentence}**`}});
+        resolve({type: "channel", content: {response: `Vielen Dank, für die Einreichung!`, announcement: `**<@${user}>** hat folgenden **${type}**(-Satz) eingereicht:\n**${sentence}**`}});
         reject(new Error('Report hat nicht Funktioniert!'));
     })
 }

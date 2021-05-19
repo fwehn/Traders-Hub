@@ -14,10 +14,10 @@ const commandData = {
                 {name: "4cl", value: "0.04"},
                 {name: "100ml", value: "0.1"},
                 {name: "200ml", value: "0.2"},
+                {name: "250ml", value: "0.25"},
                 {name: "0,33l", value: "0.33"},
                 {name: "0,5l", value: "0.5"},
-                {name: "0,7l", value: "0.7"},
-                {name: "1l", value: "1"}
+                {name: "0,7l", value: "0.7"}
             ]
         },
         {
@@ -27,11 +27,11 @@ const commandData = {
             required: true,
             choices: [
                 {name: "5%", value: 5},
-                {name: "11%", value: 11},
-                {name: "17%", value: 17},
-                {name: "32%", value: 32},
-                {name: "38%", value: 38},
-                {name: "42%", value: 42}
+                {name: "12%", value: 12},
+                {name: "18%", value: 17},
+                {name: "35%", value: 35},
+                {name: "40%", value: 40},
+                {name: "45%", value: 45}
             ]
         },
         {
