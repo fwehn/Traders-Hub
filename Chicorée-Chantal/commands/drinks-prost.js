@@ -26,9 +26,11 @@ const commandData = {
             type: 4,
             required: true,
             choices: [
+                {name: "2% für die dies brauchen....", value: 2},
                 {name: "5%", value: 5},
                 {name: "12%", value: 12},
                 {name: "18%", value: 17},
+                {name: "30%", value: 30},
                 {name: "35%", value: 35},
                 {name: "40%", value: 40},
                 {name: "45%", value: 45}
@@ -59,7 +61,7 @@ function commandCallback(interaction){
             fetch(process.env.APILINK + "/drinks/prost" + id + username + nickname + amount + proof + name, {method: 'post'})
                 .then(res => res.json())
                 .then(json => {
-                    resolve({type: "private", content: json.response});
+                    resolve({type: "public", content: json.response});
                 }).catch(err => reject(new Error(err)));
         }else{
             resolve({type: "private", content: "Sei ehrlich!"});

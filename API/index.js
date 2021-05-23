@@ -127,6 +127,8 @@ app.post("/drinks/prost", (req, res) => {
 
             data.save().then(() => {
                 let today = new Date();
+                today.setHours(0,0,0,0);
+                console.log(today);
                 //Create or Update drinks-entry
                 drinksModelSS2021.findOne({date: today})
                     .then(data => {

@@ -94,7 +94,7 @@ function commandCallback(interaction){
                             }
                         }
                     }else{
-                        drinksEmbeds[0].footer.text = `Insgesamt wurde heute ${total}l reiner Alkohol getrunken!`;
+                        drinksEmbeds[0].footer.text = `Insgesamt wurde heute ${total.toFixed(3)}l reiner Alkohol getrunken!`;
                         drinksEmbeds[0].fields = fields;
                     }
 
