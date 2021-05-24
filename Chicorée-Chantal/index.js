@@ -11,6 +11,10 @@ console.log("Starting...\n");
 const client = new discord.Client();
 const updateCommands = process.env.UPDATE_COMMANDS;
 
+client.on('guildMemberAdd', member => {
+    let role = member.guild.roles.cache.filter(role => role.id === process.env.LOWESTROLEID);
+    member.roles.add(role).catch(err => console.log(err));
+})
 
 client.on("ready", async () => {
     //Delete all old Commands
@@ -103,13 +107,21 @@ async function sendPrivateResponse(interaction, content){
                 flags: 64
             }
         }
-    });
+    }).catch(err => console.log(err));
 }
 
 async function sendPublicResponse(interaction, content){
-    await new discord.WebhookClient(client.user.id, interaction.token).send(content);
+    await new discord.WebhookClient(client.user.id, interaction.token).send(content).catch(err => console.log(err));
 }
 
 async function sendMessageToBotChannel(content){
-    client.channels.cache.get(process.env.BOT_CHANNEL).send(content);
+    client.channels.cache.get(process.env.BOT_CHANNEL).send(content).catch(err => console.log(err));
+}
+
+async function getChannel(channelId){
+     return client.guilds.cache.get(process.env.GUILDID).channels.cache.get(channelId);
+}
+
+module.exports = {
+    getChannel
 }

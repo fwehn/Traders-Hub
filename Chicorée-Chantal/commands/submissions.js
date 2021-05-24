@@ -41,7 +41,7 @@ function commandCallback(interaction){
 
     return new Promise((resolve, reject) => {
         resolve({type: "channel", content: {response: `Vielen Dank, für die Einreichung!`, announcement: `**<@${user}>** hat folgenden **${type}**(-Satz) eingereicht:\n**${sentence}**`}});
-        reject(new Error('Report hat nicht Funktioniert!'));
+        reject(new Error('Submit hat nicht Funktioniert!'));
     })
 }
 

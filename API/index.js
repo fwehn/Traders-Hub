@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const mongoPassword = require('./mongoPassword.js');
 
 const app = express();
-const port = process.env.PORT
+const port = process.env.PORT;
 const config = JSON.parse(process.env.APP_CONFIG);
 
 const {opaModel, drinkSentenceModel, personModelSS2021, drinksModelSS2021} = require('./api-models.js');
