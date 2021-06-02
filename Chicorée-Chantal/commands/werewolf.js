@@ -82,8 +82,8 @@ async function commandCallback(interaction){
             }
 
             // Check if game is playable
-            if (players.length < 5) reject({type: "private", content: `Es tut mir leid, aber Werwolf macht erst mit mehr als 5 Leuten Spaß!`});
-            if ((werewolfNumber + options.length-2) >= Math.floor(players.length * .75)) reject({type: "private", content: `Du solltest bei der Spieler Zahl weniger Werwölfe und Spezial-Rollen auswählen!`});
+            if (players.length < 5) resolve({type: "private", content: "Es tut mir leid, aber Werwolf macht erst mit mehr als 5 Leuten Spaß!"});
+            if ((werewolfNumber + options.length-2) >= Math.floor(players.length * .75)) resolve({type: "private", content: `Du solltest bei dieser Spieler-Zahl weniger Werwölfe und Spezial-Rollen auswählen!`});
 
 
             // Create narrator-text
