@@ -118,10 +118,16 @@ async function sendMessageToBotChannel(content){
     client.channels.cache.get(process.env.BOT_CHANNEL).send(content).catch(err => console.log(err));
 }
 
+async function sendPrivateMessageToUser(userId, message){
+    client.users.fetch(userId, false).then((user) => {
+        user.send(message);
+    });
+}
+
 async function getChannel(channelId){
      return client.guilds.cache.get(process.env.GUILDID).channels.cache.get(channelId);
 }
 
 module.exports = {
-    getChannel
+    getChannel, sendPrivateMessageToUser
 }
