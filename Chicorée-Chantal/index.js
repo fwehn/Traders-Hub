@@ -81,6 +81,21 @@ async function handleCommand(interaction){
                     sendPrivateResponse(interaction, callbackData.content.response);
                     break;
 
+                case "poll":
+                    sendWaiting(interaction);
+                    sendPublicResponse(interaction, callbackData.content)
+                        .then(msg => {
+                            getMessage(msg.channel_id, msg.id).then(msg => {
+                                let emojiList = [`1️⃣`, `2️⃣`,`3️⃣`, `4️⃣`,`5️⃣`, `6️⃣`,`7️⃣`, `8️⃣`,`9️⃣`];
+                                // let emojiList = [`<:Stonks3:774964846785069096>`, `2️⃣`,`3️⃣`, `4️⃣`,`5️⃣`, `6️⃣`,`7️⃣`, `8️⃣`,`9️⃣`];
+                                for (let i = 0; i < callbackData.options; i++){
+                                    msg.react(emojiList[i]);
+                                }
+                            }).catch(console.error);
+                        });
+
+                    break;
+
                 default:
                     sendPrivateResponse(interaction, callbackData.content);
                 }
@@ -111,7 +126,7 @@ async function sendPrivateResponse(interaction, content){
 }
 
 async function sendPublicResponse(interaction, content){
-    await new discord.WebhookClient(client.user.id, interaction.token).send(content).catch(err => console.log(err));
+    return await new discord.WebhookClient(client.user.id, interaction.token).send(content).catch(err => console.log(err));
 }
 
 async function sendMessageToBotChannel(content){
@@ -125,7 +140,13 @@ async function sendPrivateMessageToUser(userId, message){
 }
 
 async function getChannel(channelId){
-     return client.guilds.cache.get(process.env.GUILDID).channels.cache.get(channelId);
+    return client.guilds.cache.get(process.env.GUILDID).channels.cache.get(channelId);
+}
+
+async function getMessage(channelId, messageId){
+    return new Promise((resolve, reject) => {
+        getChannel(channelId).then(channel => {channel.messages.fetch(messageId).then(msg => {resolve(msg)}).catch(err => reject(err))});
+    });
 }
 
 module.exports = {
